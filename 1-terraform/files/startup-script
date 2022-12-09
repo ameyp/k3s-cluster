@@ -1,0 +1,2 @@
+sudo apt-get update; sudo apt-get upgrade -y; \
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --data-dir /var/lib/rancher/k3s --disable traefik --node-external-ip $MACHINE_IP" INSTALL_K3S_VERSION="v1.24.8+k3s1" sh -s -
