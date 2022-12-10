@@ -2,9 +2,10 @@
 
 pkgs.mkShell {
   nativeBuildInputs = [
-    pkgs.google-cloud-sdk
+    pkgs.butane
     pkgs.kubernetes-helm
     pkgs.minikube
+    pkgs.packer
     pkgs.terraform
     pkgs.vault
   ];
