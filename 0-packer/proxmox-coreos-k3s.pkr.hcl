@@ -16,7 +16,7 @@ source "proxmox" "coreos_k3s" {
     "<spacebar><wait><spacebar><wait><spacebar><wait><spacebar><wait><spacebar><wait>",
     "<tab><wait>",
     "<down><down><end>",
-    " ignition.config.url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/installer.ign",
+    " ignition.config.url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/installer.ign net.ifnames=0",
     "<enter>"
   ]
 
@@ -64,6 +64,7 @@ source "proxmox" "coreos_k3s" {
   template_name = "coreos-37.20221106.3.0"
   template_description = "k3s-${var.k3s.version} running on Fedora CoreOS"
 
+  ssh_host = "192.168.1.200"
   ssh_username = "core"
   ssh_private_key_file = "~/.ssh/id_rsa"
   ssh_timeout = "20m"

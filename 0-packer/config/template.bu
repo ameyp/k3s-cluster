@@ -2,12 +2,10 @@ variant: fcos
 version: 1.4.0
 # On Proxmox, predictable names must be disabled for this to work. Or change eth0 to your interface's name.
 # https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/
+kernel_arguments:
+  should_exist:
+    - net.ifnames=0
 storage:
-  links:
-    - path: /etc/systemd/network/99-default.link
-      overwrite: true
-      target: /dev/null
-      hard: false
   files:
     - path: /etc/NetworkManager/system-connections/eth0.nmconnection
       mode: 0600
@@ -24,6 +22,27 @@ storage:
           dns-search=
           may-fail=false
           method=manual
+    - path: /usr/local/bin/install-qemu-guest-agent
+      mode: 0755
+      contents:
+        inline: |
+          #!/usr/bin/env bash
+          set -euo pipefail
+          main() {
+            rpm-ostree install http://mirror.centos.org/centos/7/os/x86_64/Packages/qemu-guest-agent-2.12.0-3.el7.x86_64.rpm
+            return 0
+          }
+          main
+    - path: /usr/local/bin/run-k3s-prereq-installer
+      mode: 0755
+      contents:
+        inline: |
+          #!/usr/bin/env sh
+          main() {
+            rpm-ostree install https://rpm.rancher.io/k3s/latest/common/centos/7/noarch/k3s-selinux-0.2-1.el7_8.noarch.rpm
+            return 0
+          }
+          main
 passwd:
   users:
     - name: core
@@ -34,14 +53,43 @@ passwd:
         - sudo
 systemd:
   units:
-    - name: qemu-guest-agent.service
+    - name: install-qemu-guest-agent.service
       enabled: true
       contents: |
         [Unit]
-        Description=Runs qemu guest agent inside docker
+        After=network-online.target
+        Wants=network-online.target
+        Before=systemd-user-sessions.service
+        OnFailure=emergency.target
+        OnFailureJobMode=replace-irreversibly
+        ConditionPathExists=!/var/lib/qemu-guest-agent-installed
         [Service]
-        Type=oneshot
         RemainAfterExit=yes
-        ExecStart=docker run -d --privileged --network host -v /dev/virtio-ports/org.qemu.guest_agent.0:/dev/virtio-ports/org.qemu.guest_agent.0  eleh/qemu-guest-agent
+        Type=oneshot
+        ExecStart=/usr/local/bin/install-qemu-guest-agent
+        ExecStartPost=/usr/bin/touch /var/lib/qemu-guest-agent-installed
+        ExecStartPost=/usr/bin/systemctl --no-block reboot
+        StandardOutput=kmsg+console
+        StandardError=kmsg+console
+        [Install]
+        WantedBy=multi-user.target
+    - name: run-k3s-prereq-installer.service
+      enabled: true
+      contents: |
+        [Unit]
+        After=install-qemu-guest-agent.service
+        Wants=network-online.target
+        Before=systemd-user-sessions.service
+        OnFailure=emergency.target
+        OnFailureJobMode=replace-irreversibly
+        ConditionPathExists=!/var/lib/k3s-prereq-installed
+        [Service]
+        RemainAfterExit=yes
+        Type=oneshot
+        ExecStart=/usr/local/bin/run-k3s-prereq-installer
+        ExecStartPost=/usr/bin/touch /var/lib/k3s-prereq-installed
+        ExecStartPost=/usr/bin/systemctl --no-block reboot
+        StandardOutput=kmsg+console
+        StandardError=kmsg+console
         [Install]
         WantedBy=multi-user.target

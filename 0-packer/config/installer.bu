@@ -2,13 +2,21 @@ variant: fcos
 version: 1.4.0
 storage:
   files:
-    - path: /etc/docker/daemon.json
+    - path: /etc/NetworkManager/system-connections/eth0.nmconnection
       mode: 0600
       contents:
         inline: |
-          {
-            "data-root": "/tmp/docker"
-          }
+          [connection]
+          id=eth0
+          type=ethernet
+          interface-name=eth0
+          [ipv4]
+          address1=192.168.1.200/24,192.168.1.1
+          dhcp-hostname=k3s-test-controller
+          dns=192.168.1.1;
+          dns-search=
+          may-fail=false
+          method=manual
 passwd:
   users:
     - name: core
@@ -17,16 +25,3 @@ passwd:
       groups:
         - wheel
         - sudo
-systemd:
-  units:
-    - name: qemu-guest-agent.service
-      enabled: true
-      contents: |
-        [Unit]
-        Description=Runs qemu guest agent inside docker
-        [Service]
-        Type=oneshot
-        RemainAfterExit=yes
-        ExecStart=docker run -d --privileged --network host -v /dev/virtio-ports/org.qemu.guest_agent.0:/dev/virtio-ports/org.qemu.guest_agent.0  eleh/qemu-guest-agent
-        [Install]
-        WantedBy=multi-user.target

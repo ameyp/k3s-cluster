@@ -2,7 +2,7 @@ resource "proxmox_vm_qemu" "k3s-test-worker" {
   name = "k3s-test-worker"
   desc = "k3s test worker node"
   target_node = var.proxmox.node
-  os_type = "cloud-init"
+  os_type = "centos"
   full_clone = true
   memory = 2048
   sockets = 1
@@ -10,7 +10,7 @@ resource "proxmox_vm_qemu" "k3s-test-worker" {
   cpu = "host"
   scsihw = "virtio-scsi-pci"
   # clone = "ubuntu-2204-cloudinit-template"
-  clone = "k3s-coreos-2204"
+  clone = "coreos-37.20221106.3.0"
   agent = 1
 
   network {
@@ -23,9 +23,4 @@ resource "proxmox_vm_qemu" "k3s-test-worker" {
     storage = "local-lvm"
     size = "45G"
   }
-
-  # Cloud-init section
-  ipconfig0 = "ip=192.168.80.101/24,gw=192.168.80.1"
-  ssh_user = "ubuntu"
-  sshkeys = file("${path.module}/files/id_rsa.pub")
 }
