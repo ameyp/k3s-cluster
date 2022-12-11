@@ -2,29 +2,33 @@ variant: fcos
 version: 1.4.0
 # On Proxmox, predictable names must be disabled for this to work. Or change eth0 to your interface's name.
 # https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/
-# storage:
-#   files:
-#     - path: /etc/NetworkManager/system-connections/eth0.nmconnection
-#       mode: 0600
-#       contents:
-#         inline: |
-#           [connection]
-#           id=eth0
-#           type=ethernet
-#           interface-name=eth0
-#           [ipv4]
-#           address1=192.168.1.201/24,192.168.1.1
-#           dhcp-hostname=k3s-test
-#           dns=192.168.1.1;
-#           dns-search=
-#           may-fail=false
-#           method=manual
+storage:
+  links:
+    - path: /etc/systemd/network/99-default.link
+      overwrite: true
+      target: /dev/null
+      hard: false
+  files:
+    - path: /etc/NetworkManager/system-connections/eth0.nmconnection
+      mode: 0600
+      contents:
+        inline: |
+          [connection]
+          id=eth0
+          type=ethernet
+          interface-name=eth0
+          [ipv4]
+          address1=192.168.1.201/24,192.168.1.1
+          dhcp-hostname=k3s-test-controller
+          dns=192.168.1.1;
+          dns-search=
+          may-fail=false
+          method=manual
 passwd:
   users:
     - name: core
       ssh_authorized_keys:
         - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCkayHzoWIWE4P1z3+qOoyfdnapU8ATcYUriXDsdGkyncEZpnz4jHqZsp0EVZhtSg668H8+aEDd4RSYHvmprXWZJQe+CUIQRIfazch8mCmlVYpRVqtjms3ya7S6WWl96+jwecEwQf0eDYojFry+S5A8+cZmIZfsQb6PkRr350OxzufH2dii96zS9aIOFz7NiVn/qB+mhyMuicrPqzx0HJjK4t8p2WFMAQsPrFqWwWlX/nDr0xFDmPUZlh4SEhznSB+ai99B0FFsjaHyhlSGBL56Sy0TL3CGXWcaW5kwQhzf9P1n/WK+83j8CLkD/xwxhB5MdhNUWIY7c02QWIeU9RPOU6Y8Qf4sgKpd6/CKROJC/SkBDFpE6MMX24/UejR1PPFP+qwg6XnX2g08gIonfI9tKBTsMAPib2D13ZSUK/QgxmOV33hfbiDPXmyXFeLuzW/GIuP9PWbe6qNYoDL2ZUk/BK3kgLWd4gXtVS3Gtu/DEiw+3kCwjP85VBW0NUx7GbM= amey@ubuntu
-      password_hash: $1$vlNNDElj$aR43B9UhbU8yhDhz/D30Y/
       groups:
         - wheel
         - sudo

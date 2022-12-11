@@ -16,29 +16,27 @@ source "proxmox" "coreos_k3s" {
     "<spacebar><wait><spacebar><wait><spacebar><wait><spacebar><wait><spacebar><wait>",
     "<tab><wait>",
     "<down><down><end>",
-    " ignition.config.url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/installer.ign net.ifnames=0 ",
+    " ignition.config.url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/installer.ign",
     "<enter>"
-
-    # "c",
-    # "linux /casper/vmlinuz --- autoinstall ds='nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/' ",
-    # "<enter><wait><wait><wait><wait>",
-    # "initrd /casper/initrd<enter><wait>",
-    # "boot<enter>"
   ]
 
+  # This supplies our installer ignition file
   http_directory = "config"
 
+  # This supplies our template ignition file
   additional_iso_files {
-    cd_files = ["./config/ignition.ign"]
+    cd_files = ["./config/template.ign"]
     iso_storage_pool = "local"
     unmount = true
   }
 
-  # qemu_agent = true
-  scsi_controller = "virtio-scsi-pci"
+  # CoreOS does not support CloudInit
   cloud_init = false
   qemu_agent = true
 
+  scsi_controller = "virtio-scsi-pci"
+
+  vm_id = "9000"
   cpu_type = "host"
   cores = "2"
   memory = "2048"
@@ -63,7 +61,7 @@ source "proxmox" "coreos_k3s" {
 
   iso_file = "local:iso/fedora-coreos-37.20221106.3.0-live.x86_64.iso"
   unmount_iso = true
-  template_name = "k3s-coreos-2204"
+  template_name = "coreos-37.20221106.3.0"
   template_description = "k3s-${var.k3s.version} running on Fedora CoreOS"
 
   ssh_username = "core"
@@ -78,9 +76,11 @@ build {
     inline = [
       "sudo mkdir /tmp/iso",
       "sudo mount /dev/sr1 /tmp/iso -o ro",
-      "sudo coreos-installer install /dev/vda --ignition-file /tmp/iso/ignition.ign",
-      # Because we run qemu-guest-agent inside a docker container, packer's shutdown command
-      # doesn't seem to work.
+      "sudo coreos-installer install /dev/vda --ignition-file /tmp/iso/template.ign",
+      # Packer's shutdown command doesn't seem to work, likely because we run qemu-guest-agent
+      # inside a docker container.
+      # This will shutdown the VM after 1 minute, which is less than the duration that Packer
+      # waits for its shutdown command to complete, so it works out.
       "sudo shutdown -h +1"
     ]
   }
