@@ -3,6 +3,8 @@
 pkgs.mkShell {
   nativeBuildInputs = [
     pkgs.butane
+    pkgs.jsonnet
+    pkgs.jsonnet-language-server
     pkgs.kubernetes-helm
     pkgs.minikube
     pkgs.packer

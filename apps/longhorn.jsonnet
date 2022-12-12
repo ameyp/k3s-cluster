@@ -7,10 +7,10 @@ function(mode='test') {
   kind: "Application",
   metadata: {
     name: "longhorn",
-  },
-  namespace: vars.argo.namespace,
-  annotations: {
-    'argocd.argoproj.io/sync-wave': 1,
+    namespace: vars.argo.namespace,
+    annotations: {
+      'argocd.argoproj.io/sync-wave': 1,
+    },
   },
   spec: {
     project: vars.argo.project,
