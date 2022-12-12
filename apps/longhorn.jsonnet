@@ -19,7 +19,7 @@ function(mode='test') {
       targetRevision: '1.3.2',
       helm: {
         releaseName: 'longhorn',
-        values: {
+        values: std.manifestYamlDoc({
           persistence: {
             defaultClass: false,
             defaultClassReplicaCount: if mode == 'test' then 1 else 3,
@@ -55,7 +55,7 @@ function(mode='test') {
             value: 'true',
           },
           effect: 'NoSchedule',
-        },
+        }),
       },
       chart: 'longhorn',
     },
