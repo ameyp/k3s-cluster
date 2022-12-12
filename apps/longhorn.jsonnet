@@ -72,7 +72,7 @@ function(mode='test') {
         'CreateNamespace=true',
       ],
       retry: {
-        limit: 5,
+        limit: 2,
         backoff: {
           duration: '5s',
           factor: 2,

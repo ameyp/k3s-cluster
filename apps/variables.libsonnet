@@ -1,7 +1,7 @@
 {
   argo: {
     namespace: 'argocd',
-    project: 'default',
+    project: 'wirywolf',
   },
   longhorn: {
     namespace: 'longhorn-system',
