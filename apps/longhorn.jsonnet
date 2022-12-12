@@ -9,7 +9,7 @@ function(mode='test') {
     name: "longhorn",
     namespace: vars.argo.namespace,
     annotations: {
-      'argocd.argoproj.io/sync-wave': 1,
+      'argocd.argoproj.io/sync-wave': '1',
     },
   },
   spec: {
