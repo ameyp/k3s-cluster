@@ -49,6 +49,7 @@ storage:
         inline: |
           write-kubeconfig-mode: "0644"
           selinux: true
+          secrets-encryption: true
 
           # For prometheus
           kube-controller-manager-arg:
