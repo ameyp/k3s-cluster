@@ -17,8 +17,8 @@ function(mode='test') {
     source: {
       repoURL: 'https://charts.longhorn.io',
       targetRevision: '1.3.2',
+      chart: 'longhorn',
       helm: {
-        releaseName: 'longhorn',
         values: std.manifestYamlDoc({
           persistence: {
             defaultClass: false,
@@ -57,7 +57,6 @@ function(mode='test') {
           effect: 'NoSchedule',
         }),
       },
-      chart: 'longhorn',
     },
     destination: {
       server: 'https://kubernetes.default.svc',
