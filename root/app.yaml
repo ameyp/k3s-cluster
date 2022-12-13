@@ -8,12 +8,8 @@ spec:
   source:
     repoURL: 'https://github.com/ameyp/k3s-cluster'
     targetRevision: main
-    path: apps
-    directory:
-      jsonnet:
-        extVars:
-          - name: mode
-            value: 'test'
+    path: root
+    directory: {}
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: argocd
