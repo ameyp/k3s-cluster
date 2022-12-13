@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wirywolf-root
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/ameyp/k3s-cluster'
+    targetRevision: main
+    path: apps
+    directory:
+      jsonnet:
+        extVars:
+          - name: mode
+            value: 'test'
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
