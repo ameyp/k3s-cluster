@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/ameyp/k3s-cluster'
-    targetRevision: main
+    targetRevision: 'main'
     path: apps
     directory:
       jsonnet:

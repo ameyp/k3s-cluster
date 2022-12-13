@@ -76,9 +76,9 @@ function(mode='test') {
         backoff: {
           duration: '5s',
           factor: 2,
+          maxDuration: '3m',
         },
       },
-      maxDuration: '3m',
     },
   },
 }
