@@ -14,6 +14,8 @@ spec:
         extVars:
           - name: mode
             value: 'test'
+        libs:
+          - vendor
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: argocd
