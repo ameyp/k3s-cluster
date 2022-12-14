@@ -7,7 +7,7 @@ function(mode='test') [
   k.secret.new({
     name: secretName,
     data: {
-      "alertmanager.yaml": importstr "files/prometheus/alertmanager.conf"
+      "alertmanager.yaml": std.base64(importstr "files/prometheus/alertmanager.conf")
     }
   }),
 
