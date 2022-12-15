@@ -19,15 +19,13 @@ function(mode='test') [
       namespace: vars.argo.namespace,
       annotations: {
         'argocd.argoproj.io/sync-wave': '1',
-        # https://github.com/argoproj/argo-cd/issues/5704
-        'argocd.argoproj.io/sync-options': 'ServerSideApply=true'
       },
     },
     spec: {
       project: vars.argo.project,
       source: {
         repoURL: 'https://prometheus-community.github.io/helm-charts',
-        targetRevision: '39.5.0',
+        targetRevision: '43.1.0',
         chart: 'kube-prometheus-stack',
         helm: {
           values: (importstr "files/prometheus/values.yaml") % {
@@ -48,6 +46,8 @@ function(mode='test') [
         syncOptions: [
           'Validate=false',
           'CreateNamespace=true',
+          # https://github.com/argoproj/argo-cd/issues/820
+          'ServerSideApply=true'
         ],
         retry: {
           limit: 2,
