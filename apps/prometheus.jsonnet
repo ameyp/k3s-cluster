@@ -20,7 +20,7 @@ function(mode='test') [
       annotations: {
         'argocd.argoproj.io/sync-wave': '1',
         # https://github.com/argoproj/argo-cd/issues/5704
-        'argocd.argoproj.io/sync-options': 'Replace=true'
+        'argocd.argoproj.io/sync-options': 'ServerSideApply=true'
       },
     },
     spec: {
