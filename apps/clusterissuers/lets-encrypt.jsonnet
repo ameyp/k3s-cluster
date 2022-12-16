@@ -13,18 +13,18 @@ local vars = import 'variables.libsonnet';
     acme: {
       privateKeySecretRef: {
         name: vars.cert_manager.lets_encrypt_issuer,
-        server: "https://acme-v02.api.letsencrypt.org/directory",
-        solvers:[{
-          dns01: {
-            cloudflare: {
-              apiTokenSecretRef: {
-                key: "apitoken",
-                name: "cloudflare-api-token"
-              }
+      },
+      server: "https://acme-v02.api.letsencrypt.org/directory",
+      solvers:[{
+        dns01: {
+          cloudflare: {
+            apiTokenSecretRef: {
+              key: "apitoken",
+              name: "cloudflare-api-token"
             }
           }
-        }]
-      }
+        }
+      }]
     }
   }
 }
