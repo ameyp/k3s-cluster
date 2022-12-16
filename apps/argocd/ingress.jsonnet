@@ -1,5 +1,6 @@
 local vars = import 'variables.libsonnet';
 local k = import 'k8s.libsonnet';
+local service_name = 'argocd-server';
 
 {
   apiVersion: "traefik.containo.us/v1alpha1",
@@ -16,7 +17,7 @@ local k = import 'k8s.libsonnet';
                         [k.get_endpoint(vars.argo.ingress.subdomain)]),
       priority: 10,
       services: [{
-        name: vars.argo.ingress.service_name,
+        name: service_name,
         port: vars.argo.ingress.port,
       }],
     }, {
@@ -25,7 +26,7 @@ local k = import 'k8s.libsonnet';
                         [k.get_endpoint(vars.argo.ingress.subdomain)]),
       priority: 11,
       services: [{
-        name: vars.argo.ingress.service_name,
+        name: service_name,
         port: vars.argo.ingress.port,
         scheme: "h2c",
       }],
