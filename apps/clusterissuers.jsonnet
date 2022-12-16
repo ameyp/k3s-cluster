@@ -1,30 +1,26 @@
 local vars = import 'variables.libsonnet';
-local mode = std.extVar('mode');
 
 function(mode='test') [
   {
     apiVersion: "argoproj.io/v1alpha1",
     kind: "Application",
     metadata: {
-      name: "cert-manager",
+      name: "clusterissuers",
       namespace: vars.argo.namespace,
       annotations: {
-        'argocd.argoproj.io/sync-wave': '2',
+        'argocd.argoproj.io/sync-wave': '3',
       },
     },
     spec: {
       project: vars.argo.project,
       source: {
-        repoURL: 'https://charts.jetstack.io',
-        targetRevision: '1.10.1',
-        chart: 'cert-manager',
-        helm: {
-          values: importstr "files/cert-manager/values.yaml",
-        },
+        repoURL: 'https://github.com/ameyp/k3s-cluster',
+        targetRevision: 'main',
+        path: "apps/clusterissuers",
       },
       destination: {
         server: 'https://kubernetes.default.svc',
-        namespace: vars.cert_manager.namespace,
+        namespace: vars.argo.namespace,
       },
       syncPolicy: {
         automated: {
@@ -32,7 +28,6 @@ function(mode='test') [
         },
         syncOptions: [
           'Validate=false',
-          'CreateNamespace=true',
         ],
         retry: {
           limit: 2,
@@ -44,5 +39,5 @@ function(mode='test') [
         },
       },
     },
-  },
+  }
 ]
