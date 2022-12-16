@@ -20,5 +20,9 @@
     namespace: 'cert-manager',
     lets_encrypt_issuer: 'letsencrypt',
     self_signed_issuer: 'selfsigned',
+  },
+  traefik: {
+    namespace: 'traefik',
+    load_balancer_ip: '192.168.80.10',
   }
 }
