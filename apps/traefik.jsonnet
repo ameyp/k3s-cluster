@@ -15,7 +15,7 @@ function(mode='test') [
       project: vars.argo.project,
       source: {
         repoURL: 'https://helm.traefik.io/traefik',
-        targetRevision: '2.9.6',
+        targetRevision: '20.8.0',
         chart: 'traefik',
         helm: {
           values: (importstr "files/traefik/values.yaml")  % {
