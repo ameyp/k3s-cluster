@@ -16,4 +16,9 @@
     namespace: 'vault',
     address: 'https://vault.wirywolf.com',
   },
+  cert_manager: {
+    namespace: 'cert-manager',
+    lets_encrypt_issuer: 'letsencrypt',
+    self_signed_issuer: 'selfsigned',
+  }
 }
