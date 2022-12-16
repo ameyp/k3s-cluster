@@ -17,6 +17,11 @@ function(mode='test') [
         repoURL: 'https://github.com/ameyp/k3s-cluster',
         targetRevision: 'main',
         path: "apps/clusterissuers",
+        directory: {
+          jsonnet: {
+            libs: ["vendor"]
+          },
+        },
       },
       destination: {
         server: 'https://kubernetes.default.svc',
