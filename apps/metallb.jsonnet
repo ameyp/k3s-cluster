@@ -6,27 +6,28 @@ function(mode='test') [
     apiVersion: "argoproj.io/v1alpha1",
     kind: "Application",
     metadata: {
-      name: "traefik",
+      name: "metallb",
       namespace: vars.argo.namespace,
       annotations: {
-        'argocd.argoproj.io/sync-wave': '4',
+        'argocd.argoproj.io/sync-wave': '2',
       },
     },
     spec: {
       project: vars.argo.project,
       source: {
-        repoURL: 'https://helm.traefik.io/traefik',
-        targetRevision: '20.8.0',
-        chart: 'traefik',
+        repoURL: 'https://metallb.github.io/metallb',
+        targetRevision: '0.13.7',
+        chart: 'metallb',
         helm: {
-          values: (importstr "files/traefik/values.yaml")  % {
-            load_balancer_ip: if mode == 'test' then vars.traefik.test_load_balancer_ip else vars.load_balancer_ip,
+          values: (importstr "files/metallb/values.yaml")  % {
+            prometheus_label: vars.monitoring.prometheus_stack_name,
+            prometheus_namespace: vars.monitoring.namespace,
           },
         },
       },
       destination: {
         server: 'https://kubernetes.default.svc',
-        namespace: vars.traefik.namespace,
+        namespace: vars.metallb.namespace,
       },
       syncPolicy: {
         automated: {
