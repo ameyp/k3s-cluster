@@ -1,7 +1,5 @@
 local vars = import 'variables.libsonnet';
-local k = import '../vendor/k8s.libsonnet';
 local mode = std.extVar('mode');
-local secretName = 'alert-manager-config';
 
 function(mode='test') [
   {
@@ -11,7 +9,7 @@ function(mode='test') [
       name: "cert-manager",
       namespace: vars.argo.namespace,
       annotations: {
-        'argocd.argoproj.io/sync-wave': '1',
+        'argocd.argoproj.io/sync-wave': '2',
       },
     },
     spec: {
@@ -52,6 +50,9 @@ function(mode='test') [
     kind: "ClusterIssuer",
     metadata: {
       name: vars.cert_manager.lets_encrypt_issuer,
+      annotations: {
+        'argocd.argoproj.io/sync-wave': '3',
+      },
     },
     spec: {
       acme: {
@@ -76,7 +77,10 @@ function(mode='test') [
     apiVersion: "cert-manager.io/v1",
     kind: "ClusterIssuer",
     metadata: {
-      name: vars.cert_manager.self_signed_issuer
+      name: vars.cert_manager.self_signed_issuer,
+      annotations: {
+        'argocd.argoproj.io/sync-wave': '3',
+      },
     },
     spec: {
       selfSigned: {}
