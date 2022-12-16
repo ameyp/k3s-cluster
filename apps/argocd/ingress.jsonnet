@@ -16,7 +16,7 @@ local k = import 'k8s.libsonnet';
                         [k.get_endpoint(vars.argo.ingress.subdomain)]),
       priority: 10,
       services: [{
-        name: "argo-server",
+        name: "argocd-server",
         port: vars.argo.ingress.port,
       }],
     }, {
