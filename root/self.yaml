@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: wirywolf-apps
+  name: wirywolf-root
   namespace: argocd
 spec:
   project: wirywolf
   source:
     repoURL: 'https://github.com/ameyp/k3s-cluster'
     targetRevision: 'main'
-    path: apps
+    path: root
     directory:
       jsonnet:
         extVars:
