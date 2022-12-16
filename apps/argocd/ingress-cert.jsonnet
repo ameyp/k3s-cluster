@@ -1,7 +1,6 @@
 local vars = import 'variables.libsonnet';
 local k = import '../vendor/k8s.libsonnet';
 
-
 {
   apiVersion: "cert-manager.io/v1",
   kind: "Certificate",
