@@ -26,11 +26,11 @@
     namespace: 'metallb-system',
     pool_name: 'external',
     ip_block: '192.168.80.0/28',
-    test_ip_block: '192.168.201.0/28',
+    test_ip_block: '192.168.1.210/28', // 192.168.1.208 - 192.168.1.223
   },
   traefik: {
     namespace: 'traefik',
     load_balancer_ip: '192.168.80.10',
-    test_load_balancer_ip: '192.168.201.10',
+    test_load_balancer_ip: '192.168.1.210',
   },
 }
