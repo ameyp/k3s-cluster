@@ -1,10 +1,16 @@
 {
   cluster: {
     controller_ip: '192.168.1.201',
+    domain_name: 'wirywolf.com',
+    test_domain_prefix: 'test',
   },
   argo: {
     namespace: 'argocd',
     project: 'wirywolf',
+    ingress: {
+      subdomain: 'argocd',
+      cert_secret: 'argocd-server-tls',
+    }
   },
   longhorn: {
     namespace: 'longhorn-system',
