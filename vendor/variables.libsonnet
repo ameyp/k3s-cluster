@@ -10,7 +10,7 @@
     ingress: {
       subdomain: 'argocd',
       cert_secret: 'argocd-server-tls',
-      port: '80',
+      port: 80,
     }
   },
   longhorn: {
