@@ -1,14 +1,34 @@
 apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: wirywolf
+  namespace: argocd
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Project for all infrastructure-level applications
+  # Allow manifests to deploy from any Git repos
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: '*'
+    server: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: wirywolf-root
   namespace: argocd
 spec:
-  project: default
+  project: wirywolf
   source:
     repoURL: 'https://github.com/ameyp/k3s-cluster'
     targetRevision: 'main'
-    path: apps
+    path: root
     directory:
       jsonnet:
         extVars:
@@ -27,8 +47,9 @@ spec:
       - Validate=false
       - CreateNamespace=true
     retry:
-      limit: 5
+      limit: 2
       backoff:
         duration: 5s
         factor: 2
         maxDuration: 3m
+
