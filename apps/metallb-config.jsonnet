@@ -20,7 +20,11 @@ function(mode='test') [
         path: "apps/metallb-config",
         directory: {
           jsonnet: {
-            libs: ["vendor"]
+            libs: ["vendor"],
+            extVars: [{
+              name: 'mode',
+              value: 'test',
+            }]
           },
         },
       },
