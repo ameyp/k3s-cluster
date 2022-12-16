@@ -9,6 +9,13 @@ spec:
     repoURL: 'https://github.com/ameyp/k3s-cluster'
     targetRevision: 'main'
     path: root/crds
+    directory:
+      jsonnet:
+        extVars:
+          - name: mode
+            value: 'test'
+        libs:
+          - vendor
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: argocd

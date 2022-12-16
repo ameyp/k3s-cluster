@@ -21,7 +21,7 @@ function(mode='test') [
       },
       destination: {
         server: 'https://kubernetes.default.svc',
-        namespace: 'argocd',
+        namespace: vars.argo.namespace,
       },
       syncPolicy: {
         automated: {
