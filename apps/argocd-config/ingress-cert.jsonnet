@@ -5,7 +5,7 @@ local k = import '../vendor/k8s.libsonnet';
   apiVersion: "cert-manager.io/v1",
   kind: "Certificate",
   metadata: {
-    name: "vault-web-cert",
+    name: "argocd-web-cert",
     namespace: vars.argo.namespace,
   },
   spec: {
