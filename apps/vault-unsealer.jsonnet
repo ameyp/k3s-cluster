@@ -11,6 +11,7 @@ function(mode='test') [
       annotations: {
         'argocd.argoproj.io/sync-wave': '5',
       },
+      finalizers: ["resources-finalizer.argocd.argoproj.io"],
     },
     spec: {
       project: vars.argo.project,
