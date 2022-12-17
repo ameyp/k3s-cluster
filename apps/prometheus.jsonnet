@@ -31,7 +31,7 @@ function(mode='test') [
           values: (importstr "files/prometheus/values.yaml") % {
             controller_ip: vars.cluster.controller_ip,
             config_secret: "",
-            vault_address: vars.vault.address,
+            vault_address: k.get_endpoint(vars.vault.ingress.subdomain),
           },
         },
       },
