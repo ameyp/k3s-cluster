@@ -9,15 +9,10 @@ server:
 
       listener "tcp" {
         tls_disable = 0
-        address = "[::]:8200"
-        cluster_address = "[::]:8201"
-      }
-      listener "tcp" {
-        tls_disable = 0
         tls_cert_file = "/vault-tls-web/tls.crt"
         tls_key_file = "/vault-tls-web/tls.key"
-        address = "[::]:8300"
-        cluster_address = "[::]:8301"
+        address = "[::]:8200"
+        cluster_address = "[::]:8201"
       }
       storage "file" {
         path = "/vault/data"
@@ -36,8 +31,6 @@ server:
   volumeMounts:
     - mountPath: "/vault-tls-web"
       name: "vault-tls-web"
-  extraEnvironmentVars:
-    VAULT_CACERT: "/vault-tls/tls.crt"
 injector:
   logLevel: trace
   enabled: true
