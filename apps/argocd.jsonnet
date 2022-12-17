@@ -16,7 +16,7 @@ function(mode='test') [
       source: {
         repoURL: 'https://github.com/ameyp/k3s-cluster',
         targetRevision: 'main',
-        path: "apps/argocd",
+        path: "apps/argocd-config",
         directory: {
           jsonnet: {
             libs: ["vendor"],
