@@ -29,7 +29,11 @@ function(mode='test') [
         path: "apps/vault-unsealer-config",
         directory: {
           jsonnet: {
-            libs: ["vendor"]
+            libs: ["vendor"],
+            extVars: [{
+              name: 'mode',
+              value: 'test',
+            }],
           },
         },
       }],
