@@ -14,14 +14,23 @@ function(mode='test') [
     },
     spec: {
       project: vars.argo.project,
-      source: {
+      sources: [{
         repoURL: 'https://charts.jetstack.io',
         targetRevision: '1.10.1',
         chart: 'cert-manager',
         helm: {
           values: importstr "files/cert-manager/values.yaml",
+        }
+      }, {
+        repoURL: 'https://github.com/ameyp/k3s-cluster',
+        targetRevision: 'main',
+        path: "apps/clusterissuers",
+        directory: {
+          jsonnet: {
+            libs: ["vendor"]
+          },
         },
-      },
+      }],
       destination: {
         server: 'https://kubernetes.default.svc',
         namespace: vars.cert_manager.namespace,

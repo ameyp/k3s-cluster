@@ -1,0 +1,17 @@
+local vars = import 'variables.libsonnet';
+
+{
+  apiVersion: "v1",
+  kind: "ConfigMap",
+  metadata: {
+    name: "argocd-cmd-params-cm",
+    namespace: vars.argo.namespace,
+    labels: {
+      "app.kubernetes.io/name": "argocd-cmd-params-cm",
+      "app.kubernetes.io/part-of": "argocd",
+    },
+  },
+  data: {
+    "server.insecure": "true"
+  },
+}

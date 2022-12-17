@@ -14,7 +14,7 @@ function(mode='test') [
     },
     spec: {
       project: vars.argo.project,
-      source: {
+      sources: [{
         repoURL: 'https://metallb.github.io/metallb',
         targetRevision: '0.13.7',
         chart: 'metallb',
@@ -24,7 +24,20 @@ function(mode='test') [
             prometheus_namespace: vars.monitoring.namespace,
           },
         },
-      },
+      }, {
+        repoURL: 'https://github.com/ameyp/k3s-cluster',
+        targetRevision: 'main',
+        path: "apps/metallb-config",
+        directory: {
+          jsonnet: {
+            libs: ["vendor"],
+            extVars: [{
+              name: 'mode',
+              value: 'test',
+            }]
+          },
+        },
+      }],
       destination: {
         server: 'https://kubernetes.default.svc',
         namespace: vars.metallb.namespace,
