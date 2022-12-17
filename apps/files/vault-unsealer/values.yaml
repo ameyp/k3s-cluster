@@ -31,6 +31,8 @@ server:
   volumeMounts:
     - mountPath: "/vault-tls-web"
       name: "vault-tls-web"
+  extraEnvironmentVars:
+    VAULT_CACERT: "/vault-tls-web/tls.crt"
 injector:
   logLevel: trace
   enabled: true

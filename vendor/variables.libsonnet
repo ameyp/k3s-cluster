@@ -41,6 +41,7 @@
     ingress: {
       subdomain: 'vault-unsealer',
       cert_secret: 'vault-unsealer-tls',
+      port: 8200,
     },
   },
   vault: {
