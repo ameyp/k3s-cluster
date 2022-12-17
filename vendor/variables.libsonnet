@@ -20,10 +20,6 @@
     namespace: 'monitoring',
     prometheus_stack_name: 'prometheus-stack'
   },
-  vault: {
-    namespace: 'vault',
-    address: 'https://vault.wirywolf.com',
-  },
   cert_manager: {
     namespace: 'cert-manager',
     lets_encrypt_issuer: 'letsencrypt',
@@ -39,5 +35,19 @@
     namespace: 'traefik',
     load_balancer_ip: '192.168.80.10',
     test_load_balancer_ip: '192.168.1.210',
+  },
+  vault_unsealer: {
+    namespace: 'vault',
+    ingress: {
+      subdomain: 'vault-unsealer',
+      cert_secret: 'vault-unsealer-tls',
+    },
+  },
+  vault: {
+    namespace: 'vault',
+    ingress: {
+      subdomain: 'vault',
+      cert_secret: 'vault-tls',
+    },
   },
 }
