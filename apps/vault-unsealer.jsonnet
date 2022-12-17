@@ -42,11 +42,11 @@ function(mode='test') [
         namespace: vars.vault.namespace,
       },
       ignoreDifferences: [{
-        group: "admissionregistration",
+        group: "admissionregistration.k8s.io",
         kind: "MutatingWebhookConfiguration",
         name: "vault-unsealer-agent-injector-cfg",
         jqPathExpressions: [
-          ".webhooks[].clientConfig"
+          ".webhooks[].clientConfig.caBundle"
         ],
       }],
       syncPolicy: {
