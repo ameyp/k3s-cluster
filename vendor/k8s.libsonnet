@@ -54,7 +54,7 @@ local getOrDefault = function(params, name, default) if std.objectHas(params, na
       roleRef: {
         kind: "Role",
         name: params.roleRef,
-        apiGroup: "rbac.authorization.k8s.io/v1",
+        apiGroup: "rbac.authorization.k8s.io",
       },
       subjects: params.subjects
     },
