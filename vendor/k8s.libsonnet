@@ -1,6 +1,8 @@
 local vars = import 'variables.libsonnet';
 local mode = std.extVar('mode');
 
+local getOrDefault = function(params, name, default) if std.objectHas(params, name) then params[name] else default;
+
 {
   secret: {
     // Exports
@@ -9,15 +11,52 @@ local mode = std.extVar('mode');
       kind: "Secret",
       metadata: {
         name: params.name,
-        namespace: if std.objectHas(params, 'namespace') then params.namespace else "default",
+        namespace: getOrDefault(params, 'namespace', 'default')
       },
-      type: if std.objectHas(params, 'type') then params.type else "Opaque",
-      data: if std.objectHas(params, 'data') then params.data else {},
+      type: getOrDefault(params, 'type', 'Opaque'),
+      data: getOrDefault(params, 'data', {})
     },
   },
   get_endpoint: function(subdomain)
     if mode == 'test' then
       std.format("%s.%s.%s", [subdomain, vars.cluster.test_domain_prefix, vars.cluster.domain_name])
     else
-      std.format("%s.%s", [subdomain, vars.cluster.domain])
+      std.format("%s.%s", [subdomain, vars.cluster.domain]),
+  service_account: {
+    new: function(params) {
+      apiVersion: "v1",
+      kind: "ServiceAccount",
+      metadata: {
+        name: params.name,
+        namespace: getOrDefault(params, 'namespace', 'default')
+      },
+    },
+  },
+  role: {
+    new: function(params) {
+      apiVersion: "rbac.authorization.k8s.io/v1",
+      kind: "Role",
+      metadata: {
+        name: params.name,
+        namespace: getOrDefault(params, 'namespace', 'default')
+      },
+      rules: params.rules,
+    },
+  },
+  role_binding: {
+    new: function(params) {
+      apiVersion: "rbac.authorization.k8s.io/v1",
+      kind: "RoleBinding",
+      metadata: {
+        name: params.name,
+        namespace: getOrDefault(params, 'namespace', 'default')
+      },
+      roleRef: {
+        kind: "Role",
+        name: params.roleRef,
+        apiGroup: "rbac.authorization.k8s.io/v1",
+      },
+      subjects: params.subjects
+    },
+  },
 }
