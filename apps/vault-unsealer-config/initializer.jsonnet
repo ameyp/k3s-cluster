@@ -47,7 +47,7 @@ local service_account = 'vault-unsealer-init';
             image: "ameypar/k8s-vault-initializer:latest",
             env: [{
               name: "VAULT_ADDR",
-              value: k.get_endpoint(vars.vault_unsealer.ingress.subdomain),
+              value: "https://%s" % k.get_endpoint(vars.vault_unsealer.ingress.subdomain),
             }]
           }]
         }
