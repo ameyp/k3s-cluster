@@ -32,9 +32,9 @@ local service_account = 'vault-unsealer-init';
     metadata: {
       name: "vault-initializer",
       namespace: vars.vault_unsealer.namespace,
-      annotations: [{
+      annotations: {
         "argocd.argoproj.io/hook": "PostSync"
-      }]
+      }
     },
     spec: {
       template: {
