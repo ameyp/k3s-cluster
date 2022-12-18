@@ -27,7 +27,7 @@ local service_account = 'vault-unsealer-init';
   }),
 
   {
-    apiVersion: "v1",
+    apiVersion: "batch/v1",
     kind: "Job",
     metadata: {
       name: "vault-initializer",
