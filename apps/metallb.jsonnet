@@ -42,22 +42,21 @@ function(mode='test') [
         server: 'https://kubernetes.default.svc',
         namespace: vars.metallb.namespace,
       },
-      ignoreDifferences: [
-        {
-          group: "metallb.io",
-          kind: "AddressPool",
-          jqPathExpressions: [
-            ".spec.conversion.webhook.clientConfig.caBundle"
-          ],
-        },
-        {
-          group: "metallb.io",
-          kind: "BGPPeer",
-          jqPathExpressions: [
-            ".spec.conversion.webhook.clientConfig.caBundle"
-          ],
-        }
-      ],
+      ignoreDifferences: [{
+        group: "apiextensions.k8s.io",
+        name: "addresspools.metallb.io",
+        kind: "CustomResourceDefinition",
+        jqPathExpressions: [
+          ".spec.conversion.webhook.clientConfig.caBundle"
+        ],
+      }, {
+        group: "apiextensions.k8s.io",
+        name: "bgppeers.metallb.io",
+        kind: "CustomResourceDefinition",
+        jqPathExpressions: [
+          ".spec.conversion.webhook.clientConfig.caBundle"
+        ],
+      }],
       syncPolicy: {
         automated: {
           selfHeal: true,
