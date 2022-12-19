@@ -22,7 +22,7 @@
     prometheus_stack_name: 'prometheus-stack'
   },
   kubernetes_reflector: {
-    namespace: 'kubernetes_reflector',
+    namespace: 'kubernetes-reflector',
   },
   cert_manager: {
     namespace: 'cert-manager',
