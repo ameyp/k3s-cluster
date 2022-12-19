@@ -11,10 +11,11 @@ local getOrDefault = function(params, name, default) if std.objectHas(params, na
       kind: "Secret",
       metadata: {
         name: params.name,
-        namespace: getOrDefault(params, 'namespace', 'default')
+        namespace: getOrDefault(params, 'namespace', 'default'),
+        annotations: getOrDefault(params, 'annotations', {})
       },
       type: getOrDefault(params, 'type', 'Opaque'),
-      data: getOrDefault(params, 'data', {})
+      data: getOrDefault(params, 'data', {}),
     },
   },
   get_endpoint: function(subdomain)

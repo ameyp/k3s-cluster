@@ -12,6 +12,6 @@ local vars = import 'variables.libsonnet';
     },
   },
   data: {
-    "server.insecure": "true"
+    # "server.insecure": "true"
   },
 }

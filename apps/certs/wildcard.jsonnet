@@ -1,7 +1,12 @@
 local vars = import 'variables.libsonnet';
 local k = import 'k8s.libsonnet';
 
-local target_namespaces = std.join(",", [
+local allowed_namespaces = std.join(",", [
+  vars.vault_unsealer.namespace,
+  vars.argo.namespace
+]);
+
+local auto_namespaces = std.join(",", [
   vars.vault_unsealer.namespace
 ]);
 
@@ -24,9 +29,9 @@ local target_namespaces = std.join(",", [
     secretTemplate: {
       annotations: {
         "reflector.v1.k8s.emberstack.com/reflection-allowed": "true",
-        "reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces": target_namespaces,
+        "reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces": allowed_namespaces,
         "reflector.v1.k8s.emberstack.com/reflection-auto-enabled": "true",
-        "reflector.v1.k8s.emberstack.com/reflection-auto-namespaces": target_namespaces,
+        "reflector.v1.k8s.emberstack.com/reflection-auto-namespaces": auto_namespaces,
       },
     },
     usages: ["server auth"],

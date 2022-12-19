@@ -4,7 +4,7 @@ local service_name = 'argocd-server';
 
 {
   apiVersion: "traefik.containo.us/v1alpha1",
-  kind: "IngressRoute",
+  kind: "IngressRouteTCP",
   metadata: {
     name: "argocd-server",
     namespace: vars.argo.namespace,
@@ -12,25 +12,16 @@ local service_name = 'argocd-server';
   spec: {
     entryPoints: ["websecure",],
     routes: [{
-      kind: "Rule",
-      match: std.format("Host(`%s`)",
+      match: std.format("HostSNI(`%s`)",
                         [k.get_endpoint(vars.argo.ingress.subdomain)]),
-      priority: 10,
       services: [{
         name: service_name,
         port: vars.argo.ingress.port,
-      }],
-    }, {
-      kind: "Rule",
-      match: std.format("Host(`%s`) && Headers(`Content-Type`, `application/grpc`)",
-                        [k.get_endpoint(vars.argo.ingress.subdomain)]),
-      priority: 11,
-      services: [{
-        name: service_name,
-        port: vars.argo.ingress.port,
-        scheme: "h2c",
+        weight: 1,
       }],
     }],
-    tls: {}
+    tls: {
+      passthrough: true,
+    }
   }
 }
