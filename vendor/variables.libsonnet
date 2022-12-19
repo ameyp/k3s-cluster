@@ -10,7 +10,6 @@
     project: 'wirywolf',
     ingress: {
       subdomain: 'argocd',
-      cert_secret: 'argocd-server-tls',
       port: 80,
     }
   },
@@ -44,7 +43,6 @@
     namespace: 'vault',
     ingress: {
       subdomain: 'vault-unsealer',
-      cert_secret: 'vault-unsealer-tls',
       port: 8200,
     },
   },
@@ -52,7 +50,6 @@
     namespace: 'vault',
     ingress: {
       subdomain: 'vault',
-      cert_secret: 'vault-tls',
     },
   },
 }

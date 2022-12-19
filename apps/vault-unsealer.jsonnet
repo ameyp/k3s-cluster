@@ -21,7 +21,7 @@ function(mode='test') [
         chart: 'vault',
         helm: {
           values: (importstr "files/vault-unsealer/values.yaml") % {
-            secret_name: vars.vault_unsealer.ingress.cert_secret,
+            secret_name: vars.cluster.wildcard_cert_secret,
           },
         }
       }, {
