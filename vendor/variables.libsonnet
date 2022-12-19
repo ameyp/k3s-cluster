@@ -10,7 +10,7 @@
     project: 'wirywolf',
     ingress: {
       subdomain: 'argocd',
-      port: 80,
+      port: 443,
     }
   },
   longhorn: {
