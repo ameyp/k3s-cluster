@@ -20,7 +20,7 @@ function(mode='test') [
         targetRevision: '0.21.0',
         chart: 'vault',
         helm: {
-          releaseName: 'vault-unsealer'
+          releaseName: 'vault-unsealer',
           values: (importstr "files/vault-unsealer/values.yaml") % {
             secret_name: vars.cluster.wildcard_cert_secret,
           },
