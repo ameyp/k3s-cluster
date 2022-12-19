@@ -27,7 +27,7 @@ function(mode='test') [
       }, {
         repoURL: 'https://github.com/ameyp/k3s-cluster',
         targetRevision: 'main',
-        path: "apps/vault-unsealer-config",
+        path: "apps/vault-config",
         directory: {
           jsonnet: {
             libs: ["vendor"],
