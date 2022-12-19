@@ -20,12 +20,14 @@ local k = import 'k8s.libsonnet';
     secretTemplate: {
       annotations: {
         "reflector.v1.k8s.emberstack.com/reflection-allowed": "true",
-        "reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces": ["default"],
+        "reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces": std.join(",", [
+          "default",
+        ]),
         "reflector.v1.k8s.emberstack.com/reflection-auto-enabled": "true",
-        "reflector.v1.k8s.emberstack.com/reflection-auto-namespaces": [
+        "reflector.v1.k8s.emberstack.com/reflection-auto-namespaces": std.join(",", [
           vars.argo.namespace,
-          vars.vault_unsealer.namespace,
-        ]
+          vars.vault_unsealer.namespace
+        ])
       },
     },
     usages: ["server auth"],
