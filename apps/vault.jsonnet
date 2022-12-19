@@ -6,7 +6,7 @@ function(mode='test') [
     apiVersion: "argoproj.io/v1alpha1",
     kind: "Application",
     metadata: {
-      name: "vault-unsealer",
+      name: 'vault',
       namespace: vars.argo.namespace,
       annotations: {
         'argocd.argoproj.io/sync-wave': '5',
@@ -20,6 +20,7 @@ function(mode='test') [
         targetRevision: '0.21.0',
         chart: 'vault',
         helm: {
+          releaseName: 'vault-unsealer'
           values: (importstr "files/vault-unsealer/values.yaml") % {
             secret_name: vars.cluster.wildcard_cert_secret,
           },
