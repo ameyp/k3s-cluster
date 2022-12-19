@@ -4,7 +4,7 @@ resource "proxmox_vm_qemu" "k3s-test-worker" {
   target_node = var.proxmox.node
   os_type = "centos"
   full_clone = true
-  memory = 2048
+  memory = 6144
   sockets = 1
   cores = 2
   cpu = "host"
