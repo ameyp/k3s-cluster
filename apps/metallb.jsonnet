@@ -44,9 +44,15 @@ function(mode='test') [
       },
       ignoreDifferences: [
         {
-          group: "apiextensions.k8s.io",
-          kind: "CustomResourceDefinition",
-          namespace: vars.metallb.namespace,
+          group: "metallb.io",
+          kind: "AddressPool",
+          jqPathExpressions: [
+            ".spec.conversion.webhook.clientConfig.caBundle"
+          ],
+        },
+        {
+          group: "metallb.io",
+          kind: "BGPPeer",
           jqPathExpressions: [
             ".spec.conversion.webhook.clientConfig.caBundle"
           ],
