@@ -42,6 +42,16 @@ function(mode='test') [
         server: 'https://kubernetes.default.svc',
         namespace: vars.metallb.namespace,
       },
+      ignoreDifferences: [
+        {
+          group: "apiextensions.k8s.io",
+          kind: "CustomResourceDefinition",
+          namespace: vars.metallb.namespace,
+          jqPathExpressions: [
+            ".spec.conversion.webhook.clientConfig.caBundle"
+          ],
+        }
+      ],
       syncPolicy: {
         automated: {
           selfHeal: true,
