@@ -8,6 +8,7 @@
   argo: {
     namespace: 'argocd',
     project: 'wirywolf',
+    tls_secret_name: 'argocd-server-tls',
     ingress: {
       subdomain: 'argocd',
       port: 443,

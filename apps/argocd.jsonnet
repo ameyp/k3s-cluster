@@ -31,6 +31,17 @@ function(mode='test') [
         server: 'https://kubernetes.default.svc',
         namespace: vars.argo.namespace,
       },
+      ignoreDifferences: [
+        # Ignored because this is reflected from the wildcard cert's secret.
+        {
+          group: "core",
+          kind: "Secret",
+          name: vars.argo.tls_secret_name,
+          jqPathExpressions: [
+            ".data"
+          ],
+        }
+      ],
       syncPolicy: {
         automated: {
           selfHeal: true,
