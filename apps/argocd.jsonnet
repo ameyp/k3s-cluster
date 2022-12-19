@@ -34,7 +34,7 @@ function(mode='test') [
       ignoreDifferences: [
         # Ignored because this is reflected from the wildcard cert's secret.
         {
-          group: "core",
+          group: "",
           kind: "Secret",
           name: vars.argo.tls_secret_name,
           jqPathExpressions: [
