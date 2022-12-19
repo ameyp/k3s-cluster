@@ -36,7 +36,11 @@ function(mode='test') [
         path: "apps/certs",
         directory: {
           jsonnet: {
-            libs: ["vendor"]
+            libs: ["vendor"],
+            extVars: [{
+              name: 'mode',
+              value: 'test',
+            }]
           },
         },
       }],
