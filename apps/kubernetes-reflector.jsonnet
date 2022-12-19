@@ -16,7 +16,7 @@ function(mode='test') [
       project: vars.argo.project,
       source: {
         repoURL: 'https://emberstack.github.io/helm-charts',
-        targetRevision: '0.1.0',
+        targetRevision: '6.1.47',
         chart: 'reflector',
       },
       destination: {
