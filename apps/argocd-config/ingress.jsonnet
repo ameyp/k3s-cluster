@@ -31,8 +31,6 @@ local service_name = 'argocd-server';
         scheme: "h2c",
       }],
     }],
-    tls: {
-      secretName: vars.argo.ingress.cert_secret,
-    }
+    tls: {}
   }
 }

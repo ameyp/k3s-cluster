@@ -22,7 +22,7 @@ storage:
           address1=192.168.1.201/24,192.168.1.1
           dhcp-hostname=k3s-test-controller
           dns=192.168.1.1;
-          dns-search=
+          dns-search=wirywolf.com;
           may-fail=false
           method=manual
     - path: /usr/local/bin/install-k3s-prereq

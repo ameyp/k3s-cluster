@@ -3,6 +3,7 @@
     controller_ip: '192.168.1.201',
     domain_name: 'wirywolf.com',
     test_domain_prefix: 'test',
+    wildcard_cert_secret: 'wildcard-tls-secret',
   },
   argo: {
     namespace: 'argocd',
@@ -19,6 +20,9 @@
   monitoring: {
     namespace: 'monitoring',
     prometheus_stack_name: 'prometheus-stack'
+  },
+  kubernetes_reflector: {
+    namespace: 'kubernetes_reflector',
   },
   cert_manager: {
     namespace: 'cert-manager',

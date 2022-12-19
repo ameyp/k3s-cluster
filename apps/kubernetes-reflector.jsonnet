@@ -6,36 +6,22 @@ function(mode='test') [
     apiVersion: "argoproj.io/v1alpha1",
     kind: "Application",
     metadata: {
-      name: "traefik",
+      name: "kubernetes-reflector",
       namespace: vars.argo.namespace,
       annotations: {
-        'argocd.argoproj.io/sync-wave': '4',
+        'argocd.argoproj.io/sync-wave': '1',
       },
     },
     spec: {
       project: vars.argo.project,
-      sources: [{
-        repoURL: 'https://helm.traefik.io/traefik',
-        targetRevision: '20.8.0',
-        chart: 'traefik',
-        helm: {
-          values: (importstr "files/traefik/values.yaml")  % {
-            load_balancer_ip: if mode == 'test' then vars.traefik.test_load_balancer_ip else vars.load_balancer_ip,
-          },
-        },
-      }, {
-        repoURL: 'https://github.com/ameyp/k3s-cluster',
-        targetRevision: 'main',
-        path: "apps/traefik-config",
-        directory: {
-          jsonnet: {
-            libs: ["vendor"]
-          },
-        },
-      }],
+      source: {
+        repoURL: 'https://emberstack.github.io/helm-charts',
+        targetRevision: '0.1.0',
+        chart: 'reflector',
+      },
       destination: {
         server: 'https://kubernetes.default.svc',
-        namespace: vars.traefik.namespace,
+        namespace: vars.kubernetes_reflector.namespace,
       },
       syncPolicy: {
         automated: {

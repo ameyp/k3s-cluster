@@ -30,6 +30,15 @@ function(mode='test') [
             libs: ["vendor"]
           },
         },
+      }, {
+        repoURL: 'https://github.com/ameyp/k3s-cluster',
+        targetRevision: 'main',
+        path: "apps/certs",
+        directory: {
+          jsonnet: {
+            libs: ["vendor"]
+          },
+        },
       }],
       destination: {
         server: 'https://kubernetes.default.svc',

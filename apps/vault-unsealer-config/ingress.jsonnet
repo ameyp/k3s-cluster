@@ -21,7 +21,6 @@ local service_name = 'vault-unsealer';
       }],
     }],
     tls: {
-      secretName: vars.vault_unsealer.ingress.cert_secret,
       passthrough: true,
     }
   }
