@@ -30,7 +30,7 @@ local service_account = 'vault-unsealer-init';
     apiVersion: "batch/v1",
     kind: "Job",
     metadata: {
-      name: "vault-initializer",
+      name: "vault-unsealer-initializer",
       namespace: vars.vault_unsealer.namespace,
     },
     spec: {
