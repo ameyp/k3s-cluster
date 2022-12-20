@@ -16,7 +16,7 @@ local k = import 'k8s.libsonnet';
       name: vars.cert_manager.self_signed_issuer,
       kind: "ClusterIssuer",
     },
-    secretName: vars.cluster.wildcard_cert_secret,
+    secretName: vars.vault.internalCertSecret,
     usages: ["server auth"],
   },
 }
