@@ -11,6 +11,7 @@ local k = import 'k8s.libsonnet';
   spec: {
     dnsNames: [
       "*.vault-internal",
+      "127.0.0.1",
     ],
     issuerRef: {
       name: vars.cert_manager.self_signed_issuer,
