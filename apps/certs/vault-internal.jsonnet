@@ -11,6 +11,8 @@ local k = import 'k8s.libsonnet';
   spec: {
     dnsNames: [
       "*.vault-internal",
+    ],
+    ipAddresses: [
       "127.0.0.1",
     ],
     issuerRef: {
