@@ -1,5 +1,6 @@
 local vars = import 'variables.libsonnet';
 local mode = std.extVar('mode');
+local k = import 'k8s.libsonnet';
 
 function(mode='test') [
   {
@@ -15,30 +16,43 @@ function(mode='test') [
     },
     spec: {
       project: vars.argo.project,
-      sources: [{
-        repoURL: 'https://helm.releases.hashicorp.com',
-        targetRevision: '0.21.0',
-        chart: 'vault',
-        helm: {
-          releaseName: 'vault-unsealer',
-          values: (importstr "files/vault-unsealer/values.yaml") % {
-            secret_name: vars.cluster.wildcard_cert_secret,
-          },
-        }
-      }, {
-        repoURL: 'https://github.com/ameyp/k3s-cluster',
-        targetRevision: 'main',
-        path: "apps/vault-config",
-        directory: {
-          jsonnet: {
-            libs: ["vendor"],
-            extVars: [{
-              name: 'mode',
-              value: 'test',
-            }],
-          },
+      sources: [
+        {
+          repoURL: 'https://helm.releases.hashicorp.com',
+          targetRevision: '0.21.0',
+          chart: 'vault',
+          helm: {
+            releaseName: 'vault-unsealer',
+            values: (importstr "files/vault-unsealer/values.yaml") % {
+              secret_name: vars.cluster.wildcard_cert_secret,
+            },
+          }
         },
-      }],
+        // {
+        //   repoURL: 'https://redhat-cop.github.io/vault-config-operator',
+        //   targetRevision: '0.8.4',
+        //   chart: 'vault-config-operator',
+        //   helm: {
+        //     releaseName: 'vault-unsealer-operator',
+        //     values: (importstr "files/vault-unsealer-operator/values.yaml") % {
+        //       vaultAddr: "https://%s" % k.get_endpoint(vars.vault_unsealer.ingress.subdomain),
+        //     },
+        //   }
+        // },
+        {
+          repoURL: 'https://github.com/ameyp/k3s-cluster',
+          targetRevision: 'main',
+          path: "apps/vault-config",
+          directory: {
+            jsonnet: {
+              libs: ["vendor"],
+              extVars: [{
+                name: 'mode',
+                value: 'test',
+              }],
+            },
+          },
+        }],
       destination: {
         server: 'https://kubernetes.default.svc',
         namespace: vars.vault.namespace,

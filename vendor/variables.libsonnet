@@ -42,19 +42,26 @@
   },
   vault_unsealer: {
     namespace: 'vault',
-    ingress: {
-      subdomain: 'vault-unsealer',
-      port: 8200,
-    },
   },
   vault: {
     namespace: 'vault',
-    ingress: {
-      subdomain: 'vault',
-      port: 8300,
+    initializer: {
+      service_account = 'vault-init',
     },
-    testReplicas: 1,
-    prodReplicas: 3,
-    internalCertSecret: 'vault-internal',
+    unsealer: {
+      ingress: {
+        subdomain: 'vault-unsealer',
+        port: 8200,
+      },
+    },
+    main: {
+      ingress: {
+        subdomain: 'vault',
+        port: 8300,
+      },
+      testReplicas: 1,
+      prodReplicas: 3,
+      internalCertSecret: 'vault-internal-tls-secret',
+    },
   },
 }
