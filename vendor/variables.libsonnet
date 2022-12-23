@@ -46,7 +46,7 @@
   vault: {
     namespace: 'vault',
     initializer: {
-      service_account = 'vault-init',
+      service_account: 'vault-init',
     },
     unsealer: {
       ingress: {
