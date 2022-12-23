@@ -8,6 +8,9 @@ local k = import 'k8s.libsonnet';
     metadata: {
       name: "vault-unsealer-initializer",
       namespace: vars.vault.namespace,
+      annotations: {
+        'argocd.argoproj.io/sync-wave': '2',
+      },
     },
     spec: {
       template: {
@@ -17,7 +20,7 @@ local k = import 'k8s.libsonnet';
           containers: [{
             name: "unsealer-init",
             image: "ameypar/k8s-vault-initializer:latest",
-            args: "-vault-for-autounseal",
+            args: ["-vault-for-autounseal"],
             env: [{
               name: "VAULT_ADDR",
               value: "https://%s" % k.get_endpoint(vars.vault.unsealer.ingress.subdomain),

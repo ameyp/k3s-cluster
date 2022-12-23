@@ -29,7 +29,8 @@ local getOrDefault = function(params, name, default) if std.objectHas(params, na
       kind: "ServiceAccount",
       metadata: {
         name: params.name,
-        namespace: getOrDefault(params, 'namespace', 'default')
+        namespace: getOrDefault(params, 'namespace', 'default'),
+        annotations: getOrDefault(params, 'annotations', {})
       },
     },
   },
@@ -39,7 +40,8 @@ local getOrDefault = function(params, name, default) if std.objectHas(params, na
       kind: "Role",
       metadata: {
         name: params.name,
-        namespace: getOrDefault(params, 'namespace', 'default')
+        namespace: getOrDefault(params, 'namespace', 'default'),
+        annotations: getOrDefault(params, 'annotations', {})
       },
       rules: params.rules,
     },
@@ -50,7 +52,8 @@ local getOrDefault = function(params, name, default) if std.objectHas(params, na
       kind: "RoleBinding",
       metadata: {
         name: params.name,
-        namespace: getOrDefault(params, 'namespace', 'default')
+        namespace: getOrDefault(params, 'namespace', 'default'),
+        annotations: getOrDefault(params, 'annotations', {})
       },
       roleRef: {
         kind: "Role",
