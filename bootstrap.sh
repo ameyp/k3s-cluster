@@ -18,8 +18,8 @@ kubectl --kubeconfig ~/.kube/config-test create secret generic cloudflare-api-to
 
 # Install argocd
 kubectl --kubeconfig ~/.kube/config-test create namespace argocd
-kubectl --kubeconfig ~/.kube/config-test apply -f https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/install.yaml -n argocd
 kubectl --kubeconfig ~/.kube/config-test apply -f root/config-map.yaml
+kubectl --kubeconfig ~/.kube/config-test apply -f https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/install.yaml -n argocd
 kubectl --kubeconfig ~/.kube/config-test apply -f root/project.yaml
 kubectl --kubeconfig ~/.kube/config-test apply -f root/app.yaml
 kubectl --kubeconfig ~/.kube/config-test apply -f root/self.yaml
