@@ -2,12 +2,12 @@ local vars = import 'variables.libsonnet';
 local k = import 'k8s.libsonnet';
 
 local allowed_namespaces = std.join(",", [
-  vars.vault_unsealer.namespace,
+  vars.vault.namespace,
   vars.argo.namespace
 ]);
 
 local auto_namespaces = std.join(",", [
-  vars.vault_unsealer.namespace
+  vars.vault.namespace
 ]);
 
 {

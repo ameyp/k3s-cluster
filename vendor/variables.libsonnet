@@ -40,9 +40,6 @@
     load_balancer_ip: '192.168.80.10',
     test_load_balancer_ip: '192.168.1.210',
   },
-  vault_unsealer: {
-    namespace: 'vault',
-  },
   vault: {
     namespace: 'vault',
     initializer: {

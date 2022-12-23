@@ -7,16 +7,16 @@ local service_name = 'vault-unsealer';
   kind: "IngressRouteTCP",
   metadata: {
     name: "vault-unsealer",
-    namespace: vars.vault_unsealer.namespace,
+    namespace: vars.vault.unsealer.namespace,
   },
   spec: {
     entryPoints: ["websecure",],
     routes: [{
       match: std.format("HostSNI(`%s`)",
-                        [k.get_endpoint(vars.vault_unsealer.ingress.subdomain)]),
+                        [k.get_endpoint(vars.vault.unsealer.ingress.subdomain)]),
       services: [{
         name: service_name,
-        port: vars.vault_unsealer.ingress.port,
+        port: vars.vault.unsealer.ingress.port,
         weight: 1,
       }],
     }],

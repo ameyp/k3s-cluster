@@ -35,7 +35,7 @@ function(mode='test') [
         //   helm: {
         //     releaseName: 'vault-unsealer-operator',
         //     values: (importstr "files/vault-unsealer-operator/values.yaml") % {
-        //       vaultAddr: "https://%s" % k.get_endpoint(vars.vault_unsealer.ingress.subdomain),
+        //       vaultAddr: "https://%s" % k.get_endpoint(vars.vault.unsealer.ingress.subdomain),
         //     },
         //   }
         // },
