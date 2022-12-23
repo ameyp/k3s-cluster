@@ -5,7 +5,7 @@ local k = import 'k8s.libsonnet';
   apiVersion: "cert-manager.io/v1",
   kind: "Certificate",
   metadata: {
-    name: vars.vault.internalCertSecret,
+    name: vars.vault.main.internalCertSecret,
     namespace: vars.vault.namespace,
     annotations: {
       'argocd.argoproj.io/sync-wave': '2',
@@ -22,7 +22,7 @@ local k = import 'k8s.libsonnet';
       name: vars.cert_manager.self_signed_issuer,
       kind: "ClusterIssuer",
     },
-    secretName: vars.vault.internalCertSecret,
+    secretName: vars.vault.main.internalCertSecret,
     usages: ["server auth"],
   },
 }
