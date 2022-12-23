@@ -16,6 +16,9 @@ local auto_namespaces = std.join(",", [
   metadata: {
     name: "wildcard-web-cert",
     namespace: 'default',
+    annotations: {
+      'argocd.argoproj.io/sync-wave': '2',
+    },
   },
   spec: {
     dnsNames: [

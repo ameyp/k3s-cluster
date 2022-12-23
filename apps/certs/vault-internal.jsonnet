@@ -7,6 +7,9 @@ local k = import 'k8s.libsonnet';
   metadata: {
     name: vars.vault.internalCertSecret,
     namespace: vars.vault.namespace,
+    annotations: {
+      'argocd.argoproj.io/sync-wave': '2',
+    },
   },
   spec: {
     dnsNames: [
