@@ -7,7 +7,7 @@ local service_name = 'vault-unsealer';
   kind: "IngressRouteTCP",
   metadata: {
     name: "vault-unsealer",
-    namespace: vars.vault.unsealer.namespace,
+    namespace: vars.vault.namespace,
   },
   spec: {
     entryPoints: ["websecure",],
