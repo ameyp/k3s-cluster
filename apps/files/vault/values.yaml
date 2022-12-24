@@ -48,5 +48,3 @@ injector:
     objectSelector:
       matchLabels:
         vault-injector: enabled
-csi:
-  enabled: true
