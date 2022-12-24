@@ -2,7 +2,6 @@ global:
   tlsDisable: false
 ui:
   enabled: true
-  activeVaultPodOnly: true
   externalPort: %(webPort)d
   targetPort: %(webPort)d
 server:
