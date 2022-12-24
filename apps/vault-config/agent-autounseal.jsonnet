@@ -46,7 +46,7 @@ local k = import 'k8s.libsonnet';
             cluster_address = "[::]:8301"
           }
           seal "transit" {
-            address = %(unsealerEndpoint)s
+            address = "%(unsealerEndpoint)s"
             disable_renewal = "false"
             key_name = "autounseal"
             mount_path = "transit/"
