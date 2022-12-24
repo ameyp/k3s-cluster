@@ -27,19 +27,17 @@ server:
     size: 1Gi
     storageClass: longhorn
   volumes:
-    - name: "vault-tls"
+    - name: "vault-tls-internal"
       secret:
         secretName: %(tlsSecret)s
     - name: "vault-tls-web"
       secret:
         secretName: %(webSecret)s
   volumeMounts:
-    - mountPath: "/vault-tls"
-      name: "vault-tls"
+    - mountPath: "/vault-tls-internal"
+      name: "vault-tls-internal"
     - mountPath: "/vault-tls-web"
       name: "vault-tls-web"
-  extraEnvironmentVars:
-    VAULT_CACERT: "/vault-tls/tls.crt"
   extraLabels:
     unseal-injector: enabled
   # Changed from required to preferred because for some reason even a single pod fails to deploy on my test cluster.
