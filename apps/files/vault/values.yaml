@@ -47,12 +47,14 @@ server:
   affinity: |
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchLabels:
-              app.kubernetes.io/name: vault
-              app.kubernetes.io/instance: vault
-              component: server
-          topologyKey: kubernetes.io/hostname
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: vault
+                app.kubernetes.io/instance: vault
+                component: server
+            topologyKey: kubernetes.io/hostname
 injector:
   enabled: true
   webhook:
