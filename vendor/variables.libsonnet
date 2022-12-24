@@ -56,8 +56,6 @@
         subdomain: 'vault',
         port: 8300,
       },
-      testReplicas: 1,
-      prodReplicas: 3,
       internalCertSecret: 'vault-internal-tls-secret',
     },
   },

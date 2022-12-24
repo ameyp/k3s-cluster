@@ -36,7 +36,6 @@ function(mode='test') [
             releaseName: 'vault',
             values: (importstr "files/vault/values.yaml") % {
               webPort: vars.vault.main.ingress.port,
-              replicas: if mode == 'test' then vars.vault.main.testReplicas else vars.vault.main.prodReplicas,
               tlsSecret: vars.vault.main.internalCertSecret,
               webSecret: vars.cluster.wildcard_cert_secret,
             },
