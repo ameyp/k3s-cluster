@@ -33,6 +33,15 @@ server:
       name: "vault-tls-web"
   extraEnvironmentVars:
     VAULT_CACERT: "/vault-tls-web/tls.crt"
+  affinity: |
+    # Identical to the default, minus app.kubernetes.io/name, because that seems to be the chart name.
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/instance: "{{ .Release.Name }}"
+              component: server
+          topologyKey: kubernetes.io/hostname
 injector:
   logLevel: trace
   enabled: true

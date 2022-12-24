@@ -42,6 +42,15 @@ server:
     VAULT_CACERT: "/vault-tls/tls.crt"
   extraLabels:
     unseal-injector: enabled
+  affinity: |
+    # Identical to the default, minus app.kubernetes.io/name, because that seems to be the chart name.
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/instance: "{{ .Release.Name }}"
+              component: server
+          topologyKey: kubernetes.io/hostname
 injector:
   enabled: true
   webhook:
