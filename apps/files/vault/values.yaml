@@ -21,11 +21,11 @@ server:
       config: ""
   dataStorage:
     size: 2Gi
-    storageClass: local-path
+    storageClass: longhorn
   auditStorage:
     enabled: true
     size: 1Gi
-    storageClass: local-path
+    storageClass: longhorn
   volumes:
     - name: "vault-tls"
       secret:
