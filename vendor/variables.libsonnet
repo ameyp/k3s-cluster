@@ -57,6 +57,7 @@
         port: 8300,
       },
       internalCertSecret: 'vault-internal-tls-secret',
+      configFilePath: '/vault/secrets/server-config',
     },
   },
 }

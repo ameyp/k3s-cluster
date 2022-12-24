@@ -38,6 +38,7 @@ function(mode='test') [
               webPort: vars.vault.main.ingress.port,
               tlsSecret: vars.vault.main.internalCertSecret,
               webSecret: vars.cluster.wildcard_cert_secret,
+              configFilePath: vars.vault.main.configFilePath,
             },
           }
         },

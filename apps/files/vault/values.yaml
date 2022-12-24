@@ -15,7 +15,7 @@ server:
     vault.hashicorp.com/agent-configmap: 'vault-agent-autounseal'
   ha:
     enabled: true
-    replicas: 1
+    replicas: 3
     raft:
       enabled: true
       config: ""
