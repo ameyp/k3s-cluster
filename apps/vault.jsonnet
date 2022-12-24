@@ -28,6 +28,20 @@ function(mode='test') [
             },
           }
         },
+        {
+          repoURL: 'https://helm.releases.hashicorp.com',
+          targetRevision: '0.21.0',
+          chart: 'vault',
+          helm: {
+            releaseName: 'vault',
+            values: (importstr "files/vault/values.yaml") % {
+              webPort: vars.vault.main.ingress.port,
+              replicas: if mode == 'test' then vars.vault.main.testReplicas else vars.vault.main.prodReplicas,
+              tlsSecret: vars.vault.main.internalCertSecret,
+              webSecret: vars.cluster.wildcard_cert_secret,
+            },
+          }
+        },
         // {
         //   repoURL: 'https://redhat-cop.github.io/vault-config-operator',
         //   targetRevision: '0.8.4',
