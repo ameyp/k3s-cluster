@@ -9,7 +9,7 @@ local k = import 'k8s.libsonnet';
       name: "vault-unsealer-initializer",
       namespace: vars.vault.namespace,
       annotations: {
-        'argocd.argoproj.io/sync-wave': '2',
+        'argocd.argoproj.io/sync-wave': '1',
       },
     },
     spec: {
