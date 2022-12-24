@@ -52,7 +52,8 @@ server:
               app.kubernetes.io/name: vault
               app.kubernetes.io/instance: vault
               component: server
-          topologyKey: kubernetes.io/hostnameinjector:
+          topologyKey: kubernetes.io/hostname
+injector:
   enabled: true
   webhook:
     objectSelector:
