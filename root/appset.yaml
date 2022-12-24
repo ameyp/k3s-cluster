@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd-apps
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/ameyp/k3s-cluster
+      revision: HEAD
+      files:
+      - path: "apps/*-config.json"
+  template:
+    metadata:
+      name: '{{app.name}}'
+    spec:
+      project: wirywolf
+      sources:
+        - repoURL: '{{app.helm.repo}}'
+          targetRevision: '{{app.helm.version}}'
+          chart: '{{app.helm.chart}}'
+          helm:
+            values:
+
+        - repoURL: https://github.com/ameyp/k3s-cluster
+          targetRevision: HEAD
+          path: '{{app.path}}'
+          directory:
+            jsonnet:
+              libs:
+                - vendor
+              extVars:
+                - name: mode
+                  value: test
+
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{app.namespace}}'
