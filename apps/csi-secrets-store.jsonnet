@@ -18,7 +18,7 @@ function(mode='test') [
         helm: {
           parameters: [{
             name: "syncSecret.enabled",
-            value: true
+            value: "true"
           }],
         },
       }],
