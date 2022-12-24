@@ -33,6 +33,9 @@ server:
       name: "vault-tls-web"
   extraEnvironmentVars:
     VAULT_CACERT: "/vault-tls-web/tls.crt"
+  resources:
+    requests:
+      cpu: 125m
 injector:
   logLevel: trace
   enabled: true
@@ -40,5 +43,7 @@ injector:
     objectSelector:
       matchLabels:
         unseal-injector: enabled
-  agentDefaults:
-    cpuRequest: "125m"
+  resources:
+    requests:
+      cpu: 125m
+

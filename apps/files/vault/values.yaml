@@ -55,9 +55,15 @@ server:
                 app.kubernetes.io/instance: vault
                 component: server
             topologyKey: kubernetes.io/hostname
+  resources:
+    requests:
+      cpu: 125m
 injector:
   enabled: true
   webhook:
     objectSelector:
       matchLabels:
         vault-injector: enabled
+  resources:
+    requests:
+      cpu: 125m
