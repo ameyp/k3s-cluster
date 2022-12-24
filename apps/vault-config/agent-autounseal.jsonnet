@@ -24,7 +24,7 @@ local k = import 'k8s.libsonnet';
       }
 
       template {
-        destination = %(configFilePath)s
+        destination = "%(configFilePath)s"
         contents = <<-EOT
           disable_mlock = true
           // log_level = "debug"
