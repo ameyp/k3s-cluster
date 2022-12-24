@@ -40,6 +40,10 @@ function(mode='test') [
               webSecret: vars.cluster.wildcard_cert_secret,
               configFilePath: vars.vault.main.configFilePath,
             },
+            parameters: if mode == 'test' then [{
+              name: 'server.resources.requests.cpu',
+              value: '100m',
+            }] else []
           }
         },
         // {
