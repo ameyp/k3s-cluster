@@ -26,10 +26,15 @@ function(mode='test') [
             values: (importstr "files/vault-unsealer/values.yaml") % {
               secret_name: vars.cluster.wildcard_cert_secret,
             },
-            parameters: if mode == 'test' then [{
-              name: 'injector.resources.requests.cpu',
-              value: '100m',
-            }] else []
+            parameters: if mode == 'test' then [
+              {
+                name: 'injector.resources.requests.cpu',
+                value: '100m',
+              }, {
+                name: 'injector.agentDefaults.cpuRequest',
+                value: '100m',
+              }
+            ] else []
           }
         },
         {
