@@ -35,7 +35,7 @@ server:
     VAULT_CACERT: "/vault-tls-web/tls.crt"
   resources:
     requests:
-      cpu: 125m
+      cpu: 0.125
 injector:
   logLevel: trace
   enabled: true
@@ -45,5 +45,5 @@ injector:
         unseal-injector: enabled
   resources:
     requests:
-      cpu: 125m
+      cpu: 0.125
 

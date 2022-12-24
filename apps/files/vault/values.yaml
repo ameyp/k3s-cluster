@@ -15,7 +15,7 @@ server:
     vault.hashicorp.com/agent-configmap: 'vault-agent-autounseal'
   ha:
     enabled: true
-    replicas: 3
+    replicas: 1
     raft:
       enabled: true
       config: ""
@@ -57,7 +57,7 @@ server:
             topologyKey: kubernetes.io/hostname
   resources:
     requests:
-      cpu: 125m
+      cpu: 0.125
 injector:
   enabled: true
   webhook:
@@ -66,4 +66,4 @@ injector:
         vault-injector: enabled
   resources:
     requests:
-      cpu: 125m
+      cpu: 0.125
