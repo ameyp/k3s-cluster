@@ -12,6 +12,7 @@ ssh-keygen -f "/home/amey/.ssh/known_hosts" -R "192.168.1.201" && ssh core@192.1
 
 # Create cert-manager namespace and secret
 kubectl --kubeconfig ~/.kube/config-test create namespace cert-manager
+kubectl --kubeconfig ~/.kube/config-test create namespace vault
 kubectl --kubeconfig ~/.kube/config-test create secret generic cloudflare-api-token \
         -n cert-manager \
         --from-literal=apitoken=$(cat $CLOUDFLARE_TOKEN_FILE)
