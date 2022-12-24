@@ -49,8 +49,8 @@ server:
       preferredDuringSchedulingIgnoredDuringExecution:
         - labelSelector:
             matchLabels:
-              app.kubernetes.io/name: {{ template "vault.name" . }}
-              app.kubernetes.io/instance: "{{ .Release.Name }}"
+              app.kubernetes.io/name: vault
+              app.kubernetes.io/instance: vault
               component: server
           topologyKey: kubernetes.io/hostnameinjector:
   enabled: true
