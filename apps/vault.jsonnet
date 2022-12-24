@@ -71,14 +71,6 @@ function(mode='test') [
         server: 'https://kubernetes.default.svc',
         namespace: vars.vault.namespace,
       },
-      ignoreDifferences: [{
-        group: "admissionregistration.k8s.io",
-        kind: "MutatingWebhookConfiguration",
-        name: "vault-unsealer-agent-injector-cfg",
-        jqPathExpressions: [
-          ".webhooks[].clientConfig.caBundle"
-        ],
-      }],
       syncPolicy: {
         automated: {
           selfHeal: true,

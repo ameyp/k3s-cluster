@@ -10,6 +10,9 @@ metadata:
 data:
   application.instanceLabelKey: "argocd.wirywolf.com/argocd-config"
   resource.customizations: |
+    ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
+      jqPathExpressions:
+      - '.webhooks[]?.clientConfig.caBundle'
     argoproj.io/Application:
       health.lua: |
         hs = {}
