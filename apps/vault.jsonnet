@@ -28,10 +28,10 @@ function(mode='test') [
             },
             parameters: if mode == 'test' then [
               {
-                name: 'injector.resources.requests.cpu',
+                name: 'injector.agentDefaults.cpuRequest',
                 value: '100m',
               }, {
-                name: 'injector.agentDefaults.cpuRequest',
+                name: 'server.resources.requests.cpu',
                 value: '100m',
               }
             ] else []
@@ -49,10 +49,15 @@ function(mode='test') [
               webSecret: vars.cluster.wildcard_cert_secret,
               configFilePath: vars.vault.main.configFilePath,
             },
-            parameters: if mode == 'test' then [{
-              name: 'server.resources.requests.cpu',
-              value: '100m',
-            }] else []
+            parameters: if mode == 'test' then [
+              {
+                name: 'injector.agentDefaults.cpuRequest',
+                value: '100m',
+              }, {
+                name: 'server.resources.requests.cpu',
+                value: '100m',
+              }
+            ] else []
           }
         },
         // {
