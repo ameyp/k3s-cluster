@@ -40,3 +40,5 @@ injector:
     objectSelector:
       matchLabels:
         unseal-injector: enabled
+  agentDefaults:
+    cpuRequest: "125m"
