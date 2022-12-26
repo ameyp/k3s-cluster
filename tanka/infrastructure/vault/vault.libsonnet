@@ -8,6 +8,9 @@ function(mode='test') {
     namespace: vars.flux.namespace,
   },
   spec: {
+    dependsOn: [
+      {name: "vault-unsealer"},
+    ],
     targetNamespace: vars.vault.namespace,
     install: {
       createNamespace: true,
