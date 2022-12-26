@@ -1,29 +1,8 @@
 local vars = import 'variables.libsonnet';
 local wirywolf = import 'wirywolf.libsonnet';
+local initializer = import './initializer-job.libsonnet';
 
-function(mode='test') [{
-  apiVersion: "batch/v1",
-  kind: "Job",
-  metadata: {
-    name: "vault-unsealer-initializer",
-    namespace: vars.vault.namespace,
-  },
-  spec: {
-    template: {
-      spec: {
-        serviceAccount: vars.vault.initializer.service_account,
-        restartPolicy: "Never",
-        containers: [{
-          name: "unsealer-init",
-          image: "ameypar/k8s-vault-initializer:latest",
-          args: ["-vault-for-autounseal"],
-          env: [{
-            name: "VAULT_ADDR",
-            value: "https://%s" % wirywolf.get_endpoint(vars.vault.unsealer.ingress.subdomain, mode),
-          }]
-        }]
-      }
-    }
-  }
-}
-]
+function(mode='test') [initializer(
+  "vault-unsealer-initializer",
+  wirywolf.get_endpoint(vars.vault.unsealer.ingress.subdomain, mode),
+  ["-vault-for-autounseal"])]
