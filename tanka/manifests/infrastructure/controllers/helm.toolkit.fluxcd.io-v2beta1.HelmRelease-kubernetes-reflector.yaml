@@ -16,4 +16,5 @@ spec:
   install:
     createNamespace: true
   interval: 30m
+  releaseName: kubernetes-reflector
   targetNamespace: cert-manager

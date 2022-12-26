@@ -18,6 +18,7 @@ spec:
   install:
     createNamespace: true
   interval: 30m
+  releaseName: metallb
   targetNamespace: metallb-system
   values: |
     prometheus:

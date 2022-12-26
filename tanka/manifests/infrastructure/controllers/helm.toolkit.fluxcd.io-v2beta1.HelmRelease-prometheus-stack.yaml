@@ -16,23 +16,82 @@ spec:
   install:
     createNamespace: true
   interval: 30m
+  releaseName: kube-prometheus-stack
   targetNamespace: monitoring
-  values: "alertmanager:\n  alertmanagerSpec:\n    useExistingSecret: true\n    configSecret:
-    \n    podMetadata:\n      labels:\n        vault-injector: enabled\n      annotations:\n
-    \       vault.hashicorp.com/agent-inject: \"true\"\n        vault.hashicorp.com/agent-pre-populate-only:
-    \"true\"\n        vault.hashicorp.com/role: \"alert-manager\"\n        vault.hashicorp.com/service:
-    vault.test.wirywolf.com\n        vault.hashicorp.com/agent-inject-secret-slack-webhook-url:
-    \"tokens/data/slack\"\n        vault.hashicorp.com/agent-inject-template-slack-webhook-url:
-    |\n          {{- with secret \"tokens/data/slack\" -}}\n          {{- .Data.data.alarm_webhook_url
-    -}}\n          {{- end -}}\n    storage:\n      volumeClaimTemplate:\n        spec:\n
-    \         storageClassName: longhorn\n          resources:\n            requests:\n
-    \             storage: 2Gi\nprometheus:\n  prometheusSpec:\n    storage:\n      volumeClaimTemplate:\n
-    \       spec:\n          storageClassName: longhorn\n          resources:\n            requests:\n
-    \             storage: 2Gi\n  thanosRulerSpec:\n    storage:\n      volumeClaimTemplate:\n
-    \       spec:\n          storageClassName: longhorn\n          resources:\n            requests:\n
-    \             storage: 2Gi\ndefaultRules:\n  rules:\n    etcd: false\nkubeEtcd:\n
-    \ enabled: false\nkubeApiServer:\n  enabled: false\nkubeControllerManager:\n  enabled:
-    true\n  endpoints:\n    - 192.168.1.201\n  service:\n    enabled: true\n    port:
-    10257\n    targetPort: 10257\nkubeScheduler:\n  enabled: true\n  endpoints:\n
-    \   - 192.168.1.201\n  service:\n    enabled: true\n    port: 10259\n    targetPort:
-    10259\nkubeProxy:\n  enabled: true\n  endpoints:\n    - 192.168.1.201\n"
+  values:
+    alertmanager:
+      alertmanagerSpec:
+        configSecret: ""
+        podMetadata:
+          annotations:
+            vault.hashicorp.com/agent-inject: "true"
+            vault.hashicorp.com/agent-inject-secret-slack-webhook-url: tokens/data/slack
+            vault.hashicorp.com/agent-inject-template-slack-webhook-url: |
+              {{- with secret "tokens/data/slack" -}}
+              {{- .Data.data.alarm_webhook_url -}}
+              {{- end -}}
+            vault.hashicorp.com/agent-pre-populate-only: "true"
+            vault.hashicorp.com/role: alert-manager
+            vault.hashicorp.com/service: vault.test.wirywolf.com
+          labels:
+            vault-injector: enabled
+        storage:
+          volumeClaimTemplate:
+            spec:
+              resources:
+                requests:
+                  storage: 2Gi
+              storageClassName: longhorn
+        useExistingSecret: true
+    defaultRules:
+      rules:
+        etcd: false
+    kubeApiServer:
+      enabled: false
+    kubeControllerManager:
+      enabled: true
+      endpoints:
+      - 192.168.1.201
+      service:
+        enabled: true
+        port: 10257
+        targetPort: 10257
+    kubeEtcd:
+      enabled: false
+    kubeProxy:
+      enabled: true
+      endpoints:
+      - 192.168.1.201
+    kubeScheduler:
+      enabled: true
+      endpoints:
+      - 192.168.1.201
+      service:
+        enabled: true
+        port: 10259
+        targetPort: 10259
+    prometheus:
+      prometheusSpec:
+        storage:
+          volumeClaimTemplate:
+            spec:
+              resources:
+                requests:
+                  storage: 2Gi
+              storageClassName: longhorn
+      thanosRulerSpec:
+        storage:
+          volumeClaimTemplate:
+            spec:
+              resources:
+                requests:
+                  storage: 2Gi
+              storageClassName: longhorn
+    prometheusOperator:
+      prometheusConfigReloader:
+        resources:
+          requests:
+            cpu: 100m
+      resources:
+        requests:
+          cpu: 100m
