@@ -2,6 +2,19 @@ local vars = import 'variables.libsonnet';
 local wirywolf = import 'wirywolf.libsonnet';
 local secretName = 'alert-manager-config';
 
+local volumeClaimTemplate = {
+  volumeClaimTemplate: {
+    spec: {
+      storageClassName: "longhorn",
+      resources: {
+        requests: {
+          storage: "2Gi"
+        }
+      }
+    }
+  }
+};
+
 function(mode='test') [
   wirywolf.secret.new({
     name: secretName,
@@ -44,11 +57,88 @@ function(mode='test') [
           interval: "12h",
         },
       },
-      values: (importstr "files/prometheus/values.yaml") % {
-        controller_ip: vars.cluster.controller_ip,
-        config_secret: "",
-        vault_address: wirywolf.get_endpoint(vars.vault.main.ingress.subdomain, mode),
-      },
+      values: std.mergePatch({
+        alertmanager: {
+          alertmanagerSpec: {
+            useExistingSecret: true,
+            configSecret: "",
+            podMetadata: {
+              labels: {
+                "vault-injector": "enabled",
+              },
+              annotations: {
+                "vault.hashicorp.com/agent-inject": "true",
+                "vault.hashicorp.com/agent-pre-populate-only": "true",
+                "vault.hashicorp.com/role": "alert-manager",
+                "vault.hashicorp.com/service": wirywolf.get_endpoint(vars.vault.main.ingress.subdomain, mode),
+                "vault.hashicorp.com/agent-inject-secret-slack-webhook-url": "tokens/data/slack",
+                "vault.hashicorp.com/agent-inject-template-slack-webhook-url": |||
+                  {{- with secret "tokens/data/slack" -}}
+                  {{- .Data.data.alarm_webhook_url -}}
+                  {{- end -}}
+                |||,
+              },
+            },
+            storage: volumeClaimTemplate
+          },
+        },
+        prometheus: {
+          prometheusSpec: {
+            storage: volumeClaimTemplate
+          },
+          thanosRulerSpec: {
+            storage: volumeClaimTemplate
+          }
+        },
+        defaultRules: {
+          rules: {
+            etcd: false
+          }
+        },
+        kubeEtcd: {
+          enabled: false
+        },
+        kubeApiServer: {
+          enabled: false
+        },
+        kubeControllerManager: {
+          enabled: true,
+          endpoints: [vars.cluster.controller_ip],
+          service: {
+            enabled: true,
+            port: 10257,
+            targetPort: 10257,
+          },
+        },
+        kubeScheduler: {
+          enabled: true,
+          endpoints: [vars.cluster.controller_ip],
+          service: {
+            enabled: true,
+            port: 10259,
+            targetPort: 10259,
+          },
+        },
+        kubeProxy: {
+          enabled: true,
+          endpoints: [vars.cluster.controller_ip],
+        }
+      }, if mode == 'test' then {
+        prometheusOperator: {
+          resources: {
+            requests: {
+              cpu: "100m"
+            }
+          },
+          prometheusConfigReloader: {
+            resources: {
+              requests: {
+                cpu: "100m"
+              }
+            },
+          }
+        }
+      } else {})
     },
   },
 ]
