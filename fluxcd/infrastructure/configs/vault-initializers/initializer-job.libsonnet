@@ -15,7 +15,7 @@ function(name, addr, args, secretName)
   job.new(name) +
   job.metadata.withNamespace("vault") +
   jobSpec.withServiceAccountName(vars.vault.initializer.service_account) +
-  jobSpec.withRestartPolicy("IfNotPresent") +
+  jobSpec.withRestartPolicy("Never") +
   jobSpec.withContainers([
     container.new("initializer", "ameypar/k8s-vault-initializer:latest") +
     container.withArgs(args) +
