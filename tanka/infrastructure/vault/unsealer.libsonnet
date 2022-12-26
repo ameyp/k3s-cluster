@@ -13,6 +13,7 @@ function(mode='test') {
       createNamespace: true,
     },
     interval: "30m",
+    releaseName: "vault-unsealer",
     chart: {
       spec: {
         chart: "vault",

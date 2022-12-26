@@ -13,6 +13,7 @@ function(mode='test') {
       createNamespace: true,
     },
     interval: "30m",
+    releaseName: "vault",
     chart: {
       spec: {
         chart: "vault",
@@ -45,7 +46,7 @@ function(mode='test') {
         },
         ha: {
           enabled: true,
-          replicas: "3",
+          replicas: 3,
           raft: {
             enabled: true,
             config: "",
@@ -86,7 +87,7 @@ function(mode='test') {
         affinity: {
           podAntiAffinity: {
             preferredDuringSchedulingIgnoredDuringExecution: [{
-              weight: "100",
+              weight: 100,
               podAffinityTerm: {
                 labelSelector: {
                   matchLabels: {
