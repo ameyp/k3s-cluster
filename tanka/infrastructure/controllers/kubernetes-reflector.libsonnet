@@ -20,7 +20,7 @@ function(mode='test') [{
     namespace: vars.flux.namespace,
   },
   spec: {
-    targetNamespace: vars.cert_manager.namespace,
+    targetNamespace: vars.kubernetes_reflector.namespace,
     interval: "30m",
     install: {
       createNamespace: true,
