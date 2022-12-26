@@ -16,6 +16,7 @@ spec:
   install:
     createNamespace: true
   interval: 30m
+  releaseName: vault-unsealer
   targetNamespace: vault
   values:
     global:

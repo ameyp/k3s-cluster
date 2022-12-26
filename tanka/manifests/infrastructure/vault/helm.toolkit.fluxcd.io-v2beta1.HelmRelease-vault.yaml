@@ -16,6 +16,7 @@ spec:
   install:
     createNamespace: true
   interval: 30m
+  releaseName: vault
   targetNamespace: vault
   values:
     global:
@@ -39,7 +40,7 @@ spec:
                   app.kubernetes.io/name: vault
                   component: server
               topologyKey: kubernetes.io/hostname
-            weight: "100"
+            weight: 100
       annotations:
         vault.hashicorp.com/agent-configmap: vault-agent-autounseal
         vault.hashicorp.com/agent-inject: "true"
@@ -60,7 +61,7 @@ spec:
         raft:
           config: ""
           enabled: true
-        replicas: "3"
+        replicas: 3
       resources:
         requests:
           cpu: 100m
