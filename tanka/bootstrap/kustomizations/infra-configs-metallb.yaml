@@ -4,6 +4,8 @@ metadata:
   name: infra-configs-metallb
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infra-controllers
   interval: 10m
   targetNamespace: flux-system
   sourceRef:

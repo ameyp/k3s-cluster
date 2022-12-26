@@ -4,6 +4,8 @@ metadata:
   name: infra-configs-traefik
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infra-configs-certs
   interval: 10m
   targetNamespace: flux-system
   sourceRef:

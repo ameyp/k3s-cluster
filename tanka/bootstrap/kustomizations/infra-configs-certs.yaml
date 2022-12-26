@@ -4,6 +4,8 @@ metadata:
   name: infra-configs-certs
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infra-configs-clusterissuers
   interval: 10m
   targetNamespace: flux-system
   sourceRef:
