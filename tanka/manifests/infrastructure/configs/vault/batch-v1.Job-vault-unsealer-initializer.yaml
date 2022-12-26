@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: vault-unsealer-initializer
+  namespace: vault
+spec:
+  template:
+    spec:
+      containers:
+      - args:
+        - -vault-for-autounseal
+        env:
+        - name: VAULT_ADDR
+          value: https://vault-unsealer.test.wirywolf.com
+        image: ameypar/k8s-vault-initializer:latest
+        name: unsealer-init
+      restartPolicy: Never
+      serviceAccount: vault-init

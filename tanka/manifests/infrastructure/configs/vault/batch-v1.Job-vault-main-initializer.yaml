@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: vault-main-initializer
+  namespace: vault
+spec:
+  template:
+    spec:
+      containers:
+      - env:
+        - name: VAULT_ADDR
+          value: https://vault.test.wirywolf.com
+        image: ameypar/k8s-vault-initializer:latest
+        name: main-init
+      restartPolicy: Never
+      serviceAccount: vault-init

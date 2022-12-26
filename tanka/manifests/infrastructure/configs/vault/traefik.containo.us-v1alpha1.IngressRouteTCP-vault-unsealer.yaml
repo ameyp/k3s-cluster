@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: vault-unsealer
+  namespace: vault
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: HostSNI(`vault-unsealer.test.wirywolf.com`)
+    services:
+    - name: vault-unsealer
+      port: 8200
+      weight: 1
+  tls:
+    passthrough: true
