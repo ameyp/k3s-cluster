@@ -4,5 +4,5 @@ local initializer = import './initializer-job.libsonnet';
 
 function(mode='test') [initializer(
   "vault-main-initializer",
-  wirywolf.get_endpoint(vars.vault.main.ingress.subdomain, mode),
+  "https://%s" % wirywolf.get_endpoint(vars.vault.main.ingress.subdomain, mode),
   [])]
