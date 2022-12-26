@@ -1,3 +1,15 @@
 {
-    "tanka.dev-v1alpha1.Environment-environments-infrastructure-configs.yaml": "infrastructure/controllers/main.jsonnet"
+    "helm.toolkit.fluxcd.io-v2beta1.HelmRelease-cert-manager.yaml": "infrastructure/controllers/main.jsonnet",
+    "helm.toolkit.fluxcd.io-v2beta1.HelmRelease-kubernetes-reflector.yaml": "infrastructure/controllers/main.jsonnet",
+    "helm.toolkit.fluxcd.io-v2beta1.HelmRelease-longhorn.yaml": "infrastructure/controllers/main.jsonnet",
+    "helm.toolkit.fluxcd.io-v2beta1.HelmRelease-metallb.yaml": "infrastructure/controllers/main.jsonnet",
+    "helm.toolkit.fluxcd.io-v2beta1.HelmRelease-prometheus-stack.yaml": "infrastructure/controllers/main.jsonnet",
+    "helm.toolkit.fluxcd.io-v2beta1.HelmRelease-traefik.yaml": "infrastructure/controllers/main.jsonnet",
+    "source.toolkit.fluxcd.io-v1beta2.HelmRepository-cert-manager.yaml": "infrastructure/controllers/main.jsonnet",
+    "source.toolkit.fluxcd.io-v1beta2.HelmRepository-kubernetes-reflector.yaml": "infrastructure/controllers/main.jsonnet",
+    "source.toolkit.fluxcd.io-v1beta2.HelmRepository-longhorn.yaml": "infrastructure/controllers/main.jsonnet",
+    "source.toolkit.fluxcd.io-v1beta2.HelmRepository-metallb.yaml": "infrastructure/controllers/main.jsonnet",
+    "source.toolkit.fluxcd.io-v1beta2.HelmRepository-prometheus.yaml": "infrastructure/controllers/main.jsonnet",
+    "source.toolkit.fluxcd.io-v1beta2.HelmRepository-traefik.yaml": "infrastructure/controllers/main.jsonnet",
+    "v1.Secret-alert-manager-config.yaml": "infrastructure/controllers/main.jsonnet"
 }

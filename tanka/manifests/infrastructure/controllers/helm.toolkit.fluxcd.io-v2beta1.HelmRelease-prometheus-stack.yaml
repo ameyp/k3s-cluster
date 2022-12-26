@@ -1,0 +1,38 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prometheus-stack
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      interval: 12h
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus
+        namespace: flux-system
+      version: 43.1.0
+  install:
+    createNamespace: true
+  interval: 30m
+  targetNamespace: monitoring
+  values: "alertmanager:\n  alertmanagerSpec:\n    useExistingSecret: true\n    configSecret:
+    \n    podMetadata:\n      labels:\n        vault-injector: enabled\n      annotations:\n
+    \       vault.hashicorp.com/agent-inject: \"true\"\n        vault.hashicorp.com/agent-pre-populate-only:
+    \"true\"\n        vault.hashicorp.com/role: \"alert-manager\"\n        vault.hashicorp.com/service:
+    vault.test.wirywolf.com\n        vault.hashicorp.com/agent-inject-secret-slack-webhook-url:
+    \"tokens/data/slack\"\n        vault.hashicorp.com/agent-inject-template-slack-webhook-url:
+    |\n          {{- with secret \"tokens/data/slack\" -}}\n          {{- .Data.data.alarm_webhook_url
+    -}}\n          {{- end -}}\n    storage:\n      volumeClaimTemplate:\n        spec:\n
+    \         storageClassName: longhorn\n          resources:\n            requests:\n
+    \             storage: 2Gi\nprometheus:\n  prometheusSpec:\n    storage:\n      volumeClaimTemplate:\n
+    \       spec:\n          storageClassName: longhorn\n          resources:\n            requests:\n
+    \             storage: 2Gi\n  thanosRulerSpec:\n    storage:\n      volumeClaimTemplate:\n
+    \       spec:\n          storageClassName: longhorn\n          resources:\n            requests:\n
+    \             storage: 2Gi\ndefaultRules:\n  rules:\n    etcd: false\nkubeEtcd:\n
+    \ enabled: false\nkubeApiServer:\n  enabled: false\nkubeControllerManager:\n  enabled:
+    true\n  endpoints:\n    - 192.168.1.201\n  service:\n    enabled: true\n    port:
+    10257\n    targetPort: 10257\nkubeScheduler:\n  enabled: true\n  endpoints:\n
+    \   - 192.168.1.201\n  service:\n    enabled: true\n    port: 10259\n    targetPort:
+    10259\nkubeProxy:\n  enabled: true\n  endpoints:\n    - 192.168.1.201\n"
