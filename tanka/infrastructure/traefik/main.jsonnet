@@ -42,6 +42,12 @@ function(mode='test') [{
     },
     values: {
       service: {
+        logs: {
+          level: "DEBUG",
+          access: {
+            enabled: true
+          }
+        },
         ipFamilyPolicy: "PreferDualStack",
         spec: {
           loadBalancerIP: if mode == 'test' then vars.traefik.testLoadBalancerIP else vars.loadBalancerIP,
