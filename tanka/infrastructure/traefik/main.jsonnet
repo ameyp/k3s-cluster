@@ -40,8 +40,50 @@ function(mode='test') [{
         interval: "12h",
       },
     },
-    values: (importstr "files/traefik/values.yaml")  % {
-      loadBalancerIP: if mode == 'test' then vars.traefik.testLoadBalancerIP else vars.loadBalancerIP,
+    values: {
+      service: {
+        ipFamilyPolicy: "PreferDualStack",
+        spec: {
+          loadBalancerIP: if mode == 'test' then vars.traefik.testLoadBalancerIP else vars.loadBalancerIP,
+        },
+      },
+      rbac: {
+        enabled: true,
+      },
+      ports: {
+        web: {
+          redirectTo: "websecure",
+        },
+        websecure: {
+          tls: {
+            enabled: true,
+          },
+        },
+      },
+      podAnnotations: {
+        "prometheus.io/port": 8082,
+        "prometheus.io/scrape": true,
+      },
+      providers: {
+        kubernetesIngress: {
+          publishedService: {
+            enabled: true,
+          },
+        },
+      },
+      priorityClassName: "system-cluster-critical",
+      tolerations: [{
+        key: "CriticalAddonsOnly",
+        operator: "Exists",
+      }, {
+        key: "node-role.kubernetes.io/control-plane",
+        operator: "Exists",
+        effect: "NoSchedule",
+      }, {
+        key: "node-role.kubernetes.io/master",
+        operator: "Exists",
+        effect: "NoSchedule",
+      }],
     },
   },
 }]
