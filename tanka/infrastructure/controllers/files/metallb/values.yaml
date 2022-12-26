@@ -1,0 +1,11 @@
+prometheus:
+  serviceAccount: "prometheus-stack-kube-prom-prometheus"
+  namespace: %(prometheusNamespace)s
+  podMonitor:
+    enabled: true
+    additionalLabels:
+      release: %(prometheusLabel)s
+  prometheusRule:
+    enabled: true
+    additionalLabels:
+      release: %(prometheusLabel)s
