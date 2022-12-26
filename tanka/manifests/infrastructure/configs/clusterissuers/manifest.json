@@ -1,0 +1,4 @@
+{
+    "cert-manager.io-v1.ClusterIssuer-letsencrypt.yaml": "infrastructure/configs/clusterissuers/main.jsonnet",
+    "cert-manager.io-v1.ClusterIssuer-selfsigned.yaml": "infrastructure/configs/clusterissuers/main.jsonnet"
+}
