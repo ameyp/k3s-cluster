@@ -20,8 +20,8 @@ function(name, addr, args)
     container.new("initializer", "ameypar/k8s-vault-initializer:latest") +
     container.withArgs(args) +
     container.withEnvMixin([
-      envVar("VAULT_ADDR", addr),
-      envVar("VAULT_CACERT", "/%s/%s" % [volumeName, certName])
+      envVar.new("VAULT_ADDR", addr),
+      envVar.new("VAULT_CACERT", "/%s/%s" % [volumeName, certName])
     ]) +
     container.withVolumeMounts([
       volumeMount.new(volumeName, "/%s" % [volumeName])
