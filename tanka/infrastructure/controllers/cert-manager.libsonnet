@@ -1,7 +1,7 @@
 local k = import "github.com/grafana/jsonnet-libs/ksonnet-util/kausal.libsonnet";
 local vars = import "variables.libsonnet";
 
-[{
+function(mode='test') [{
   apiVersion: "source.toolkit.fluxcd.io/v1beta2",
   kind: "HelmRepository",
   metadata: {
