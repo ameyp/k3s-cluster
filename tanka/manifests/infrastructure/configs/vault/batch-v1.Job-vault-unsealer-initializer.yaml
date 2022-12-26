@@ -12,7 +12,17 @@ spec:
         env:
         - name: VAULT_ADDR
           value: https://vault-unsealer.test.wirywolf.com
+        - name: VAULT_CACERT
+          value: /vault-tls-web/tls.crt
         image: ameypar/k8s-vault-initializer:latest
-        name: unsealer-init
+        imagePullPolicy: IfNotPresent
+        name: initializer
+        volumeMounts:
+        - mountPath: /vault-tls-web
+          name: vault-tls-web
       restartPolicy: Never
-      serviceAccount: vault-init
+      serviceAccountName: vault-init
+      volumes:
+      - name: vault-tls-web
+        secret:
+          secretName: wildcard-tls-secret
