@@ -11,3 +11,4 @@ spec:
     name: k3s-cluster-deploy
   path: "./tanka/manifests/infrastructure/controllers"
   prune: true
+  wait: true

@@ -5,16 +5,15 @@ function(mode='test') [{
   kind: "ClusterIssuer",
   metadata: {
     name: vars.cert_manager.lets_encrypt_issuer,
-    annotations: {
-      'argocd.argoproj.io/sync-wave': '1',
-    },
   },
   spec: {
     acme: {
       privateKeySecretRef: {
         name: vars.cert_manager.lets_encrypt_issuer,
       },
-      server: "https://acme-v02.api.letsencrypt.org/directory",
+      server: if mode == "test"
+              then "https://acme-staging-v02.api.letsencrypt.org/directory"
+              else "https://acme-v02.api.letsencrypt.org/directory",
       solvers:[{
         dns01: {
           cloudflare: {
@@ -32,9 +31,6 @@ function(mode='test') [{
   kind: "ClusterIssuer",
   metadata: {
     name: vars.cert_manager.self_signed_issuer,
-    annotations: {
-      'argocd.argoproj.io/sync-wave': '1',
-    },
   },
   spec: {
     selfSigned: {}
