@@ -1,0 +1,15 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: infra-configs-vault
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infra-configs-certs
+    - name: infra-configs-traefik
+  interval: 10m
+  sourceRef:
+    kind: GitRepository
+    name: k3s-cluster-deploy
+  path: "./tanka/manifests/infrastructure/configs/vault"
+  prune: true
