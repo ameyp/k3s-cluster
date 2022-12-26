@@ -7,7 +7,6 @@ spec:
   dependsOn:
     - name: infra-controllers
   interval: 10m
-  targetNamespace: flux-system
   sourceRef:
     kind: GitRepository
     name: k3s-cluster-deploy
