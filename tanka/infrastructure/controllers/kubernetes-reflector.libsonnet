@@ -25,6 +25,7 @@ function(mode='test') [{
     install: {
       createNamespace: true,
     },
+    releaseName: "kubernetes-reflector",
     chart: {
       spec: {
         chart: "reflector",

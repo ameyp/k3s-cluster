@@ -28,6 +28,7 @@ function(mode='test') [{
     install: {
       createNamespace: true,
     },
+    releaseName: "metallb",
     chart: {
       spec: {
         chart: "metallb",

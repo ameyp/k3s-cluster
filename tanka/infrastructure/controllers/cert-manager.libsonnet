@@ -30,6 +30,7 @@ local vars = import "variables.libsonnet";
       createNamespace: true,
     },
     interval: "30m",
+    releaseName: "cert-manager",
     chart: {
       spec: {
         chart: "cert-manager",

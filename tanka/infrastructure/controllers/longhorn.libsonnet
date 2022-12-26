@@ -25,6 +25,7 @@ function(mode='test') [{
     install: {
       createNamespace: true,
     },
+    releaseName: "longhorn",
     chart: {
       spec: {
         chart: "longhorn",

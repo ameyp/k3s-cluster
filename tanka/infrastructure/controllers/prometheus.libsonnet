@@ -45,6 +45,7 @@ function(mode='test') [
       install: {
         createNamespace: true,
       },
+      releaseName: "kube-prometheus-stack",
       chart: {
         spec: {
           chart: "kube-prometheus-stack",
