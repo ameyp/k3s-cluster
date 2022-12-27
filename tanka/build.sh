@@ -5,12 +5,12 @@ set -euo pipefail
 function jsonnet_export() {
     local MODE=$1
     local SOURCE=$2
-    local DEST=$3/main.json
+    local DEST=$3/main.yaml
 
     mkdir -p $(dirname $DEST)
 
     echo "[$MODE] Building $SOURCE"
-    jsonnet ${SOURCE} -J vendor -J lib --tla-code mode="\"$MODE\"" > $DEST
+    jsonnet -y ${SOURCE} -J vendor -J lib --tla-code mode="\"$MODE\"" > $DEST
 }
 
 rm -rf manifests/*
