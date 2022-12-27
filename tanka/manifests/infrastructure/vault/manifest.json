@@ -1,5 +1,0 @@
-{
-    "helm.toolkit.fluxcd.io-v2beta1.HelmRelease-vault-unsealer.yaml": "infrastructure/vault/main.jsonnet",
-    "helm.toolkit.fluxcd.io-v2beta1.HelmRelease-vault.yaml": "infrastructure/vault/main.jsonnet",
-    "source.toolkit.fluxcd.io-v1beta2.HelmRepository-hashicorp.yaml": "infrastructure/vault/main.jsonnet"
-}

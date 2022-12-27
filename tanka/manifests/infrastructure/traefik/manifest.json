@@ -1,4 +1,0 @@
-{
-    "helm.toolkit.fluxcd.io-v2beta1.HelmRelease-traefik.yaml": "infrastructure/traefik/main.jsonnet",
-    "source.toolkit.fluxcd.io-v1beta2.HelmRepository-traefik.yaml": "infrastructure/traefik/main.jsonnet"
-}

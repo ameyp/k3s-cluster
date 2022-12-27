@@ -1,0 +1,204 @@
+[
+   {
+      "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+      "kind": "Kustomization",
+      "metadata": {
+         "name": "infra-controllers",
+         "namespace": "flux-system"
+      },
+      "spec": {
+         "interval": "10m",
+         "path": "./tanka/manifests/test/infrastructure/controllers",
+         "prune": true,
+         "sourceRef": {
+            "kind": "GitRepository",
+            "name": "k3s-cluster-deploy"
+         },
+         "targetNamespace": "flux-system",
+         "wait": true
+      }
+   },
+   {
+      "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+      "kind": "Kustomization",
+      "metadata": {
+         "name": "infra-configs-metallb",
+         "namespace": "flux-system"
+      },
+      "spec": {
+         "dependsOn": [
+            {
+               "name": "infra-controllers"
+            }
+         ],
+         "interval": "10m",
+         "path": "./tanka/manifests/test/infrastructure/configs/metallb",
+         "prune": true,
+         "sourceRef": {
+            "kind": "GitRepository",
+            "name": "k3s-cluster-deploy"
+         },
+         "targetNamespace": "flux-system",
+         "wait": true
+      }
+   },
+   {
+      "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+      "kind": "Kustomization",
+      "metadata": {
+         "name": "infra-configs-clusterissuers",
+         "namespace": "flux-system"
+      },
+      "spec": {
+         "dependsOn": [
+            {
+               "name": "infra-controllers"
+            }
+         ],
+         "interval": "10m",
+         "path": "./tanka/manifests/test/infrastructure/configs/clusterissuers",
+         "prune": true,
+         "sourceRef": {
+            "kind": "GitRepository",
+            "name": "k3s-cluster-deploy"
+         },
+         "targetNamespace": "flux-system",
+         "wait": true
+      }
+   },
+   {
+      "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+      "kind": "Kustomization",
+      "metadata": {
+         "name": "infra-configs-certs",
+         "namespace": "flux-system"
+      },
+      "spec": {
+         "dependsOn": [
+            {
+               "name": "infra-configs-clusterissuers"
+            }
+         ],
+         "interval": "10m",
+         "path": "./tanka/manifests/test/infrastructure/configs/certs",
+         "prune": true,
+         "sourceRef": {
+            "kind": "GitRepository",
+            "name": "k3s-cluster-deploy"
+         },
+         "targetNamespace": "flux-system",
+         "wait": true
+      }
+   },
+   {
+      "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+      "kind": "Kustomization",
+      "metadata": {
+         "name": "infra-configs-traefik",
+         "namespace": "flux-system"
+      },
+      "spec": {
+         "dependsOn": [
+            {
+               "name": "infra-traefik"
+            },
+            {
+               "name": "infra-configs-certs"
+            }
+         ],
+         "interval": "10m",
+         "path": "./tanka/manifests/test/infrastructure/configs/traefik",
+         "prune": true,
+         "sourceRef": {
+            "kind": "GitRepository",
+            "name": "k3s-cluster-deploy"
+         },
+         "targetNamespace": "flux-system",
+         "wait": true
+      }
+   },
+   {
+      "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+      "kind": "Kustomization",
+      "metadata": {
+         "name": "infra-configs-vault",
+         "namespace": "flux-system"
+      },
+      "spec": {
+         "dependsOn": [
+            {
+               "name": "infra-configs-certs"
+            },
+            {
+               "name": "infra-configs-traefik"
+            }
+         ],
+         "interval": "10m",
+         "path": "./tanka/manifests/test/infrastructure/configs/vault",
+         "prune": true,
+         "sourceRef": {
+            "kind": "GitRepository",
+            "name": "k3s-cluster-deploy"
+         },
+         "targetNamespace": "flux-system",
+         "wait": true
+      }
+   },
+   {
+      "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+      "kind": "Kustomization",
+      "metadata": {
+         "name": "infra-traefik",
+         "namespace": "flux-system"
+      },
+      "spec": {
+         "dependsOn": [
+            {
+               "name": "infra-controllers"
+            },
+            {
+               "name": "infra-configs-metallb"
+            }
+         ],
+         "interval": "10m",
+         "path": "./tanka/manifests/test/infrastructure/traefik",
+         "prune": true,
+         "sourceRef": {
+            "kind": "GitRepository",
+            "name": "k3s-cluster-deploy"
+         },
+         "targetNamespace": "flux-system",
+         "wait": true
+      }
+   },
+   {
+      "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+      "kind": "Kustomization",
+      "metadata": {
+         "name": "infra-vault",
+         "namespace": "flux-system"
+      },
+      "spec": {
+         "dependsOn": [
+            {
+               "name": "infra-configs-certs"
+            },
+            {
+               "name": "infra-configs-traefik"
+            },
+            {
+               "name": "infra-configs-vault"
+            }
+         ],
+         "interval": "10m",
+         "path": "./tanka/manifests/test/infrastructure/traefik",
+         "prune": true,
+         "sourceRef": {
+            "kind": "GitRepository",
+            "name": "k3s-cluster-deploy"
+         },
+         "targetNamespace": "flux-system",
+         "wait": true
+      }
+   }
+]

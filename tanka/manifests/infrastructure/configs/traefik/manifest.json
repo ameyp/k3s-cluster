@@ -1,3 +1,0 @@
-{
-    "traefik.containo.us-v1alpha1.TLSStore-default.yaml": "infrastructure/configs/traefik/main.jsonnet"
-}

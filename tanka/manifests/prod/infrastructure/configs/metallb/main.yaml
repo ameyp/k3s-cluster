@@ -1,0 +1,28 @@
+[
+   {
+      "apiVersion": "metallb.io/v1beta1",
+      "kind": "IPAddressPool",
+      "metadata": {
+         "name": "external",
+         "namespace": "metallb-system"
+      },
+      "spec": {
+         "addresses": [
+            "192.168.80.0/28"
+         ]
+      }
+   },
+   {
+      "apiVersion": "metallb.io/v1beta1",
+      "kind": "L2Advertisement",
+      "metadata": {
+         "name": "external",
+         "namespace": "metallb-system"
+      },
+      "spec": {
+         "ipAddressPools": [
+            "external"
+         ]
+      }
+   }
+]

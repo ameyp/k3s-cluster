@@ -1,4 +1,0 @@
-{
-    "cert-manager.io-v1.Certificate-vault-internal-tls-secret.yaml": "infrastructure/configs/certs/main.jsonnet",
-    "cert-manager.io-v1.Certificate-wildcard-web-cert.yaml": "infrastructure/configs/certs/main.jsonnet"
-}

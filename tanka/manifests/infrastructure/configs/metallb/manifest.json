@@ -1,4 +1,0 @@
-{
-    "metallb.io-v1beta1.IPAddressPool-external.yaml": "infrastructure/configs/metallb/main.jsonnet",
-    "metallb.io-v1beta1.L2Advertisement-external.yaml": "infrastructure/configs/metallb/main.jsonnet"
-}
