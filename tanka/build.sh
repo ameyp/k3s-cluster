@@ -5,7 +5,7 @@ set -euo pipefail
 function jsonnet_export() {
     local MODE=$1
     local SOURCE=$2
-    local DEST=$3/main.yaml
+    local DEST=$3/main.json
 
     mkdir -p $(dirname $DEST)
 
