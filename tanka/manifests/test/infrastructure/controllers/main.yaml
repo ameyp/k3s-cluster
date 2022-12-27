@@ -1,0 +1,364 @@
+---
+{
+   "apiVersion": "source.toolkit.fluxcd.io/v1beta2",
+   "kind": "HelmRepository",
+   "metadata": {
+      "name": "cert-manager",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "interval": "24h",
+      "url": "https://charts.jetstack.io"
+   }
+}
+---
+{
+   "apiVersion": "helm.toolkit.fluxcd.io/v2beta1",
+   "kind": "HelmRelease",
+   "metadata": {
+      "name": "cert-manager",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "chart": {
+         "spec": {
+            "chart": "cert-manager",
+            "interval": "12h",
+            "sourceRef": {
+               "kind": "HelmRepository",
+               "name": "cert-manager",
+               "namespace": "flux-system"
+            },
+            "version": "1.10.1"
+         }
+      },
+      "dependsOn": [
+         {
+            "name": "prometheus-stack"
+         },
+         {
+            "name": "longhorn"
+         },
+         {
+            "name": "kubernetes-reflector"
+         }
+      ],
+      "install": {
+         "createNamespace": true
+      },
+      "interval": "30m",
+      "releaseName": "cert-manager",
+      "targetNamespace": "cert-manager",
+      "values": {
+         "installCRDs": "true"
+      }
+   }
+}
+---
+{
+   "apiVersion": "v1",
+   "data": {
+      "alertmanager.yaml": "Z2xvYmFsOgogIHJlc29sdmVfdGltZW91dDogNW0Kcm91dGU6CiAgcmVjZWl2ZXI6ICJudWxsIgogIGdyb3VwX2J5OgogIC0gbmFtZXNwYWNlCiAgcm91dGVzOgogIC0gcmVjZWl2ZXI6IHNsYWNrLW5vdGlmaWNhdGlvbnMKICAgIGdyb3VwX2J5OgogICAgLSBhcHAKICAgIG1hdGNoZXJzOgogICAgLSBzZXZlcml0eSA9fiBjcml0aWNhbHx3YXJuaW5nCiAgICBjb250aW51ZTogdHJ1ZQogICAgZ3JvdXBfd2FpdDogMzBzCiAgICBncm91cF9pbnRlcnZhbDogNW0KICAgIHJlcGVhdF9pbnRlcnZhbDogMTJoCiAgLSByZWNlaXZlcjogIm51bGwiCiAgICBtYXRjaGVyczoKICAgIC0gYWxlcnRuYW1lID1+ICJJbmZvSW5oaWJpdG9yfFdhdGNoZG9nIgogIGdyb3VwX3dhaXQ6IDMwcwogIGdyb3VwX2ludGVydmFsOiA1bQogIHJlcGVhdF9pbnRlcnZhbDogMTJoCmluaGliaXRfcnVsZXM6Ci0gdGFyZ2V0X21hdGNoZXJzOgogIC0gc2V2ZXJpdHkgPX4gd2FybmluZ3xpbmZvCiAgc291cmNlX21hdGNoZXJzOgogIC0gc2V2ZXJpdHkgPSBjcml0aWNhbAogIGVxdWFsOgogIC0gbmFtZXNwYWNlCiAgLSBhbGVydG5hbWUKLSB0YXJnZXRfbWF0Y2hlcnM6CiAgLSBzZXZlcml0eSA9IGluZm8KICBzb3VyY2VfbWF0Y2hlcnM6CiAgLSBzZXZlcml0eSA9IHdhcm5pbmcKICBlcXVhbDoKICAtIG5hbWVzcGFjZQogIC0gYWxlcnRuYW1lCi0gdGFyZ2V0X21hdGNoZXJzOgogIC0gc2V2ZXJpdHkgPSBpbmZvCiAgc291cmNlX21hdGNoZXJzOgogIC0gYWxlcnRuYW1lID0gSW5mb0luaGliaXRvcgogIGVxdWFsOgogIC0gbmFtZXNwYWNlCnJlY2VpdmVyczoKLSBuYW1lOiAibnVsbCIKLSBuYW1lOiBzbGFjay1ub3RpZmljYXRpb25zCiAgc2xhY2tfY29uZmlnczoKICAtIGFwaV91cmxfZmlsZTogL3ZhdWx0L3NlY3JldHMvc2xhY2std2ViaG9vay11cmwKICAgIGNoYW5uZWw6ICcjYWxhcm1zJwogICAgdXNlcm5hbWU6IEFsZXJ0TWFuYWdlcgp0ZW1wbGF0ZXM6Ci0gL2V0Yy9hbGVydG1hbmFnZXIvY29uZmlnLyoudG1wbAo="
+   },
+   "kind": "Secret",
+   "metadata": {
+      "annotations": { },
+      "name": "alert-manager-config",
+      "namespace": "default"
+   },
+   "type": "Opaque"
+}
+---
+{
+   "apiVersion": "source.toolkit.fluxcd.io/v1beta2",
+   "kind": "HelmRepository",
+   "metadata": {
+      "name": "prometheus",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "interval": "24h",
+      "url": "https://prometheus-community.github.io/helm-charts"
+   }
+}
+---
+{
+   "apiVersion": "helm.toolkit.fluxcd.io/v2beta1",
+   "kind": "HelmRelease",
+   "metadata": {
+      "name": "prometheus-stack",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "chart": {
+         "spec": {
+            "chart": "kube-prometheus-stack",
+            "interval": "12h",
+            "sourceRef": {
+               "kind": "HelmRepository",
+               "name": "prometheus",
+               "namespace": "flux-system"
+            },
+            "version": "43.1.0"
+         }
+      },
+      "install": {
+         "createNamespace": true
+      },
+      "interval": "30m",
+      "releaseName": "prometheus-stack",
+      "targetNamespace": "monitoring",
+      "values": {
+         "alertmanager": {
+            "alertmanagerSpec": {
+               "configSecret": "",
+               "podMetadata": {
+                  "annotations": {
+                     "vault.hashicorp.com/agent-inject": "true",
+                     "vault.hashicorp.com/agent-inject-secret-slack-webhook-url": "tokens/data/slack",
+                     "vault.hashicorp.com/agent-inject-template-slack-webhook-url": "{{- with secret \"tokens/data/slack\" -}}\n{{- .Data.data.alarm_webhook_url -}}\n{{- end -}}\n",
+                     "vault.hashicorp.com/agent-pre-populate-only": "true",
+                     "vault.hashicorp.com/role": "alert-manager",
+                     "vault.hashicorp.com/service": "vault.test.wirywolf.com"
+                  },
+                  "labels": {
+                     "vault-injector": "enabled"
+                  }
+               },
+               "storage": {
+                  "volumeClaimTemplate": {
+                     "spec": {
+                        "resources": {
+                           "requests": {
+                              "storage": "2Gi"
+                           }
+                        },
+                        "storageClassName": "longhorn"
+                     }
+                  }
+               },
+               "useExistingSecret": true
+            }
+         },
+         "defaultRules": {
+            "rules": {
+               "etcd": false
+            }
+         },
+         "kubeApiServer": {
+            "enabled": false
+         },
+         "kubeControllerManager": {
+            "enabled": true,
+            "endpoints": [
+               "192.168.1.201"
+            ],
+            "service": {
+               "enabled": true,
+               "port": 10257,
+               "targetPort": 10257
+            }
+         },
+         "kubeEtcd": {
+            "enabled": false
+         },
+         "kubeProxy": {
+            "enabled": true,
+            "endpoints": [
+               "192.168.1.201"
+            ]
+         },
+         "kubeScheduler": {
+            "enabled": true,
+            "endpoints": [
+               "192.168.1.201"
+            ],
+            "service": {
+               "enabled": true,
+               "port": 10259,
+               "targetPort": 10259
+            }
+         },
+         "prometheus": {
+            "prometheusSpec": {
+               "storage": {
+                  "volumeClaimTemplate": {
+                     "spec": {
+                        "resources": {
+                           "requests": {
+                              "storage": "2Gi"
+                           }
+                        },
+                        "storageClassName": "longhorn"
+                     }
+                  }
+               }
+            },
+            "thanosRulerSpec": {
+               "storage": {
+                  "volumeClaimTemplate": {
+                     "spec": {
+                        "resources": {
+                           "requests": {
+                              "storage": "2Gi"
+                           }
+                        },
+                        "storageClassName": "longhorn"
+                     }
+                  }
+               }
+            }
+         },
+         "prometheusOperator": {
+            "prometheusConfigReloader": {
+               "resources": {
+                  "requests": {
+                     "cpu": "100m"
+                  }
+               }
+            },
+            "resources": {
+               "requests": {
+                  "cpu": "100m"
+               }
+            }
+         }
+      }
+   }
+}
+---
+{
+   "apiVersion": "source.toolkit.fluxcd.io/v1beta2",
+   "kind": "HelmRepository",
+   "metadata": {
+      "name": "longhorn",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "interval": "24h",
+      "url": "https://charts.longhorn.io"
+   }
+}
+---
+{
+   "apiVersion": "helm.toolkit.fluxcd.io/v2beta1",
+   "kind": "HelmRelease",
+   "metadata": {
+      "name": "longhorn",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "chart": {
+         "spec": {
+            "chart": "longhorn",
+            "interval": "12h",
+            "sourceRef": {
+               "kind": "HelmRepository",
+               "name": "longhorn",
+               "namespace": "flux-system"
+            },
+            "version": "1.3.2"
+         }
+      },
+      "install": {
+         "createNamespace": true
+      },
+      "interval": "30m",
+      "releaseName": "longhorn",
+      "targetNamespace": "longhorn-system",
+      "values": {
+         "values": "\"defaultSettings\":\n  \"backupTarget\": \"s3://amey-backups-longhorn@us-west-004/\"\n  \"backupTargetCredentialSecret\": \"longhorn-backup-secret\"\n  \"defaultReplicaCount\": 1\n  \"nodeDownPodDeletionPolicy\": \"delete-both-statefulset-and-deployment-pod\"\n\"effect\": \"NoSchedule\"\n\"longhornDriver\":\n  \"effect\": \"NoSchedule\"\n  \"tolerations\":\n  - \"key\": \"node-role.kubernetes.io/master\"\n    \"operator\": \"Equal\"\n    \"value\": \"true\"\n\"longhornManager\":\n  \"effect\": \"NoSchedule\"\n  \"tolerations\":\n  - \"key\": \"node-role.kubernetes.io/master\"\n    \"operator\": \"Equal\"\n    \"value\": \"true\"\n\"longhornUI\":\n  \"tolerations\":\n  - \"key\": \"node-role.kubernetes.io/master\"\n    \"operator\": \"Equal\"\n  \"value\": \"true\"\n\"persistence\":\n  \"defaultClass\": false\n  \"defaultClassReplicaCount\": 1\n  \"reclaimPolicy\": \"Delete\""
+      }
+   }
+}
+---
+{
+   "apiVersion": "source.toolkit.fluxcd.io/v1beta2",
+   "kind": "HelmRepository",
+   "metadata": {
+      "name": "kubernetes-reflector",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "interval": "24h",
+      "url": "https://emberstack.github.io/helm-charts"
+   }
+}
+---
+{
+   "apiVersion": "helm.toolkit.fluxcd.io/v2beta1",
+   "kind": "HelmRelease",
+   "metadata": {
+      "name": "kubernetes-reflector",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "chart": {
+         "spec": {
+            "chart": "reflector",
+            "interval": "12h",
+            "sourceRef": {
+               "kind": "HelmRepository",
+               "name": "kubernetes-reflector",
+               "namespace": "flux-system"
+            },
+            "version": "6.1.47"
+         }
+      },
+      "install": {
+         "createNamespace": true
+      },
+      "interval": "30m",
+      "releaseName": "kubernetes-reflector",
+      "targetNamespace": "kubernetes-reflector"
+   }
+}
+---
+{
+   "apiVersion": "source.toolkit.fluxcd.io/v1beta2",
+   "kind": "HelmRepository",
+   "metadata": {
+      "name": "metallb",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "interval": "24h",
+      "url": "https://metallb.github.io/metallb"
+   }
+}
+---
+{
+   "apiVersion": "helm.toolkit.fluxcd.io/v2beta1",
+   "kind": "HelmRelease",
+   "metadata": {
+      "name": "metallb",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "chart": {
+         "spec": {
+            "chart": "metallb",
+            "interval": "12h",
+            "sourceRef": {
+               "kind": "HelmRepository",
+               "name": "metallb",
+               "namespace": "flux-system"
+            },
+            "version": "0.13.7"
+         }
+      },
+      "dependsOn": [
+         {
+            "name": "prometheus-stack"
+         }
+      ],
+      "install": {
+         "createNamespace": true
+      },
+      "interval": "30m",
+      "releaseName": "metallb",
+      "targetNamespace": "metallb-system",
+      "values": "prometheus:\n  serviceAccount: \"prometheus-stack-kube-prom-prometheus\"\n  namespace: monitoring\n  podMonitor:\n    enabled: true\n    additionalLabels:\n      release: prometheus-stack\n  prometheusRule:\n    enabled: true\n    additionalLabels:\n      release: prometheus-stack\n"
+   }
+}
+...
