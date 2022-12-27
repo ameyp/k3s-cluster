@@ -50,7 +50,7 @@ function(mode='test') [{
         // },
         ipFamilyPolicy: "PreferDualStack",
         spec: {
-          loadBalancerIP: if mode == 'test' then vars.traefik.testLoadBalancerIP else vars.loadBalancerIP,
+          loadBalancerIP: if mode == 'test' then vars.traefik.testLoadBalancerIP else vars.traefik.loadBalancerIP,
         },
       },
       rbac: {

@@ -21,7 +21,7 @@ local getOrDefault = function(params, name, default) if std.objectHas(params, na
     if mode == 'test' then
       std.format("%s.%s.%s", [subdomain, vars.cluster.test_domain_prefix, vars.cluster.domain_name])
     else
-      std.format("%s.%s", [subdomain, vars.cluster.domain]),
+      std.format("%s.%s", [subdomain, vars.cluster.domain_name]),
   service_account: {
     new: function(params) {
       apiVersion: "v1",
