@@ -31,5 +31,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: k3s-cluster
-  path: "./tanka/bootstrap/kustomizations"
+  path: "./tanka/manifests/${CLUSTER}/kustomizations"
   prune: true

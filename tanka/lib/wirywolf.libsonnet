@@ -62,4 +62,12 @@ local getOrDefault = function(params, name, default) if std.objectHas(params, na
       subjects: params.subjects
     },
   },
+  kustomization: {
+    new: function(params) {
+      apiVersion: "kustomize.toolkit.fluxcd.io/v1beta2",
+      kind: "Kustomization",
+      metadata: params.metadata,
+      spec: params.spec,
+    }
+  }
 }
