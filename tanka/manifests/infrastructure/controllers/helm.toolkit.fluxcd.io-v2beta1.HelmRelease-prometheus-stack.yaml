@@ -16,7 +16,7 @@ spec:
   install:
     createNamespace: true
   interval: 30m
-  releaseName: kube-prometheus-stack
+  releaseName: prometheus-stack
   targetNamespace: monitoring
   values:
     alertmanager:
