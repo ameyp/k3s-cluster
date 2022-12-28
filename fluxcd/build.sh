@@ -40,7 +40,8 @@ for mode in test prod; do
                    manifests/${mode}/infrastructure/configs/vault
     jsonnet_export $mode infrastructure/configs/vault-initializers/main.jsonnet \
                    manifests/${mode}/infrastructure/configs/vault-initializers
-    jsonnet_export $mode infrastructure/configs/vault-data/main.jsonnet \
-                   manifests/${mode}/infrastructure/configs/vault-data
+
+    jsonnet_export $mode infrastructure/vault-data/main.jsonnet \
+                   manifests/${mode}/infrastructure/vault-data
 done
 
