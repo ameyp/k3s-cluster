@@ -217,7 +217,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./tanka/manifests/prod/infrastructure/traefik",
+      "path": "./tanka/manifests/prod/infrastructure/vault",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
