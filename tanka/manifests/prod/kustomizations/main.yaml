@@ -141,7 +141,7 @@
          "kind": "GitRepository",
          "name": "k3s-cluster-deploy"
       },
-      "wait": true
+      "wait": false
    }
 }
 ---
