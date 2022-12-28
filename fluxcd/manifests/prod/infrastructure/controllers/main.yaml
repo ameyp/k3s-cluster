@@ -119,7 +119,7 @@
                      "vault.hashicorp.com/agent-inject-template-slack-webhook-url": "{{- with secret \"tokens/data/slack\" -}}\n{{- .Data.data.alarm_webhook_url -}}\n{{- end -}}\n",
                      "vault.hashicorp.com/agent-pre-populate-only": "true",
                      "vault.hashicorp.com/role": "alert-manager",
-                     "vault.hashicorp.com/service": "vault.wirywolf.com"
+                     "vault.hashicorp.com/service": "https://vault.wirywolf.com"
                   },
                   "labels": {
                      "vault-injector": "enabled"
