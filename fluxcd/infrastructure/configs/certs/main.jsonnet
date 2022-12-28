@@ -16,9 +16,6 @@ function(mode='test') [{
   metadata: {
     name: "wildcard-web-cert",
     namespace: 'default',
-    annotations: {
-      'argocd.argoproj.io/sync-wave': '2',
-    },
   },
   spec: {
     dnsNames: [
@@ -45,9 +42,6 @@ function(mode='test') [{
   metadata: {
     name: vars.vault.main.internalCertSecret,
     namespace: vars.vault.namespace,
-    annotations: {
-      'argocd.argoproj.io/sync-wave': '2',
-    },
   },
   spec: {
     dnsNames: [
