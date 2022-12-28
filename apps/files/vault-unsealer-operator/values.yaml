@@ -1,2 +1,0 @@
-env:
-  VAULT_ADDR: %(vaultAddr)s
