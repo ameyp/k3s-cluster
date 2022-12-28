@@ -14,7 +14,7 @@ function(mode='test') [
         name: "infra-configs-vault-initializers"
       }],
       interval: "10m",
-      targetNamespace: vars.flux.namespace,
+      targetNamespace: vars.vault.namespace,
       sourceRef: {
         kind: "GitRepository",
         name: "k3s-cluster-deploy",
