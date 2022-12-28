@@ -25,6 +25,8 @@ for mode in test prod; do
                    manifests/${mode}/infrastructure/vault
     jsonnet_export $mode infrastructure/traefik/main.jsonnet \
                    manifests/${mode}/infrastructure/traefik
+    jsonnet_export $mode infrastructure/vault-config-operator/main.jsonnet \
+                   manifests/${mode}/infrastructure/vault-config-operator
 
     jsonnet_export $mode infrastructure/configs/clusterissuers/main.jsonnet \
                    manifests/${mode}/infrastructure/configs/clusterissuers
