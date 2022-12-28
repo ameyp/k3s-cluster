@@ -57,5 +57,13 @@ function(mode) [
         name: "infra-vault"
       }]
     }
+  }),
+  kustomization({
+    metadata: metadata("vault-data"),
+    spec: spec("vault-data", mode) + {
+      dependsOn: [{
+        name: "infra-vault-config-operator"
+      }]
+    }
   })
 ]
