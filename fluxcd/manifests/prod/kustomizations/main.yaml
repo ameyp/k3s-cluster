@@ -256,7 +256,7 @@
    "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
    "kind": "Kustomization",
    "metadata": {
-      "name": "infra-configs-vault-data",
+      "name": "infra-vault-data",
       "namespace": "flux-system"
    },
    "spec": {
@@ -266,7 +266,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./fluxcd/manifests/prod/infrastructure/configs/vault-data",
+      "path": "./fluxcd/manifests/prod/infrastructure/vault-data",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
