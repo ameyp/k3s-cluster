@@ -14,6 +14,8 @@ function(mode='test') [
         name: "infra-configs-certs"
       }, {
         name: "infra-configs-traefik"
+      }, {
+        name: "infra-configs-vault"
       }],
       interval: "10m",
       targetNamespace: vars.flux.namespace,
@@ -21,7 +23,7 @@ function(mode='test') [
         kind: "GitRepository",
         name: "k3s-cluster-deploy",
       },
-      path: "./tanka/manifests/%s/infrastructure/traefik" % mode,
+      path: "./tanka/manifests/%s/infrastructure/vault" % mode,
       prune: true,
       wait: true,
     }
