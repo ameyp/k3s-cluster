@@ -36,5 +36,7 @@ for mode in test prod; do
                    manifests/${mode}/infrastructure/configs/traefik
     jsonnet_export $mode infrastructure/configs/vault/main.jsonnet \
                    manifests/${mode}/infrastructure/configs/vault
+    jsonnet_export $mode infrastructure/configs/vault-initializers/main.jsonnet \
+                   manifests/${mode}/infrastructure/configs/vault-initializers
 done
 
