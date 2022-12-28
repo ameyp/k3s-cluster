@@ -6,14 +6,16 @@ local kustomization = wirywolf.kustomization.new;
 function(mode='test') [
   kustomization({
     metadata: {
-      name: "infra-traefik",
+      name: "infra-vault",
       namespace: vars.flux.namespace,
     },
     spec: {
       dependsOn: [{
-        name: "infra-controllers"
+        name: "infra-configs-certs"
       }, {
-        name: "infra-configs-metallb"
+        name: "infra-configs-traefik"
+      }, {
+        name: "infra-configs-vault"
       }],
       interval: "10m",
       targetNamespace: vars.flux.namespace,
@@ -21,7 +23,7 @@ function(mode='test') [
         kind: "GitRepository",
         name: "k3s-cluster-deploy",
       },
-      path: "./tanka/manifests/%s/infrastructure/traefik" % mode,
+      path: "./fluxcd/manifests/%s/infrastructure/vault" % mode,
       prune: true,
       wait: true,
     }

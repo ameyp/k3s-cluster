@@ -6,7 +6,7 @@ function(name, mode) {
     kind: "GitRepository",
     name: "k3s-cluster-deploy",
   },
-  path: "./tanka/manifests/%s/infrastructure/configs/%s" % [mode, name],
+  path: "./fluxcd/manifests/%s/infrastructure/configs/%s" % [mode, name],
   prune: true,
   wait: true,
 }

@@ -31,5 +31,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: k3s-cluster
-  path: "./tanka/manifests/${CLUSTER}/kustomizations"
+  path: "./fluxcd/manifests/${CLUSTER}/kustomizations"
   prune: true

@@ -10,7 +10,6 @@ pkgs.mkShell {
     pkgs.kubernetes-helm
     pkgs.minikube
     pkgs.packer
-    pkgs.tanka
     pkgs.terraform
     pkgs.vault
   ];
