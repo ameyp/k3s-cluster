@@ -26,7 +26,7 @@ local getOrDefault = function(params, name, default) if std.objectHas(params, na
     if mode == 'test' then
       std.format("https://%s.%s.%s", ["vault", vars.cluster.test_domain_prefix, vars.cluster.domain_name])
     else
-      std.format("https://%s.%s", ["vault, vars.cluster.domain_name"]),
+      std.format("https://%s.%s", ["vault", vars.cluster.domain_name]),
   get_controller_ip: function(mode)
     if mode == 'test' then vars.cluster.test_controller_ip else vars.cluster.controller_ip,
   service_account: {
