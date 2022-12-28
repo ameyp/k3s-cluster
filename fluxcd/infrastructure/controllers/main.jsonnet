@@ -5,8 +5,8 @@ local metallb = import "./metallb.libsonnet";
 local cert_manager = import "./cert-manager.libsonnet";
 
 function(mode='test')
-  cert_manager("test") +
-  prometheus("test") +
-  longhorn("test") +
-  kubernetes_reflector("test") +
-  metallb("test")
+  cert_manager(mode) +
+  prometheus(mode) +
+  longhorn(mode) +
+  kubernetes_reflector(mode) +
+  metallb(mode)
