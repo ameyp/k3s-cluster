@@ -1,8 +1,11 @@
+local vars = import "variables.libsonnet";
+
 local policy = function(name, policyContent) {
   apiVersion: "redhatcop.redhat.io/v1alpha1",
   kind: "Policy",
   metadata: {
-    name: name
+    name: name,
+    namespace: vars.vault.namespace,
   },
   spec: {
     authentication: {
