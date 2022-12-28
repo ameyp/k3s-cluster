@@ -22,6 +22,11 @@ local getOrDefault = function(params, name, default) if std.objectHas(params, na
       std.format("%s.%s.%s", [subdomain, vars.cluster.test_domain_prefix, vars.cluster.domain_name])
     else
       std.format("%s.%s", [subdomain, vars.cluster.domain_name]),
+  get_vault_address: function(mode)
+    if mode == 'test' then
+      std.format("https://%s.%s.%s", ["vault", vars.cluster.test_domain_prefix, vars.cluster.domain_name])
+    else
+      std.format("https://%s.%s", ["vault, vars.cluster.domain_name"]),
   get_controller_ip: function(mode)
     if mode == 'test' then vars.cluster.test_controller_ip else vars.cluster.controller_ip,
   service_account: {
@@ -70,6 +75,31 @@ local getOrDefault = function(params, name, default) if std.objectHas(params, na
       kind: "Kustomization",
       metadata: params.metadata,
       spec: params.spec,
+    }
+  },
+  helmRepository: {
+    new: function(name, url) {
+      apiVersion: "source.toolkit.fluxcd.io/v1beta2",
+      kind: "HelmRepository",
+      metadata: {
+        name: name,
+        namespace: vars.flux.namespace,
+      },
+      spec: {
+        interval: "24h",
+        url: url
+      }
+    }
+  },
+  helmRelease: {
+    new: function(params) {
+      apiVersion: "helm.toolkit.fluxcd.io/v2beta1",
+      kind: "HelmRelease",
+      metadata: {
+        name: params.name,
+        namespace: vars.flux.namespace,
+      },
+      spec: params.spec
     }
   }
 }
