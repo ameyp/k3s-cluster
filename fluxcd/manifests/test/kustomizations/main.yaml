@@ -227,4 +227,29 @@
       "wait": true
    }
 }
+---
+{
+   "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+   "kind": "Kustomization",
+   "metadata": {
+      "name": "infra-vault-config-operator",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "dependsOn": [
+         {
+            "name": "infra-configs-vault-initializers"
+         }
+      ],
+      "interval": "10m",
+      "path": "./fluxcd/manifests/test/infrastructure/vault-config-operator",
+      "prune": true,
+      "sourceRef": {
+         "kind": "GitRepository",
+         "name": "k3s-cluster-deploy"
+      },
+      "targetNamespace": "flux-system",
+      "wait": true
+   }
+}
 ...
