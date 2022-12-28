@@ -16,7 +16,7 @@ function(mode) [
           version: "0.8.4",
           sourceRef: {
             kind: "HelmRepository",
-            name: "prometheus",
+            name: "vault-config-operator",
             namespace: vars.flux.namespace,
           },
           interval: "12h",
