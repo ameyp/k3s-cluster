@@ -2,6 +2,7 @@
 
 CLOUDFLARE_TOKEN_FILE="cloudflare-api-token.secret"
 export CLUSTER=${CLUSTER:-test}
+KUBECONFIG="$HOME/.kube/config-$CLUSTER"
 
 if [ ! -f $CLOUDFLARE_TOKEN_FILE ]; then
     echo "Please write the cloudflare API token to a file named $CLOUDFLARE_TOKEN_FILE." >2
@@ -9,15 +10,15 @@ if [ ! -f $CLOUDFLARE_TOKEN_FILE ]; then
 fi
 
 # Get the kubeconfig file
-ssh-keygen -f "/home/amey/.ssh/known_hosts" -R "192.168.1.201" && ssh core@192.168.1.201 cat /etc/rancher/k3s/k3s.yaml | sed "s/127.0.0.1/192.168.1.201/" - > ~/.kube/config-test
+ssh-keygen -f "/home/amey/.ssh/known_hosts" -R "192.168.1.201" && ssh core@192.168.1.201 cat /etc/rancher/k3s/k3s.yaml | sed "s/127.0.0.1/192.168.1.201/" - > $KUBECONFIG
 
 # Create cert-manager namespace and secret
-kubectl --kubeconfig ~/.kube/config-test create namespace cert-manager
-kubectl --kubeconfig ~/.kube/config-test create namespace vault
-kubectl --kubeconfig ~/.kube/config-test create secret generic cloudflare-api-token \
+kubectl --kubeconfig $KUBECONFIG create namespace cert-manager
+kubectl --kubeconfig $KUBECONFIG create namespace vault
+kubectl --kubeconfig $KUBECONFIG create secret generic cloudflare-api-token \
         -n cert-manager \
         --from-literal=apitoken=$(cat $CLOUDFLARE_TOKEN_FILE)
 
 # Bootstrap fluxcd
-kubectl --kubeconfig ~/.kube/config-test apply -f https://github.com/fluxcd/flux2/releases/latest/download/install.yaml
-cat fluxcd/bootstrap/root.yaml | envsubst | kubectl --kubeconfig ~/.kube/config-$CLUSTER apply -f -
+kubectl --kubeconfig $KUBECONFIG apply -f https://github.com/fluxcd/flux2/releases/latest/download/install.yaml
+cat fluxcd/bootstrap/root.yaml | envsubst | kubectl --kubeconfig $KUBECONFIG apply -f -
