@@ -48,6 +48,8 @@ function(mode) [
       }, {
         name: "infra-configs-traefik"
       }]
+    } + {
+      wait: false // The initializer jobs don't reach Ready state till after vaults have been deployed and initialized.
     }
   }),
 ]
