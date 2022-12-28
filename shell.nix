@@ -3,7 +3,7 @@
 pkgs.mkShell {
   nativeBuildInputs = [
     pkgs.butane
-    # pkgs.fluxcd
+    pkgs.fluxcd
     pkgs.jsonnet
     pkgs.jsonnet-bundler
     pkgs.jsonnet-language-server
