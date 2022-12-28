@@ -3,9 +3,6 @@
    "apiVersion": "cert-manager.io/v1",
    "kind": "Certificate",
    "metadata": {
-      "annotations": {
-         "argocd.argoproj.io/sync-wave": "2"
-      },
       "name": "wildcard-web-cert",
       "namespace": "default"
    },
@@ -36,9 +33,6 @@
    "apiVersion": "cert-manager.io/v1",
    "kind": "Certificate",
    "metadata": {
-      "annotations": {
-         "argocd.argoproj.io/sync-wave": "2"
-      },
       "name": "vault-internal-tls-secret",
       "namespace": "vault"
    },
