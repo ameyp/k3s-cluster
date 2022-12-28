@@ -71,7 +71,7 @@ function(mode='test') [
                 "vault.hashicorp.com/agent-inject": "true",
                 "vault.hashicorp.com/agent-pre-populate-only": "true",
                 "vault.hashicorp.com/role": "alert-manager",
-                "vault.hashicorp.com/service": wirywolf.get_endpoint(vars.vault.main.ingress.subdomain, mode),
+                "vault.hashicorp.com/service": "https://%s" % wirywolf.get_endpoint(vars.vault.main.ingress.subdomain, mode),
                 "vault.hashicorp.com/agent-inject-secret-slack-webhook-url": "tokens/data/slack",
                 "vault.hashicorp.com/agent-inject-template-slack-webhook-url": |||
                   {{- with secret "tokens/data/slack" -}}
