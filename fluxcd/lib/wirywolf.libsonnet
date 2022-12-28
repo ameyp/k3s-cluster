@@ -22,6 +22,8 @@ local getOrDefault = function(params, name, default) if std.objectHas(params, na
       std.format("%s.%s.%s", [subdomain, vars.cluster.test_domain_prefix, vars.cluster.domain_name])
     else
       std.format("%s.%s", [subdomain, vars.cluster.domain_name]),
+  get_controller_ip: function(mode)
+    if mode == 'test' then vars.cluster.test_controller_ip else vars.cluster.controller_ip,
   service_account: {
     new: function(params) {
       apiVersion: "v1",

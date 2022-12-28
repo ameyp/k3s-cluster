@@ -104,7 +104,7 @@ function(mode='test') [
         },
         kubeControllerManager: {
           enabled: true,
-          endpoints: [vars.cluster.controller_ip],
+          endpoints: [wirywolf.get_controller_ip(mode)],
           service: {
             enabled: true,
             port: 10257,
@@ -113,7 +113,7 @@ function(mode='test') [
         },
         kubeScheduler: {
           enabled: true,
-          endpoints: [vars.cluster.controller_ip],
+          endpoints: [wirywolf.get_controller_ip(mode)],
           service: {
             enabled: true,
             port: 10259,
@@ -122,7 +122,7 @@ function(mode='test') [
         },
         kubeProxy: {
           enabled: true,
-          endpoints: [vars.cluster.controller_ip],
+          endpoints: [wirywolf.get_controller_ip(mode)],
         }
       }, if mode == 'test' then {
         prometheusOperator: {

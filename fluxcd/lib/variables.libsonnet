@@ -1,6 +1,7 @@
 {
   cluster: {
-    controller_ip: '192.168.1.201',
+    test_controller_ip: '192.168.1.201',
+    controller_ip: '192.168.80.81',
     domain_name: 'wirywolf.com',
     test_domain_prefix: 'test',
     wildcard_cert_secret: 'wildcard-tls-secret',
