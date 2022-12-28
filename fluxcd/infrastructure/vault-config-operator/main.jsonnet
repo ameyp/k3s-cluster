@@ -7,7 +7,9 @@ function(mode) [
     apiVersion: "cert-manager.io/v1",
     kind: "Certificate",
     metadata: {
-      name: "vault-config-operator-webhook",
+      # https://github.com/redhat-cop/vault-config-operator/blob/b6ba1ca04bf52ee3dd2245454598246b230981c0/config/default/kustomization.yaml#L65
+      # https://github.com/redhat-cop/vault-config-operator/blob/3077a7f1694483ece6032a8c54b51827237401ab/config/helmchart/kustomization.yaml#L13
+      name: "serving-cert",
       namespace: vars.vault.namespace,
     },
     spec: {
