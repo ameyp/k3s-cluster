@@ -248,7 +248,6 @@
          "kind": "GitRepository",
          "name": "k3s-cluster-deploy"
       },
-      "targetNamespace": "vault",
       "wait": true
    }
 }
