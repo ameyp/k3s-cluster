@@ -3,7 +3,8 @@
    "apiVersion": "redhatcop.redhat.io/v1alpha1",
    "kind": "Policy",
    "metadata": {
-      "name": "allow-tokens"
+      "name": "allow-tokens",
+      "namespace": "vault"
    },
    "spec": {
       "authentication": {
