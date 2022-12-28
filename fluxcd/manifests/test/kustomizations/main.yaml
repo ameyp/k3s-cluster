@@ -8,7 +8,7 @@
    },
    "spec": {
       "interval": "10m",
-      "path": "./tanka/manifests/test/infrastructure/controllers",
+      "path": "./fluxcd/manifests/test/infrastructure/controllers",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
@@ -33,7 +33,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./tanka/manifests/test/infrastructure/configs/metallb",
+      "path": "./fluxcd/manifests/test/infrastructure/configs/metallb",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
@@ -57,7 +57,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./tanka/manifests/test/infrastructure/configs/clusterissuers",
+      "path": "./fluxcd/manifests/test/infrastructure/configs/clusterissuers",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
@@ -81,7 +81,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./tanka/manifests/test/infrastructure/configs/certs",
+      "path": "./fluxcd/manifests/test/infrastructure/configs/certs",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
@@ -108,7 +108,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./tanka/manifests/test/infrastructure/configs/traefik",
+      "path": "./fluxcd/manifests/test/infrastructure/configs/traefik",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
@@ -135,7 +135,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./tanka/manifests/test/infrastructure/configs/vault",
+      "path": "./fluxcd/manifests/test/infrastructure/configs/vault",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
@@ -159,7 +159,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./tanka/manifests/test/infrastructure/configs/vault-initializers",
+      "path": "./fluxcd/manifests/test/infrastructure/configs/vault-initializers",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
@@ -186,7 +186,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./tanka/manifests/test/infrastructure/traefik",
+      "path": "./fluxcd/manifests/test/infrastructure/traefik",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
@@ -217,7 +217,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./tanka/manifests/test/infrastructure/vault",
+      "path": "./fluxcd/manifests/test/infrastructure/vault",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
