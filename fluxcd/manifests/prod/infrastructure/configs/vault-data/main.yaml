@@ -1,0 +1,16 @@
+---
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "Policy",
+   "metadata": {
+      "name": "allow-tokens"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "policy": "path \"tokens/*\" {\n  capabilities = [\"read\", \"list\"]\n}\n"
+   }
+}
+...
