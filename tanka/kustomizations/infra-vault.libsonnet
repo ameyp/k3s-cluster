@@ -14,8 +14,6 @@ function(mode='test') [
         name: "infra-configs-certs"
       }, {
         name: "infra-configs-traefik"
-      }, {
-        name: "infra-configs-vault"
       }],
       interval: "10m",
       targetNamespace: vars.flux.namespace,
