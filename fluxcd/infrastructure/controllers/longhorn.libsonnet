@@ -39,43 +39,41 @@ function(mode='test') [{
       },
     },
     values: {
-      values: std.manifestYamlDoc({
-        persistence: {
-          defaultClass: false,
-          defaultClassReplicaCount: if mode == 'test' then 1 else 3,
-          reclaimPolicy: 'Delete',
-        },
-        defaultSettings: {
-          defaultReplicaCount: if mode == 'test' then 1 else 3,
-          nodeDownPodDeletionPolicy: 'delete-both-statefulset-and-deployment-pod',
-          backupTarget: 's3://amey-backups-longhorn@us-west-004/',
-          backupTargetCredentialSecret: 'longhorn-backup-secret',
-        },
-        longhornManager: {
-          tolerations: [{
-            key: 'node-role.kubernetes.io/master',
-            operator: 'Equal',
-            value: 'true',
-          }],
-          effect: 'NoSchedule'
-        },
-        longhornDriver: {
-          tolerations: [{
-            key: 'node-role.kubernetes.io/master',
-            operator: 'Equal',
-            value: 'true',
-          }],
-          effect: 'NoSchedule',
-        },
-        longhornUI: {
-          tolerations: [{
-            key: 'node-role.kubernetes.io/master',
-            operator: 'Equal'
-          }],
+      persistence: {
+        defaultClass: false,
+        defaultClassReplicaCount: if mode == 'test' then 1 else 3,
+        reclaimPolicy: 'Delete',
+      },
+      defaultSettings: {
+        defaultReplicaCount: if mode == 'test' then 1 else 3,
+        nodeDownPodDeletionPolicy: 'delete-both-statefulset-and-deployment-pod',
+        backupTarget: 's3://amey-backups-longhorn@us-west-004/',
+        backupTargetCredentialSecret: 'longhorn-backup-secret',
+      },
+      longhornManager: {
+        tolerations: [{
+          key: 'node-role.kubernetes.io/master',
+          operator: 'Equal',
           value: 'true',
-        },
+        }],
+        effect: 'NoSchedule'
+      },
+      longhornDriver: {
+        tolerations: [{
+          key: 'node-role.kubernetes.io/master',
+          operator: 'Equal',
+          value: 'true',
+        }],
         effect: 'NoSchedule',
-      })
+      },
+      longhornUI: {
+        tolerations: [{
+          key: 'node-role.kubernetes.io/master',
+          operator: 'Equal'
+        }],
+        value: 'true',
+      },
+      effect: 'NoSchedule',
     },
   },
 }]
