@@ -267,7 +267,47 @@
       "releaseName": "longhorn",
       "targetNamespace": "longhorn-system",
       "values": {
-         "values": "\"defaultSettings\":\n  \"backupTarget\": \"s3://amey-backups-longhorn@us-west-004/\"\n  \"backupTargetCredentialSecret\": \"longhorn-backup-secret\"\n  \"defaultReplicaCount\": 1\n  \"nodeDownPodDeletionPolicy\": \"delete-both-statefulset-and-deployment-pod\"\n\"effect\": \"NoSchedule\"\n\"longhornDriver\":\n  \"effect\": \"NoSchedule\"\n  \"tolerations\":\n  - \"key\": \"node-role.kubernetes.io/master\"\n    \"operator\": \"Equal\"\n    \"value\": \"true\"\n\"longhornManager\":\n  \"effect\": \"NoSchedule\"\n  \"tolerations\":\n  - \"key\": \"node-role.kubernetes.io/master\"\n    \"operator\": \"Equal\"\n    \"value\": \"true\"\n\"longhornUI\":\n  \"tolerations\":\n  - \"key\": \"node-role.kubernetes.io/master\"\n    \"operator\": \"Equal\"\n  \"value\": \"true\"\n\"persistence\":\n  \"defaultClass\": false\n  \"defaultClassReplicaCount\": 1\n  \"reclaimPolicy\": \"Delete\""
+         "defaultSettings": {
+            "backupTarget": "s3://amey-backups-longhorn@us-west-004/",
+            "backupTargetCredentialSecret": "longhorn-backup-secret",
+            "defaultReplicaCount": 1,
+            "nodeDownPodDeletionPolicy": "delete-both-statefulset-and-deployment-pod"
+         },
+         "effect": "NoSchedule",
+         "longhornDriver": {
+            "effect": "NoSchedule",
+            "tolerations": [
+               {
+                  "key": "node-role.kubernetes.io/master",
+                  "operator": "Equal",
+                  "value": "true"
+               }
+            ]
+         },
+         "longhornManager": {
+            "effect": "NoSchedule",
+            "tolerations": [
+               {
+                  "key": "node-role.kubernetes.io/master",
+                  "operator": "Equal",
+                  "value": "true"
+               }
+            ]
+         },
+         "longhornUI": {
+            "tolerations": [
+               {
+                  "key": "node-role.kubernetes.io/master",
+                  "operator": "Equal"
+               }
+            ],
+            "value": "true"
+         },
+         "persistence": {
+            "defaultClass": false,
+            "defaultClassReplicaCount": 1,
+            "reclaimPolicy": "Delete"
+         }
       }
    }
 }
