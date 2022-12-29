@@ -21,19 +21,19 @@ function(mode) [
     path "tokens/*" {
       capabilities = ["read", "list"]
     }
-|||)
+|||),
 
   policy("allow-logins", |||
     path "logins/*" {
       capabilities = ["read", "list"]
     }
-|||)
+|||),
 
   policy("slack-webhooks", |||
     path "tokens/data/slack" {
       capabilities = ["read"]
     }
-|||)
+|||),
 
   policy("media", |||
     path "tokens/data/mullvad" {
@@ -48,7 +48,7 @@ function(mode) [
     path "logins/data/newsgroupdirect" {
       capabilities = ["read"]
     }
-|||)
+|||),
 
   policy("operator", |||
     // path "auth/token/create" {
@@ -90,5 +90,5 @@ function(mode) [
     path "mariadb/*" {
       capabilities = ["create", "update", "list", "read", "delete"]
     }
-|||)
+|||),
 ]
