@@ -4,7 +4,8 @@ local role = function(name, params) {
   apiVersion: "redhatcop.redhat.io/v1alpha1",
   kind: "KubernetesAuthEngineRole",
   metadata: {
-    name: name
+    name: name,
+    namespace: vars.vault.namespace,
   },
   spec: {
     authentication: {
@@ -14,7 +15,9 @@ local role = function(name, params) {
     path: "kubernetes",
     policies: params.policies,
     targetServiceAccounts: params.serviceAccounts,
-    targetNamespaces: params.namespaces,
+    targetNamespaces: {
+      targetNamespaces: params.namespaces,
+    },
   },
 };
 
