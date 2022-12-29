@@ -64,4 +64,10 @@
       configFilePath: '/vault/secrets/server-config',
     },
   },
+  kured: {
+    namespace: 'kured'
+  },
+  redis: {
+    namespace: 'redis'
+  }
 }
