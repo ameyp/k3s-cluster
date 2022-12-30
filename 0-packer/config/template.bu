@@ -1,3 +1,9 @@
+# TODO https://gist.github.com/netwarex/5186be148560f99b5ac22759299e5407 might be required to address https://github.com/longhorn/longhorn/issues/4988
+# but it's also possible that it has been fixed in a newer version of open-isci: https://github.com/open-iscsi/open-iscsi/pull/244
+# Other potential fixes:
+# https://github.com/longhorn/longhorn/issues/2016
+# https://gist.github.com/frezbo/e124b2c57b407b99aaff5cf82d50721d
+
 variant: fcos
 version: 1.4.0
 # On Proxmox, predictable names must be disabled for this to work. Or change eth0 to your interface's name.
