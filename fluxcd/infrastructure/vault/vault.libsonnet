@@ -57,12 +57,12 @@ function(mode='test') {
         },
         dataStorage: {
           size: "2Gi",
-          storageClass: "longhorn",
+          storageClass: "local-path",
         },
         auditStorage: {
           enabled: true,
           size: "1Gi",
-          storageClass: "longhorn",
+          storageClass: "local-path",
         },
         volumes: [{
           name: "vault-tls-internal",
