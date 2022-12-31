@@ -15,6 +15,8 @@ function(mode='test') [
       }, {
         name: "infra-configs-traefik"
       }, {
+        name: "infra-configs-longhorn"
+      }, {
         name: "infra-configs-vault"
       }],
       interval: "10m",
