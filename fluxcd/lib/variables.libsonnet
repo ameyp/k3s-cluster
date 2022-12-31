@@ -68,7 +68,13 @@
   kured: {
     namespace: 'kured'
   },
-  redis: {
-    namespace: 'redis'
-  }
+  databases: {
+    namespace: "databases",
+    postgresql: {
+      loadBalancerIP: "192.168.80.11",
+      testLoadBalancerIP: "192.168.1.211",
+      initialPasswordSecret: "postgresql-initial-password",
+      initialPassword: "postgrespassword",
+    }
+  },
 }

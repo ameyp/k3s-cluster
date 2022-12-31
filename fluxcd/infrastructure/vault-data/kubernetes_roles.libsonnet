@@ -47,7 +47,7 @@ function(mode) [
   role("redis", {
     policies: ["allow-logins"],
     serviceAccounts: ["redis"],
-    namespaces: [vars.redis.namespace],
+    namespaces: [vars.databases.namespace],
   }),
   role("kured", {
     policies: ["slack-webhooks"],

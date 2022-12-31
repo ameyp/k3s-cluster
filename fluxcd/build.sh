@@ -21,12 +21,20 @@ for mode in test prod; do
 
     jsonnet_export $mode infrastructure/controllers/main.jsonnet \
                    manifests/${mode}/infrastructure/controllers
+
+    # Vault
     jsonnet_export $mode infrastructure/vault/main.jsonnet \
                    manifests/${mode}/infrastructure/vault
-    jsonnet_export $mode infrastructure/traefik/main.jsonnet \
-                   manifests/${mode}/infrastructure/traefik
     jsonnet_export $mode infrastructure/vault-config-operator/main.jsonnet \
                    manifests/${mode}/infrastructure/vault-config-operator
+
+    # Traefik
+    jsonnet_export $mode infrastructure/traefik/main.jsonnet \
+                   manifests/${mode}/infrastructure/traefik
+
+    # Databases
+    jsonnet_export $mode infrastructure/postgresql/main.jsonnet \
+                   manifests/${mode}/infrastructure/postgresql
 
     for c in $(ls infrastructure/configs); do
         jsonnet_export $mode infrastructure/configs/$c/main.jsonnet \
