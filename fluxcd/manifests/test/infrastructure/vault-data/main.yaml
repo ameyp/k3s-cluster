@@ -205,7 +205,7 @@
       ],
       "targetNamespaces": {
          "targetNamespaces": [
-            "redis"
+            "databases"
          ]
       },
       "targetServiceAccounts": [

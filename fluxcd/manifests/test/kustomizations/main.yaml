@@ -225,6 +225,33 @@
    "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
    "kind": "Kustomization",
    "metadata": {
+      "name": "infra-postgresql",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "dependsOn": [
+         {
+            "name": "infra-controllers"
+         },
+         {
+            "name": "infra-configs-metallb"
+         }
+      ],
+      "interval": "10m",
+      "path": "./fluxcd/manifests/test/infrastructure/postgresql",
+      "prune": true,
+      "sourceRef": {
+         "kind": "GitRepository",
+         "name": "k3s-cluster-deploy"
+      },
+      "wait": true
+   }
+}
+---
+{
+   "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+   "kind": "Kustomization",
+   "metadata": {
       "name": "infra-vault",
       "namespace": "flux-system"
    },

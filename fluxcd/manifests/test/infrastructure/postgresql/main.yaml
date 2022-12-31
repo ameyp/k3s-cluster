@@ -1,0 +1,99 @@
+---
+{
+   "apiVersion": "v1",
+   "kind": "Namespace",
+   "metadata": {
+      "name": "databases"
+   }
+}
+---
+{
+   "apiVersion": "v1",
+   "data": { },
+   "kind": "Secret",
+   "metadata": {
+      "name": "postgresql-initial-password",
+      "namespace": "databases"
+   },
+   "stringData": {
+      "postgres-password": "postgrespassword"
+   },
+   "type": "Opaque"
+}
+---
+{
+   "apiVersion": "source.toolkit.fluxcd.io/v1beta2",
+   "kind": "HelmRepository",
+   "metadata": {
+      "name": "bitnami",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "interval": "24h",
+      "url": "https://charts.bitnami.com/bitnami"
+   }
+}
+---
+{
+   "apiVersion": "helm.toolkit.fluxcd.io/v2beta1",
+   "kind": "HelmRelease",
+   "metadata": {
+      "name": "postgresql",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "chart": {
+         "spec": {
+            "chart": "postgresql",
+            "interval": "12h",
+            "sourceRef": {
+               "kind": "HelmRepository",
+               "name": "bitnami",
+               "namespace": "flux-system"
+            },
+            "version": "11.6.8"
+         }
+      },
+      "dependsOn": [
+         {
+            "name": "longhorn"
+         },
+         {
+            "name": "metallb"
+         }
+      ],
+      "install": {
+         "createNamespace": true
+      },
+      "interval": "30m",
+      "releaseName": "postgresql",
+      "targetNamespace": "databases",
+      "values": {
+         "global": {
+            "postgresql": {
+               "auth": {
+                  "existingSecret": "postgresql-initial-password"
+               }
+            },
+            "storageClass": "longhorn"
+         },
+         "primary": {
+            "persistence": {
+               "size": "1Gi",
+               "storageClass": "longhorn"
+            },
+            "service": {
+               "loadBalancerIP": "192.168.1.211",
+               "type": "LoadBalancer"
+            }
+         },
+         "tls": {
+            "certFilename": "tls.crt",
+            "certKeyFilename": "tls.key",
+            "certificatesSecret": "wildcard-tls-secret",
+            "enabled": true
+         }
+      }
+   }
+}
+...
