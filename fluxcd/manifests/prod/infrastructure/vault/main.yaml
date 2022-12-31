@@ -162,11 +162,11 @@
             "auditStorage": {
                "enabled": true,
                "size": "1Gi",
-               "storageClass": "local-path"
+               "storageClass": "longhorn-single"
             },
             "dataStorage": {
                "size": "2Gi",
-               "storageClass": "local-path"
+               "storageClass": "longhorn-single"
             },
             "extraArgs": "-config=/vault/secrets/server-config",
             "extraLabels": {

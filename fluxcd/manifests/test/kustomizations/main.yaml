@@ -71,6 +71,30 @@
    "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
    "kind": "Kustomization",
    "metadata": {
+      "name": "infra-configs-longhorn",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "dependsOn": [
+         {
+            "name": "infra-controllers"
+         }
+      ],
+      "interval": "10m",
+      "path": "./fluxcd/manifests/test/infrastructure/configs/longhorn",
+      "prune": true,
+      "sourceRef": {
+         "kind": "GitRepository",
+         "name": "k3s-cluster-deploy"
+      },
+      "wait": true
+   }
+}
+---
+{
+   "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+   "kind": "Kustomization",
+   "metadata": {
       "name": "infra-configs-certs",
       "namespace": "flux-system"
    },
