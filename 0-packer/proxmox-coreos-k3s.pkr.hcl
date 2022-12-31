@@ -59,7 +59,7 @@ source "proxmox" "coreos_k3s" {
     type = "virtio"
   }
 
-  iso_file = "local:iso/fedora-coreos-37.20221106.3.0-live.x86_64.iso"
+  iso_file = "local:iso/fedora-coreos-37.20221211.3.0-live.x86_64.iso"
   unmount_iso = true
   template_name = "coreos-37.20221106.3.0"
   template_description = "k3s-${var.k3s.version} running on Fedora CoreOS"
