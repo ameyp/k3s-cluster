@@ -23,6 +23,14 @@ function(mode) [
     }
   }),
   kustomization({
+    metadata: metadata("longhorn"),
+    spec: spec("longhorn", mode) + {
+      dependsOn: [{
+        name: "infra-controllers"
+      }]
+    }
+  }),
+  kustomization({
     metadata: metadata("certs"),
     spec: spec("certs", mode) + {
       dependsOn: [{

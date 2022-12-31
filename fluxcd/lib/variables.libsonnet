@@ -20,6 +20,7 @@
   },
   longhorn: {
     namespace: 'longhorn-system',
+    singleReplicaStorageClass: 'longhorn-single',
   },
   monitoring: {
     namespace: 'monitoring',
