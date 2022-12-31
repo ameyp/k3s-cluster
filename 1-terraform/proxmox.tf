@@ -6,7 +6,7 @@ resource "proxmox_vm_qemu" "k3s-test-worker" {
   full_clone = true
   memory = 6144
   sockets = 1
-  cores = 2
+  cores = 4
   cpu = "host"
   scsihw = "virtio-scsi-pci"
   # clone = "ubuntu-2204-cloudinit-template"
