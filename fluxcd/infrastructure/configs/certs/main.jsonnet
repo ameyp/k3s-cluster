@@ -3,6 +3,7 @@ local wirywolf = import "wirywolf.libsonnet";
 
 local allowed_namespaces = std.join(",", [
   vars.vault.namespace,
+  vars.databases.namespace
 ]);
 
 local auto_namespaces = std.join(",", [
