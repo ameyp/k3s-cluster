@@ -28,18 +28,10 @@ for mode in test prod; do
     jsonnet_export $mode infrastructure/vault-config-operator/main.jsonnet \
                    manifests/${mode}/infrastructure/vault-config-operator
 
-    jsonnet_export $mode infrastructure/configs/clusterissuers/main.jsonnet \
-                   manifests/${mode}/infrastructure/configs/clusterissuers
-    jsonnet_export $mode infrastructure/configs/certs/main.jsonnet \
-                   manifests/${mode}/infrastructure/configs/certs
-    jsonnet_export $mode infrastructure/configs/metallb/main.jsonnet \
-                   manifests/${mode}/infrastructure/configs/metallb
-    jsonnet_export $mode infrastructure/configs/traefik/main.jsonnet \
-                   manifests/${mode}/infrastructure/configs/traefik
-    jsonnet_export $mode infrastructure/configs/vault/main.jsonnet \
-                   manifests/${mode}/infrastructure/configs/vault
-    jsonnet_export $mode infrastructure/configs/vault-initializers/main.jsonnet \
-                   manifests/${mode}/infrastructure/configs/vault-initializers
+    for c in $(ls infrastructure/configs); do
+        jsonnet_export $mode infrastructure/configs/$c/main.jsonnet \
+                       manifests/${mode}/infrastructure/configs/$c
+    done
 
     jsonnet_export $mode infrastructure/vault-data/main.jsonnet \
                    manifests/${mode}/infrastructure/vault-data
