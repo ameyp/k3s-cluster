@@ -45,6 +45,7 @@ function(mode) [
   }, [
     servicePort.newNamed(vars.databases.mariadb.port.name, vars.databases.mariadb.port.number, vars.databases.mariadb.port.number)
   ]) +
+  service.metadata.withNamespace(vars.databases.namespace) +
   service.spec.withType("LoadBalancer") +
   service.spec.withLoadBalancerIP(
     if mode == "test"
