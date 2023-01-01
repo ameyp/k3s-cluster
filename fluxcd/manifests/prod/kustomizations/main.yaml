@@ -225,7 +225,7 @@
    "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
    "kind": "Kustomization",
    "metadata": {
-      "name": "infra-postgresql",
+      "name": "infra-databases",
       "namespace": "flux-system"
    },
    "spec": {
@@ -238,7 +238,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./fluxcd/manifests/prod/infrastructure/postgresql",
+      "path": "./fluxcd/manifests/prod/infrastructure/databases",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
@@ -317,6 +317,9 @@
       "dependsOn": [
          {
             "name": "infra-vault-config-operator"
+         },
+         {
+            "name": "infra-databases"
          }
       ],
       "interval": "10m",
