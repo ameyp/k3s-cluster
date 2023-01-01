@@ -26,18 +26,18 @@ function(mode) [
   }),
 
   // Config map containing config file
-  // configMap.new(configMapName) +
-  // configMap.metadata.withNamespace(vars.databases.namespace) +
-  // configMap.withData({
-  //   "config.cnf": |||
-  //     [mariadb]
-  //     ssl_cert = /certs/tls.crt
-  //     ssl_key = /certs/tls.key
-  //     # Not required by default because vault doesn't support it.
-  //     # https://github.com/hashicorp/vault/issues/6444
-  //     # require_secure_transport = on
-  //   |||
-  // })
+  configMap.new(configMapName) +
+  configMap.metadata.withNamespace(vars.databases.namespace) +
+  configMap.withData({
+    "config.cnf": |||
+      [mariadb]
+      ssl_cert = /certs/tls.crt
+      ssl_key = /certs/tls.key
+      # Not required by default because vault doesn't support it.
+      # https://github.com/hashicorp/vault/issues/6444
+      # require_secure_transport = on
+    |||
+  }),
 
   // Service
   service.new(serviceName, {
