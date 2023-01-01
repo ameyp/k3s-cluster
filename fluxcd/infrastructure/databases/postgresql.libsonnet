@@ -4,9 +4,6 @@ local vars = import "variables.libsonnet";
 local secret = k.core.v1.secret;
 
 function(mode) [
-  // Create the namespace
-  k.core.v1.namespace.new(vars.databases.namespace),
-
   // Create the secret containing the initial admin password
   secret.new(vars.databases.postgresql.initialPasswordSecret, {}) +
   secret.metadata.withNamespace(vars.databases.namespace) +

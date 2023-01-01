@@ -21,6 +21,7 @@
   longhorn: {
     namespace: 'longhorn-system',
     singleReplicaStorageClass: 'longhorn-single',
+    defaultStorageClass: "longhorn",
   },
   monitoring: {
     namespace: 'monitoring',
@@ -75,6 +76,20 @@
       testLoadBalancerIP: "192.168.1.211",
       initialPasswordSecret: "postgresql-initial-password",
       initialPassword: "postgrespassword",
+      port: {
+        name: "tcp",
+        number: 5432,
+      }
+    },
+    mariadb: {
+      port: {
+        name: "tcp",
+        number: 3306
+      },
+      appName: "mariadb",
+      loadBalancerIP: "192.168.80.14",
+      testLoadBalancerIP: "192.168.1.214",
+      initialPassword: "mariadbrootpassword",
     }
   },
 }

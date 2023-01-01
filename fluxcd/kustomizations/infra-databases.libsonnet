@@ -6,7 +6,7 @@ local kustomization = wirywolf.kustomization.new;
 function(mode='test') [
   kustomization({
     metadata: {
-      name: "infra-postgresql",
+      name: "infra-databases",
       namespace: vars.flux.namespace,
     },
     spec: {
@@ -20,7 +20,7 @@ function(mode='test') [
         kind: "GitRepository",
         name: "k3s-cluster-deploy",
       },
-      path: "./fluxcd/manifests/%s/infrastructure/postgresql" % mode,
+      path: "./fluxcd/manifests/%s/infrastructure/databases" % mode,
       prune: true,
       wait: true,
     }

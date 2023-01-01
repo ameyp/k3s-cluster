@@ -18,7 +18,9 @@ function(mode) [
       prune: true,
       wait: true,
       dependsOn: [{
-        name: "infra-vault-config-operator"
+        name: "infra-vault-config-operator",
+      }, {
+        name: "infra-databases",
       }]
     }
   })

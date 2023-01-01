@@ -1,3 +1,4 @@
+local k = import "github.com/grafana/jsonnet-libs/ksonnet-util/kausal.libsonnet";
 local vars = import 'variables.libsonnet';
 
 local getOrDefault = function(params, name, default) if std.objectHas(params, name) then params[name] else default;
@@ -101,5 +102,17 @@ local getOrDefault = function(params, name, default) if std.objectHas(params, na
       },
       spec: params.spec
     }
+  },
+  persistentVolumeClaim: {
+    local pvc = k.core.v1.persistentVolumeClaim,
+
+    new: function(params)
+        pvc.new(params.name) +
+         pvc.metadata.withNamespace(params.namespace) +
+         pvc.spec.withAccessModes(["ReadWriteMany"]) +
+         pvc.spec.resources.withRequests({
+           storage: params.storage
+         }) +
+         pvc.spec.withStorageClassName(vars.longhorn.defaultStorageClass)
   }
 }

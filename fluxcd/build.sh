@@ -33,8 +33,8 @@ for mode in test prod; do
                    manifests/${mode}/infrastructure/traefik
 
     # Databases
-    jsonnet_export $mode infrastructure/postgresql/main.jsonnet \
-                   manifests/${mode}/infrastructure/postgresql
+    jsonnet_export $mode infrastructure/databases/main.jsonnet \
+                   manifests/${mode}/infrastructure/databases
 
     for c in $(ls infrastructure/configs); do
         jsonnet_export $mode infrastructure/configs/$c/main.jsonnet \
