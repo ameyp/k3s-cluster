@@ -18,7 +18,7 @@ local certsVolumeName = "mariadb-certs";
 local serviceName = "mariadb";
 
 function(mode) {
-  "mariadb-prereqs/main.yaml": [
+  "mariadb-prereqs/pvc.yaml":
     // PVC
     wirywolf.persistentVolumeClaim.new({
       name: configPvcName,
@@ -26,6 +26,7 @@ function(mode) {
       storage: "2Gi"
     }),
 
+  "mariadb-prereqs/configmap.yaml":
     // Config map containing config file
     configMap.new(configMapName) +
     configMap.metadata.withNamespace(vars.databases.namespace) +
@@ -40,6 +41,7 @@ function(mode) {
       |||
     }),
 
+  "mariadb-prereqs/service.yaml":
     // Service
     service.new(serviceName, {
       "app.kubernetes.io/name": vars.databases.mariadb.appName,
@@ -54,8 +56,8 @@ function(mode) {
       if mode == "test"
       then vars.databases.mariadb.testLoadBalancerIP
       else vars.databases.mariadb.loadBalancerIP),
-  ],
-  "mariadb/main.yaml":
+
+  "mariadb/statefulset.yaml":
     // Stateful set
     statefulSet.metadata.withNamespace(vars.databases.namespace) +
     statefulSet.new("mariadb", replicas=1, containers=[

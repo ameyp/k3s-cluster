@@ -4,7 +4,7 @@ local vars = import "variables.libsonnet";
 local secret = k.core.v1.secret;
 
 function(mode) {
-  "postgresql-prereqs/main.yaml":
+  "postgresql-prereqs/secret.yaml":
     // Create the secret containing the initial admin password
     secret.new(vars.databases.postgresql.initialPasswordSecret, {}) +
     secret.metadata.withNamespace(vars.databases.namespace) +
@@ -12,7 +12,7 @@ function(mode) {
       "postgres-password": vars.databases.postgresql.initialPassword
     }),
 
-  "postgresql/main.yaml": [
+  "postgresql/repo.yaml":
     // Helm repo and chart
     {
       apiVersion: "source.toolkit.fluxcd.io/v1beta2",
@@ -26,6 +26,8 @@ function(mode) {
         url: "https://charts.bitnami.com/bitnami"
       }
     },
+
+  "postgresql/chart.yaml":
     {
       apiVersion: "helm.toolkit.fluxcd.io/v2beta1",
       kind: "HelmRelease",
@@ -86,5 +88,4 @@ function(mode) {
         },
       },
     }
-  ]
 }
