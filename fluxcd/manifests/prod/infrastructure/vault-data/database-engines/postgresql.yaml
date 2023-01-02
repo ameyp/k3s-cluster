@@ -14,7 +14,7 @@
          "role": "operator"
       },
       "connectionURL": "postgresql://{{username}}:{{password}}@postgresql.wirywolf.com/postgres?sslmode=require",
-      "path": "databases",
+      "path": "databases/postgresql",
       "pluginName": "postgresql-database-plugin",
       "rootCredentials": {
          "secret": {
