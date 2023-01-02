@@ -1,3 +1,4 @@
+local vars = import "variables.libsonnet";
 local wirywolf = import "wirywolf.libsonnet";
 
 function(mode, params) {
@@ -6,6 +7,7 @@ function(mode, params) {
     kind: "DatabaseSecretEngineConfig",
     metadata: {
       name: "postgresql",
+      namespace: vars.vault.namespace,
     },
     spec: {
       authentication: {
@@ -30,6 +32,7 @@ function(mode, params) {
     kind: "DatabaseSecretEngineConfig",
     metadata: {
       name: "mariadb",
+      namespace: vars.vault.namespace,
     },
     spec: {
       authentication: {
