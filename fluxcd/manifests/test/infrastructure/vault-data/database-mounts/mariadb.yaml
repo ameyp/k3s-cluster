@@ -10,7 +10,7 @@
          "path": "kubernetes",
          "role": "operator"
       },
-      "path": "mariadb",
+      "path": "databases",
       "type": "database"
    }
 }

@@ -14,7 +14,7 @@
          "role": "operator"
       },
       "connectionURL": "{{username}}:{{password}}@tcp(mariadb.wirywolf.com)/",
-      "path": "mariadb",
+      "path": "databases",
       "pluginName": "mysql-database-plugin",
       "rootCredentials": {
          "secret": {
