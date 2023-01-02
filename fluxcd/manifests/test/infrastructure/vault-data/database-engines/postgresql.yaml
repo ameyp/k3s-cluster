@@ -16,8 +16,10 @@
       "connectionURL": "postgresql://{{username}}:{{password}}@postgresql.test.wirywolf.com/postgres?sslmode=require",
       "path": "postgres",
       "pluginName": "postgresql-database-plugin",
-      "rootCredentialsFromSecret": {
-         "name": "database-vault-password"
+      "rootCredentials": {
+         "secret": {
+            "name": "database-vault-password"
+         }
       },
       "rootPasswordRotation": {
          "enable": true,

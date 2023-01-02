@@ -16,8 +16,10 @@
       "connectionURL": "{{username}}:{{password}}@tcp(mariadb.test.wirywolf.com)/",
       "path": "mariadb",
       "pluginName": "mysql-database-plugin",
-      "rootCredentialsFromSecret": {
-         "name": "database-vault-password"
+      "rootCredentials": {
+         "secret": {
+            "name": "database-vault-password"
+         }
       },
       "rootPasswordRotation": {
          "enable": true,
