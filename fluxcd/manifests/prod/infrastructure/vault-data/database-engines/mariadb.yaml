@@ -24,6 +24,7 @@
       "rootPasswordRotation": {
          "enable": true,
          "rotationPeriod": "168h"
-      }
+      },
+      "verifyConnection": true
    }
 }
