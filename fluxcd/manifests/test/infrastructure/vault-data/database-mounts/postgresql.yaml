@@ -2,7 +2,8 @@
    "apiVersion": "redhatcop.redhat.io/v1alpha1",
    "kind": "SecretEngineMount",
    "metadata": {
-      "name": "postgresql"
+      "name": "postgresql",
+      "namespace": "vault"
    },
    "spec": {
       "authentication": {
