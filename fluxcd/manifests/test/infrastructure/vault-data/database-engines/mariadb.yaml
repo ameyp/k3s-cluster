@@ -2,7 +2,8 @@
    "apiVersion": "redhatcop.redhat.io/v1alpha1",
    "kind": "DatabaseSecretEngineConfig",
    "metadata": {
-      "name": "mariadb"
+      "name": "mariadb",
+      "namespace": "vault"
    },
    "spec": {
       "allowedRoles": [
