@@ -5,7 +5,7 @@ function(mode, params) {
     apiVersion: "redhatcop.redhat.io/v1alpha1",
     kind: "SecretEngineMount",
     metadata: {
-      name: "postgresql",
+      name: params.postgresql.name,
       namespace: vars.vault.namespace,
     },
     spec: {
@@ -21,7 +21,7 @@ function(mode, params) {
     apiVersion: "redhatcop.redhat.io/v1alpha1",
     kind: "SecretEngineMount",
     metadata: {
-      name: "mariadb",
+      name: params.mariadb.name,
       namespace: vars.vault.namespace,
     },
     spec: {
