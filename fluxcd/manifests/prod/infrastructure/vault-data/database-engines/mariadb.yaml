@@ -1,0 +1,26 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "DatabaseSecretEngineConfig",
+   "metadata": {
+      "name": "mariadb"
+   },
+   "spec": {
+      "allowedRoles": [
+         "*"
+      ],
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "connectionURL": "{{username}}:{{password}}@tcp(mariadb.wirywolf.com)/",
+      "path": "mariadb",
+      "pluginName": "mysql-database-plugin",
+      "rootCredentialsFromSecret": {
+         "name": "database-vault-password"
+      },
+      "rootPasswordRotation": {
+         "enable": true,
+         "rotationPeriod": "168h"
+      }
+   }
+}

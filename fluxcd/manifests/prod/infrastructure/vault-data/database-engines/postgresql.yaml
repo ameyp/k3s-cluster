@@ -1,0 +1,26 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "DatabaseSecretEngineConfig",
+   "metadata": {
+      "name": "postgresql"
+   },
+   "spec": {
+      "allowedRoles": [
+         "*"
+      ],
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "connectionURL": "postgresql://{{username}}:{{password}}@postgresql.wirywolf.com/postgres?sslmode=require",
+      "path": "postgres",
+      "pluginName": "postgresql-database-plugin",
+      "rootCredentialsFromSecret": {
+         "name": "database-vault-password"
+      },
+      "rootPasswordRotation": {
+         "enable": true,
+         "rotationPeriod": "168h"
+      }
+   }
+}
