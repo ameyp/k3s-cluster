@@ -35,7 +35,7 @@ function(mode)
     },
     mariadb: {
       path: mariadbPath,
-      endpoint: mariadbEndpoint
+      endpoint: mariadbEndpoint,
       passwordSecret: adminPasswordSecret,
     }
   })
