@@ -79,15 +79,11 @@ function(mode) {
       capabilities = ["create", "update", "list", "read", "delete"]
     }
 
-    path "postgres/*" {
+    path "databases/*" {
       capabilities = ["create", "update", "list", "read", "delete"]
     }
 
     path "gitea/*" {
-      capabilities = ["create", "update", "list", "read", "delete"]
-    }
-
-    path "mariadb/*" {
       capabilities = ["create", "update", "list", "read", "delete"]
     }
 |||),
