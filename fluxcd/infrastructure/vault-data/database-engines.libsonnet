@@ -26,8 +26,9 @@ function(mode, params) {
       rootPasswordRotation: {
         enable: true,
         rotationPeriod: "168h", // 1 week
-      }
-    }
+      },
+      verifyConnection: true,
+    },
   },
   "database-engines/mariadb.yaml": {
     apiVersion: "redhatcop.redhat.io/v1alpha1",
@@ -53,7 +54,8 @@ function(mode, params) {
       rootPasswordRotation: {
         enable: true,
         rotationPeriod: "168h", // 1 week
-      }
-    }
+      },
+      verifyConnection: true,
+    },
   },
 }
