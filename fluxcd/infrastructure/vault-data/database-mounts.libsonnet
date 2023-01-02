@@ -17,6 +17,22 @@ function(mode, params) {
       path: params.postgresql.path
     }
   },
+  "database-mounts/gitea.yaml": {
+    apiVersion: "redhatcop.redhat.io/v1alpha1",
+    kind: "SecretEngineMount",
+    metadata: {
+      name: "gitea",
+      namespace: vars.vault.namespace,
+    },
+    spec: {
+      authentication: {
+        path: "kubernetes",
+        role: "operator",
+      },
+      type: "database",
+      path: params.postgresql.path
+    }
+  },
   "database-mounts/mariadb.yaml": {
     apiVersion: "redhatcop.redhat.io/v1alpha1",
     kind: "SecretEngineMount",
