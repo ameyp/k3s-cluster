@@ -52,7 +52,7 @@ for mode in test prod; do
                        manifests/${mode}/infrastructure/configs/$c
     done
 
-    jsonnet_export $mode infrastructure/vault-data/main.jsonnet \
-                   manifests/${mode}/infrastructure/vault-data
+    jsonnet_export_multi $mode infrastructure/vault-data/main.jsonnet \
+                         manifests/${mode}/infrastructure/vault-data
 done
 

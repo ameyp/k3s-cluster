@@ -72,6 +72,7 @@
   databases: {
     namespace: "databases",
     postgresql: {
+      subdomain: "postgresql",
       loadBalancerIP: "192.168.80.11",
       testLoadBalancerIP: "192.168.1.211",
       initialPasswordSecret: "postgresql-initial-password",
@@ -82,14 +83,15 @@
       }
     },
     mariadb: {
-      port: {
-        name: "tcp",
-        number: 3306
-      },
+      subdomain: "mariadb",
       appName: "mariadb",
       loadBalancerIP: "192.168.80.14",
       testLoadBalancerIP: "192.168.1.214",
       initialPassword: "mariadbrootpassword",
+      port: {
+        name: "tcp",
+        number: 3306
+      },
     }
   },
 }

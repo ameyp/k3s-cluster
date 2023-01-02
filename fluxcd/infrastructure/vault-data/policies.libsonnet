@@ -16,26 +16,26 @@ local policy = function(name, policyContent) {
   },
 };
 
-function(mode) [
-  policy("allow-tokens", |||
+function(mode) {
+  "policies/allow-tokens.yaml": policy("allow-tokens", |||
     path "tokens/*" {
       capabilities = ["read", "list"]
     }
 |||),
 
-  policy("allow-logins", |||
+  "policies/allow-logins.yaml": policy("allow-logins", |||
     path "logins/*" {
       capabilities = ["read", "list"]
     }
 |||),
 
-  policy("slack-webhooks", |||
+  "policies/slack-webhooks.yaml": policy("slack-webhooks", |||
     path "tokens/data/slack" {
       capabilities = ["read"]
     }
 |||),
 
-  policy("media", |||
+  "policies/media.yaml": policy("media", |||
     path "tokens/data/mullvad" {
       capabilities = ["read"]
     }
@@ -50,7 +50,7 @@ function(mode) [
     }
 |||),
 
-  policy("operator", |||
+  "policies/operator.yaml": policy("operator", |||
     // path "auth/token/create" {
     //   capabilities = ["update"]
     // }
@@ -91,4 +91,4 @@ function(mode) [
       capabilities = ["create", "update", "list", "read", "delete"]
     }
 |||),
-]
+}

@@ -21,37 +21,37 @@ local role = function(name, params) {
   },
 };
 
-function(mode) [
-  role("operator", {
+function(mode) {
+  "kubernetes-roles/operator.yaml": role("operator", {
     policies: ["operator"],
     serviceAccounts: ["default"],
     namespaces: [vars.vault.namespace]
   }),
-  role("media", {
+  "kubernetes-roles/media.yaml": role("media", {
     policies: ["media"],
     serviceAccounts: ["default"],
     namespaces: ["media"],
   }),
   # TODO scope down
-  role("scraparr", {
+  "kubernetes-roles/scraparr.yaml": role("scraparr", {
     policies: ["allow-tokens"],
     serviceAccounts: ["default"],
     namespaces: [vars.monitoring.namespace],
   }),
-  role("alert-manager", {
+  "kubernetes-roles/alert-manager.yaml": role("alert-manager", {
     policies: ["slack-webhooks"],
     serviceAccounts: ["prometheus-stack-kube-prom-alertmanager"],
     namespaces: [vars.monitoring.namespace],
   }),
   # TODO scope down
-  role("redis", {
+  "kubernetes-roles/redis.yaml": role("redis", {
     policies: ["allow-logins"],
     serviceAccounts: ["redis"],
     namespaces: [vars.databases.namespace],
   }),
-  role("kured", {
+  "kubernetes-roles/kured.yaml": role("kured", {
     policies: ["slack-webhooks"],
     serviceAccounts: ["kured"],
     namespaces: [vars.kured.namespace],
   }),
-]
+}
