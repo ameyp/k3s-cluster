@@ -10,7 +10,6 @@ function(mode) {
     },
     spec: {
       interval: "10m",
-      targetNamespace: vars.flux.namespace,
       sourceRef: {
         kind: "GitRepository",
         name: "k3s-cluster-deploy",
@@ -27,7 +26,6 @@ function(mode) {
     },
     spec: {
       interval: "10m",
-      targetNamespace: vars.flux.namespace,
       sourceRef: {
         kind: "GitRepository",
         name: "k3s-cluster-deploy",
@@ -47,7 +45,6 @@ function(mode) {
         name: "infra-databases-postgresql-prereqs"
       }],
       interval: "10m",
-      targetNamespace: vars.flux.namespace,
       sourceRef: {
         kind: "GitRepository",
         name: "k3s-cluster-deploy",
@@ -64,7 +61,6 @@ function(mode) {
     },
     spec: {
       interval: "10m",
-      targetNamespace: vars.flux.namespace,
       sourceRef: {
         kind: "GitRepository",
         name: "k3s-cluster-deploy",
@@ -84,7 +80,6 @@ function(mode) {
         name: "infra-databases-mariadb-prereqs"
       }],
       interval: "10m",
-      targetNamespace: vars.flux.namespace,
       sourceRef: {
         kind: "GitRepository",
         name: "k3s-cluster-deploy",
