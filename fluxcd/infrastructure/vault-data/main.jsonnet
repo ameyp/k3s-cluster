@@ -8,8 +8,7 @@ local kubernetes_roles = import "./kubernetes_roles.libsonnet";
 local database_mounts = import "./database-mounts.libsonnet";
 local database_engines = import "./database-engines.libsonnet";
 
-local postgresPath = "postgres";
-local mariadbPath = "mariadb";
+local databasesPath = "databases";
 local adminPasswordSecret = "database-vault-password";
 
 function(mode)
@@ -19,20 +18,20 @@ function(mode)
   kubernetes_roles(mode) +
   database_mounts(mode, {
     postgresql: {
-      path: postgresPath,
+      path: databasesPath,
     },
     mariadb: {
-      path: mariadbPath,
+      path: databasesPath,
     }
   }) +
   database_engines(mode, {
     postgresql: {
-      path: postgresPath,
+      path: databasesPath,
       endpoint: wirywolf.get_endpoint(vars.databases.postgresql.subdomain, mode),
       passwordSecret: adminPasswordSecret,
     },
     mariadb: {
-      path: mariadbPath,
+      path: databasesPath,
       endpoint: wirywolf.get_endpoint(vars.databases.mariadb.subdomain, mode),
       passwordSecret: adminPasswordSecret,
     }
