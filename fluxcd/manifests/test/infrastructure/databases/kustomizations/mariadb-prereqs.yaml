@@ -1,0 +1,19 @@
+{
+   "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+   "kind": "Kustomization",
+   "metadata": {
+      "name": "infra-databases-mariadb-prereqs",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "interval": "10m",
+      "path": "./fluxcd/manifests/test/infrastructure/databases/mariadb-prereqs",
+      "prune": true,
+      "sourceRef": {
+         "kind": "GitRepository",
+         "name": "k3s-cluster-deploy"
+      },
+      "targetNamespace": "flux-system",
+      "wait": true
+   }
+}

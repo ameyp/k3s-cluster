@@ -1,0 +1,87 @@
+{
+   "apiVersion": "apps/v1",
+   "kind": "StatefulSet",
+   "metadata": {
+      "name": "mariadb",
+      "namespace": "databases"
+   },
+   "spec": {
+      "replicas": 1,
+      "selector": {
+         "matchLabels": {
+            "app.kubernetes.io/name": "mariadb"
+         }
+      },
+      "serviceName": "mariadb",
+      "template": {
+         "metadata": {
+            "labels": {
+               "app.kubernetes.io/name": "mariadb"
+            }
+         },
+         "spec": {
+            "containers": [
+               {
+                  "env": [
+                     {
+                        "name": "MARIADB_ROOT_PASSWORD",
+                        "value": "mariadbrootpassword"
+                     }
+                  ],
+                  "image": "mariadb:10.10",
+                  "imagePullPolicy": "IfNotPresent",
+                  "name": "mariadb",
+                  "ports": [
+                     {
+                        "containerPort": 3306,
+                        "name": "tcp"
+                     }
+                  ],
+                  "resources": {
+                     "requests": {
+                        "cpu": "50m"
+                     }
+                  },
+                  "volumeMounts": [
+                     {
+                        "mountPath": "/var/lib/mysql",
+                        "name": "mariadb-data"
+                     },
+                     {
+                        "mountPath": "/etc/mysql/conf.d",
+                        "name": "mariadb-config"
+                     },
+                     {
+                        "mountPath": "/certs",
+                        "name": "mariadb-certs"
+                     }
+                  ]
+               }
+            ],
+            "volumes": [
+               {
+                  "name": "mariadb-data",
+                  "persistentVolumeClaim": {
+                     "claimName": "mariadb-data"
+                  }
+               },
+               {
+                  "configMap": {
+                     "name": "mariadb-config"
+                  },
+                  "name": "mariadb-config"
+               },
+               {
+                  "name": "mariadb-certs",
+                  "secret": {
+                     "secretName": "wildcard-tls-secret"
+                  }
+               }
+            ]
+         }
+      },
+      "updateStrategy": {
+         "type": "RollingUpdate"
+      }
+   }
+}
