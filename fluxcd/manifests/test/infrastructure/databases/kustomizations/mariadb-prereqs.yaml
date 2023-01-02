@@ -13,7 +13,6 @@
          "kind": "GitRepository",
          "name": "k3s-cluster-deploy"
       },
-      "targetNamespace": "flux-system",
       "wait": true
    }
 }
