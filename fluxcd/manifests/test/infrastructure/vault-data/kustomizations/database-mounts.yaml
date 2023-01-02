@@ -1,0 +1,26 @@
+{
+   "apiVersion": "kustomize.toolkit.fluxcd.io/v1beta2",
+   "kind": "Kustomization",
+   "metadata": {
+      "name": "vault-data-database-mounts",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "dependsOn": [
+         {
+            "name": "vault-data-kubernetes-roles"
+         },
+         {
+            "name": "vault-data-policies"
+         }
+      ],
+      "interval": "10m",
+      "path": "./fluxcd/manifests/test/infrastructure/vault-data/database-mounts",
+      "prune": true,
+      "sourceRef": {
+         "kind": "GitRepository",
+         "name": "k3s-cluster-deploy"
+      },
+      "wait": true
+   }
+}

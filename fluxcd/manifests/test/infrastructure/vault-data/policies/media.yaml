@@ -1,0 +1,15 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "Policy",
+   "metadata": {
+      "name": "media",
+      "namespace": "vault"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "policy": "path \"tokens/data/mullvad\" {\n  capabilities = [\"read\"]\n}\npath \"tokens/data/sabnzbd\" {\n  capabilities = [\"read\"]\n}\npath \"logins/data/tweaknews\" {\n  capabilities = [\"read\"]\n}\npath \"logins/data/newsgroupdirect\" {\n  capabilities = [\"read\"]\n}\n"
+   }
+}

@@ -1,0 +1,15 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "SecretEngineMount",
+   "metadata": {
+      "name": "postgresql"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "path": "postgres",
+      "type": "database"
+   }
+}

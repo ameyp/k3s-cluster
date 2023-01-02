@@ -1,0 +1,26 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "KubernetesAuthEngineRole",
+   "metadata": {
+      "name": "media",
+      "namespace": "vault"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "path": "kubernetes",
+      "policies": [
+         "media"
+      ],
+      "targetNamespaces": {
+         "targetNamespaces": [
+            "media"
+         ]
+      },
+      "targetServiceAccounts": [
+         "default"
+      ]
+   }
+}
