@@ -13,6 +13,17 @@ function jsonnet_export() {
     jsonnet -y ${SOURCE} -J vendor -J lib --tla-code mode="\"$MODE\"" > $DEST
 }
 
+function jsonnet_export_multi() {
+    local MODE=$1
+    local SOURCE=$2
+    local DEST=$3
+
+    mkdir -p $(dirname $DEST)
+
+    echo "[$MODE] Building $SOURCE"
+    jsonnet -y ${SOURCE} -J vendor -J lib -c --tla-code mode="\"$MODE\"" -m $DEST
+}
+
 rm -rf manifests/*
 
 for mode in test prod; do
@@ -33,8 +44,8 @@ for mode in test prod; do
                    manifests/${mode}/infrastructure/traefik
 
     # Databases
-    jsonnet_export $mode infrastructure/databases/main.jsonnet \
-                   manifests/${mode}/infrastructure/databases
+    jsonnet_export_multi $mode infrastructure/databases/main.jsonnet \
+                         manifests/${mode}/infrastructure/databases
 
     for c in $(ls infrastructure/configs); do
         jsonnet_export $mode infrastructure/configs/$c/main.jsonnet \

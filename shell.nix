@@ -4,7 +4,7 @@ pkgs.mkShell {
   nativeBuildInputs = [
     pkgs.butane
     pkgs.fluxcd
-    pkgs.jsonnet
+    pkgs.go-jsonnet
     pkgs.jsonnet-bundler
     pkgs.jsonnet-language-server
     pkgs.kubernetes-helm

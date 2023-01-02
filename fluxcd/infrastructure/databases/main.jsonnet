@@ -1,10 +1,11 @@
-local k = import "github.com/grafana/jsonnet-libs/ksonnet-util/kausal.libsonnet";
 local vars = import "variables.libsonnet";
-
-local postgresql = import "./postgresql.libsonnet";
+local kustomizations = import "./kustomizations.libsonnet";
+local prereqs = import "./prereqs.libsonnet";
 local mariadb = import "./mariadb.libsonnet";
+local postgresql = import "./postgresql.libsonnet";
 
-function(mode) [
-  // Create the namespace
-  k.core.v1.namespace.new(vars.databases.namespace),
-] + postgresql(mode) + mariadb(mode)
+function(mode)
+  kustomizations(mode) +
+  prereqs(mode) +
+  mariadb(mode) +
+  postgresql(mode)

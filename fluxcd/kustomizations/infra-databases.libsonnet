@@ -20,7 +20,7 @@ function(mode='test') [
         kind: "GitRepository",
         name: "k3s-cluster-deploy",
       },
-      path: "./fluxcd/manifests/%s/infrastructure/databases" % mode,
+      path: "./fluxcd/manifests/%s/infrastructure/databases/kustomizations" % mode,
       prune: true,
       wait: true,
     }
