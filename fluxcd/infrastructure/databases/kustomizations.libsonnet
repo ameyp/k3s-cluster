@@ -25,6 +25,9 @@ function(mode) {
       namespace: vars.flux.namespace,
     },
     spec: {
+      dependsOn: [{
+        name: "infra-databases-prereqs"
+      }],
       interval: "10m",
       sourceRef: {
         kind: "GitRepository",
@@ -60,6 +63,9 @@ function(mode) {
       namespace: vars.flux.namespace,
     },
     spec: {
+      dependsOn: [{
+        name: "infra-databases-prereqs"
+      }],
       interval: "10m",
       sourceRef: {
         kind: "GitRepository",
