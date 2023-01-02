@@ -6,6 +6,11 @@
       "namespace": "flux-system"
    },
    "spec": {
+      "dependsOn": [
+         {
+            "name": "infra-databases-prereqs"
+         }
+      ],
       "interval": "10m",
       "path": "./fluxcd/manifests/prod/infrastructure/databases/mariadb-prereqs",
       "prune": true,
