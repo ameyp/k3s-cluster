@@ -11,8 +11,6 @@ local database_engines = import "./database-engines.libsonnet";
 local postgresPath = "postgres";
 local mariadbPath = "mariadb";
 local adminPasswordSecret = "database-vault-password";
-local postgresEndpoint = wirywolf.get_endpoint(vars.databases.postgresql.subdomain, mode);
-local mariadbEndpoint = wirywolf.get_endpoint(vars.databases.mariadb.subdomain, mode);
 
 function(mode)
   kustomizations(mode) +
@@ -30,12 +28,12 @@ function(mode)
   database_engines(mode, {
     postgresql: {
       path: postgresPath,
-      endpoint: postgresEndpoint,
+      endpoint: wirywolf.get_endpoint(vars.databases.postgresql.subdomain, mode),
       passwordSecret: adminPasswordSecret,
     },
     mariadb: {
       path: mariadbPath,
-      endpoint: mariadbEndpoint,
+      endpoint: wirywolf.get_endpoint(vars.databases.mariadb.subdomain, mode),
       passwordSecret: adminPasswordSecret,
     }
   })

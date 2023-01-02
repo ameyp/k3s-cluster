@@ -11,7 +11,7 @@ function(mode, params) {
       authentication: {
         path: "kubernetes",
         role: "operator",
-      }
+      },
       pluginName: "postgresql-database-plugin",
       allowedRoles: ["*"],
       connectionURL: "postgresql://{{username}}:{{password}}@%s/postgres?sslmode=require" % params.postgresql.endpoint,
@@ -25,7 +25,7 @@ function(mode, params) {
       }
     }
   },
-  "database-engines/postgresql.yaml": {
+  "database-engines/mariadb.yaml": {
     apiVersion: "redhatcop.redhat.io/v1alpha1",
     kind: "DatabaseSecretEngineConfig",
     metadata: {
@@ -35,7 +35,7 @@ function(mode, params) {
       authentication: {
         path: "kubernetes",
         role: "operator",
-      }
+      },
       pluginName: "mysql-database-plugin",
       allowedRoles: ["*"],
       connectionURL: "{{username}}:{{password}}@tcp(%s)/" % params.mariadb.endpoint,
