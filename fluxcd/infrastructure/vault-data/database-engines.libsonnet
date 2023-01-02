@@ -17,8 +17,10 @@ function(mode, params) {
       pluginName: "postgresql-database-plugin",
       allowedRoles: ["*"],
       connectionURL: "postgresql://{{username}}:{{password}}@%s/postgres?sslmode=require" % params.postgresql.endpoint,
-      rootCredentialsFromSecret: {
-        name: params.postgresql.passwordSecret,
+      rootCredentials: {
+        secret: {
+          name: params.postgresql.passwordSecret,
+        },
       },
       path: params.postgresql.path,
       rootPasswordRotation: {
@@ -42,8 +44,10 @@ function(mode, params) {
       pluginName: "mysql-database-plugin",
       allowedRoles: ["*"],
       connectionURL: "{{username}}:{{password}}@tcp(%s)/" % params.mariadb.endpoint,
-      rootCredentialsFromSecret: {
-        name: params.mariadb.passwordSecret,
+      rootCredentials: {
+        secret: {
+          name: params.mariadb.passwordSecret,
+        },
       },
       path: params.mariadb.path,
       rootPasswordRotation: {
