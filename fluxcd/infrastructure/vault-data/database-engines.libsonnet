@@ -18,6 +18,8 @@ function(mode, params) {
       allowedRoles: ["*"],
       connectionURL: "postgresql://{{username}}:{{password}}@%s/postgres?sslmode=require" % params.postgresql.endpoint,
       rootCredentials: {
+        usernameKey: "username",
+        passwordKey: "password",
         secret: {
           name: params.postgresql.passwordSecret,
         },
@@ -46,6 +48,8 @@ function(mode, params) {
       allowedRoles: ["*"],
       connectionURL: "{{username}}:{{password}}@tcp(%s)/" % params.mariadb.endpoint,
       rootCredentials: {
+        usernameKey: "username",
+        passwordKey: "password",
         secret: {
           name: params.mariadb.passwordSecret,
         },
