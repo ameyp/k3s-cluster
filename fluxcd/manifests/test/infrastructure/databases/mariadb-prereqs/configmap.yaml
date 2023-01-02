@@ -1,0 +1,11 @@
+{
+   "apiVersion": "v1",
+   "data": {
+      "config.cnf": "[mariadb]\nssl_cert = /certs/tls.crt\nssl_key = /certs/tls.key\n# Not required by default because vault doesn't support it.\n# https://github.com/hashicorp/vault/issues/6444\n# require_secure_transport = on\n"
+   },
+   "kind": "ConfigMap",
+   "metadata": {
+      "name": "mariadb-config",
+      "namespace": "databases"
+   }
+}
