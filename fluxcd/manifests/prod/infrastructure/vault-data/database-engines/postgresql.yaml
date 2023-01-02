@@ -17,9 +17,11 @@
       "path": "databases/postgresql",
       "pluginName": "postgresql-database-plugin",
       "rootCredentials": {
+         "passwordKey": "password",
          "secret": {
             "name": "database-vault-password"
-         }
+         },
+         "usernameKey": "username"
       },
       "rootPasswordRotation": {
          "enable": true,
