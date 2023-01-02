@@ -21,7 +21,7 @@ function(mode, params) {
     apiVersion: "redhatcop.redhat.io/v1alpha1",
     kind: "SecretEngineMount",
     metadata: {
-      name: "mariadb"
+      name: "mariadb",
       namespace: vars.vault.namespace,
     },
     spec: {
