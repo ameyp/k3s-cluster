@@ -87,4 +87,10 @@ function(mode) {
       capabilities = ["create", "update", "list", "read", "delete"]
     }
   |||),
+
+  "policies/firefly.yaml": policy("firefly", |||
+    path "databases/mariadb/static-creds/firefly" {
+      capabilities = ["read"]
+    }
+  |||),
 }
