@@ -6,7 +6,7 @@ function(mode, params) {
     apiVersion: "redhatcop.redhat.io/v1alpha1",
     kind: "DatabaseSecretEngineConfig",
     metadata: {
-      name: "postgresql",
+      name: "postgres",
       namespace: vars.vault.namespace,
     },
     spec: {
@@ -21,10 +21,10 @@ function(mode, params) {
         usernameKey: "username",
         passwordKey: "password",
         secret: {
-          name: "postgresql-initial-creds",
+          name: "postgres-initial-creds",
         },
       },
-      path: params.postgresql.path,
+      path: params.path,
       rootPasswordRotation: {
         enable: true,
         rotationPeriod: "168h", // 1 week
@@ -54,7 +54,7 @@ function(mode, params) {
           name: "immich-initial-creds",
         },
       },
-      path: params.postgresql.path,
+      path: params.path,
       rootPasswordRotation: {
         enable: true,
         rotationPeriod: "168h", // 1 week
@@ -84,7 +84,7 @@ function(mode, params) {
           name: "gitea-initial-creds",
         },
       },
-      path: params.postgresql.path,
+      path: params.path,
       rootPasswordRotation: {
         enable: true,
         rotationPeriod: "168h", // 1 week

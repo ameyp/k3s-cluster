@@ -18,12 +18,11 @@ function(mode)
   policies(mode) +
   kubernetes_roles(mode) +
   database_mounts(mode, {
+    path: databasesPath,
     postgresql: {
-      path: databasesPath,
       name: postgresqlMountName,
     },
     mariadb: {
-      path: databasesPath,
       name: mariadbMountName,
     }
   }) +
