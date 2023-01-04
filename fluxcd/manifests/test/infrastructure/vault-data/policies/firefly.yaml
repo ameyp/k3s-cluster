@@ -1,0 +1,15 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "Policy",
+   "metadata": {
+      "name": "mariadb-firefly",
+      "namespace": "vault"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "policy": "path \"databases/mariadb/static-creds/firefly\" {\n  capabilities = [\"read\"]\n}\n"
+   }
+}
