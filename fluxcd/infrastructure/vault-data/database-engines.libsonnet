@@ -21,7 +21,67 @@ function(mode, params) {
         usernameKey: "username",
         passwordKey: "password",
         secret: {
-          name: params.postgresql.passwordSecret,
+          name: "postgresql-initial-creds",
+        },
+      },
+      path: params.postgresql.path,
+      rootPasswordRotation: {
+        enable: true,
+        rotationPeriod: "168h", // 1 week
+      },
+      verifyConnection: true,
+    },
+  },
+  "database-engines/immich.yaml": {
+    apiVersion: "redhatcop.redhat.io/v1alpha1",
+    kind: "DatabaseSecretEngineConfig",
+    metadata: {
+      name: "immich",
+      namespace: vars.vault.namespace,
+    },
+    spec: {
+      authentication: {
+        path: "kubernetes",
+        role: "operator",
+      },
+      pluginName: "postgresql-database-plugin",
+      allowedRoles: ["*"],
+      connectionURL: "postgresql://{{username}}:{{password}}@%s/immich?sslmode=require" % params.postgresql.endpoint,
+      rootCredentials: {
+        usernameKey: "username",
+        passwordKey: "password",
+        secret: {
+          name: "immich-initial-creds",
+        },
+      },
+      path: params.postgresql.path,
+      rootPasswordRotation: {
+        enable: true,
+        rotationPeriod: "168h", // 1 week
+      },
+      verifyConnection: true,
+    },
+  },
+  "database-engines/immich.yaml": {
+    apiVersion: "redhatcop.redhat.io/v1alpha1",
+    kind: "DatabaseSecretEngineConfig",
+    metadata: {
+      name: "gitea",
+      namespace: vars.vault.namespace,
+    },
+    spec: {
+      authentication: {
+        path: "kubernetes",
+        role: "operator",
+      },
+      pluginName: "postgresql-database-plugin",
+      allowedRoles: ["*"],
+      connectionURL: "postgresql://{{username}}:{{password}}@%s/gitea?sslmode=require" % params.postgresql.endpoint,
+      rootCredentials: {
+        usernameKey: "username",
+        passwordKey: "password",
+        secret: {
+          name: "gitea-initial-creds",
         },
       },
       path: params.postgresql.path,
@@ -51,7 +111,7 @@ function(mode, params) {
         usernameKey: "username",
         passwordKey: "password",
         secret: {
-          name: params.mariadb.passwordSecret,
+          name: "mariadb-initial-creds",
         },
       },
       path: params.mariadb.path,
