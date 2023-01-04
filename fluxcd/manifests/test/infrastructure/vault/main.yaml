@@ -91,6 +91,13 @@
                   }
                }
             ]
+         },
+         "ui": {
+            "enabled": true,
+            "externalPort": 8200,
+            "loadBalancerIP": "192.168.1.202",
+            "serviceType": "LoadBalancer",
+            "targetPort": 8200
          }
       }
    }
@@ -224,6 +231,8 @@
          "ui": {
             "enabled": true,
             "externalPort": 8300,
+            "loadBalancerIP": "192.168.1.203",
+            "serviceType": "LoadBalancer",
             "targetPort": 8300
          }
       }
