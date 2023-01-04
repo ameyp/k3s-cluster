@@ -24,7 +24,7 @@ function(mode, params) {
           name: "postgres-initial-creds",
         },
       },
-      path: params.path,
+      path: params.postgresql.path,
       rootPasswordRotation: {
         enable: true,
         rotationPeriod: "168h", // 1 week
@@ -54,7 +54,7 @@ function(mode, params) {
           name: "immich-initial-creds",
         },
       },
-      path: params.path,
+      path: params.postgresql.path,
       rootPasswordRotation: {
         enable: true,
         rotationPeriod: "168h", // 1 week
@@ -84,7 +84,7 @@ function(mode, params) {
           name: "gitea-initial-creds",
         },
       },
-      path: params.path,
+      path: params.postgresql.path,
       rootPasswordRotation: {
         enable: true,
         rotationPeriod: "168h", // 1 week
