@@ -1,0 +1,16 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "SecretEngineMount",
+   "metadata": {
+      "name": "immich",
+      "namespace": "vault"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "path": "databases",
+      "type": "database"
+   }
+}
