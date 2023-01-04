@@ -261,16 +261,13 @@
             "name": "infra-configs-certs"
          },
          {
-            "name": "infra-configs-traefik"
+            "name": "infra-configs-metallb"
          },
          {
             "name": "infra-configs-longhorn"
          },
          {
             "name": "infra-configs-vault"
-         },
-         {
-            "name": "infra-configs-vault-initializers"
          }
       ],
       "interval": "10m",
