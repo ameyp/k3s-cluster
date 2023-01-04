@@ -19,7 +19,7 @@
       "rootCredentials": {
          "passwordKey": "password",
          "secret": {
-            "name": "database-vault-password"
+            "name": "postgresql-initial-creds"
          },
          "usernameKey": "username"
       },

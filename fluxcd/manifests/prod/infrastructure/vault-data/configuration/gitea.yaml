@@ -1,0 +1,14 @@
+{
+   "apiVersion": "v1",
+   "data": { },
+   "kind": "Secret",
+   "metadata": {
+      "name": "gitea-initial-creds",
+      "namespace": "vault"
+   },
+   "stringData": {
+      "password": "giteapassword",
+      "username": "gitea"
+   },
+   "type": "kubernetes.io/basic-auth"
+}

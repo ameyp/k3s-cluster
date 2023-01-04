@@ -2,7 +2,7 @@
    "apiVersion": "redhatcop.redhat.io/v1alpha1",
    "kind": "DatabaseSecretEngineConfig",
    "metadata": {
-      "name": "postgresql",
+      "name": "gitea",
       "namespace": "vault"
    },
    "spec": {
@@ -13,13 +13,13 @@
          "path": "kubernetes",
          "role": "operator"
       },
-      "connectionURL": "postgresql://{{username}}:{{password}}@postgresql.test.wirywolf.com/postgres?sslmode=require",
+      "connectionURL": "postgresql://{{username}}:{{password}}@postgresql.wirywolf.com/gitea?sslmode=require",
       "path": "databases/postgresql",
       "pluginName": "postgresql-database-plugin",
       "rootCredentials": {
          "passwordKey": "password",
          "secret": {
-            "name": "postgresql-initial-creds"
+            "name": "gitea-initial-creds"
          },
          "usernameKey": "username"
       },

@@ -3,12 +3,12 @@
    "data": { },
    "kind": "Secret",
    "metadata": {
-      "name": "database-vault-password",
+      "name": "immich-initial-creds",
       "namespace": "vault"
    },
    "stringData": {
-      "password": "vaultpassword",
-      "username": "vault"
+      "password": "immichpassword",
+      "username": "immich"
    },
    "type": "kubernetes.io/basic-auth"
 }
