@@ -69,7 +69,7 @@
                   "env": [
                      {
                         "name": "VAULT_ADDR",
-                        "value": "https://vault.vault.svc"
+                        "value": "https://vault.vault.svc:8200"
                      },
                      {
                         "name": "VAULT_CACERT",
