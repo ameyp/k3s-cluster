@@ -3,6 +3,4 @@ local main_ingress = import './main-ingress.libsonnet';
 local unsealer_ingress = import './unsealer-ingress.libsonnet';
 
 function(mode='test')
-  agent_autounseal_configmap(mode) +
-  main_ingress(mode) +
-  unsealer_ingress(mode)
+  agent_autounseal_configmap(mode)
