@@ -18,6 +18,8 @@ function(mode='test') [
         name: "infra-configs-longhorn"
       }, {
         name: "infra-configs-vault"
+      }, {
+        name: "infra-configs-vault-initializers"
       }],
       interval: "10m",
       targetNamespace: vars.flux.namespace,
@@ -27,7 +29,7 @@ function(mode='test') [
       },
       path: "./fluxcd/manifests/%s/infrastructure/vault" % mode,
       prune: true,
-      wait: false,
+      wait: true,
     }
   })
 ]

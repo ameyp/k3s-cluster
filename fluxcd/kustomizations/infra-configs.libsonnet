@@ -55,15 +55,16 @@ function(mode) [
         name: "infra-configs-certs"
       }, {
         name: "infra-configs-traefik"
-      }]
+      }],
     }
   }),
   kustomization({
     metadata: metadata("vault-initializers"),
     spec: spec("vault-initializers", mode) + {
       dependsOn: [{
-        name: "infra-vault"
-      }]
+        name: "infra-configs-certs"
+      }],
+      wait: false,
     }
   }),
 ]
