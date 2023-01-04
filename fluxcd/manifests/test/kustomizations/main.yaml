@@ -179,7 +179,7 @@
    "spec": {
       "dependsOn": [
          {
-            "name": "infra-vault"
+            "name": "infra-configs-certs"
          }
       ],
       "interval": "10m",
@@ -189,7 +189,7 @@
          "kind": "GitRepository",
          "name": "k3s-cluster-deploy"
       },
-      "wait": true
+      "wait": false
    }
 }
 ---
@@ -268,6 +268,9 @@
          },
          {
             "name": "infra-configs-vault"
+         },
+         {
+            "name": "infra-configs-vault-initializers"
          }
       ],
       "interval": "10m",
@@ -278,7 +281,7 @@
          "name": "k3s-cluster-deploy"
       },
       "targetNamespace": "flux-system",
-      "wait": false
+      "wait": true
    }
 }
 ---
