@@ -14,7 +14,7 @@
          "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}' SUPERUSER;"
       ],
       "dBName": "postgres",
-      "maxTTL": 120,
+      "maxTTL": "20m",
       "path": "databases/postgresql"
    }
 }
