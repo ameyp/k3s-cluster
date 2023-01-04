@@ -83,6 +83,8 @@ function(mode, params) {
       dBName: "mariadb",
       username: "firefly",
       rotationPeriod: 86400,
-    }
+      credentialType: "password",
+      passwordCredentialConfig: {}
+    },
   },
 }
