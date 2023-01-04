@@ -107,7 +107,7 @@ function(mode) {
   |||),
 
   "policies/postgresql-backups.yaml": policy("postgresql-backups", |||
-    path "databases/postgresql/static-creds/gitea" {
+    path "databases/postgresql/creds/postgresql-backups" {
       capabilities = ["read"]
     }
   |||),
