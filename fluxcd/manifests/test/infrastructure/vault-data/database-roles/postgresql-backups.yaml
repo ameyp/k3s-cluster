@@ -1,0 +1,20 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "DatabaseSecretEngineRole",
+   "metadata": {
+      "name": "postgresql-backups",
+      "namespace": "vault"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "creationStatements": [
+         "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}' SUPERUSER;"
+      ],
+      "dBName": "postgres",
+      "maxTtl": 120,
+      "path": "databases/postgresql"
+   }
+}

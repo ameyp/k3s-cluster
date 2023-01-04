@@ -1,0 +1,23 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "DatabaseSecretEngineStaticRole",
+   "metadata": {
+      "name": "gitea",
+      "namespace": "vault"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "credentialType": "password",
+      "dBName": "gitea",
+      "passwordCredentialConfig": { },
+      "path": "databases/postgresql",
+      "rotationPeriod": 86400,
+      "rotationStatements": [
+         "ALTER USER \"{{name}}\" WITH PASSWORD '{{password}}';"
+      ],
+      "username": "gitea"
+   }
+}

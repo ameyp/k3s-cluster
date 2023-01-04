@@ -3,7 +3,7 @@
    "data": { },
    "kind": "Secret",
    "metadata": {
-      "name": "postgresql-initial-creds",
+      "name": "postgres-initial-creds",
       "namespace": "vault"
    },
    "stringData": {

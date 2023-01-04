@@ -1,0 +1,18 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "DatabaseSecretEngineStaticRole",
+   "metadata": {
+      "name": "firefly",
+      "namespace": "vault"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "dBName": "mariadb",
+      "path": "databases/mariadb",
+      "rotationPeriod": 86400,
+      "username": "firefly"
+   }
+}
