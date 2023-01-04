@@ -18,7 +18,7 @@ function(mode, params) {
       creationStatements: [
         "CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}' SUPERUSER;"
       ],
-      maxTTL: 120,
+      maxTTL: "20m",
     }
   },
   "database-roles/postgresql-immich.yaml": {
