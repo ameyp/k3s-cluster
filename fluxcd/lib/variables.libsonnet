@@ -57,7 +57,7 @@
         port: 8200,
       },
       loadBalancerIP: '192.168.80.2',
-      testLoadBalancerIP: '192.168.1.202',
+      testLoadBalancerIP: '192.168.1.208',
     },
     main: {
       ingress: {
@@ -67,7 +67,7 @@
       internalCertSecret: 'vault-internal-tls-secret',
       configFilePath: '/vault/secrets/server-config',
       loadBalancerIP: '192.168.80.3',
-      testLoadBalancerIP: '192.168.1.203',
+      testLoadBalancerIP: '192.168.1.209',
     },
   },
   kured: {
