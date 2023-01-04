@@ -88,8 +88,26 @@ function(mode) {
     }
   |||),
 
-  "policies/firefly.yaml": policy("mariadb-firefly", |||
+  "policies/mariadb-firefly.yaml": policy("mariadb-firefly", |||
     path "databases/mariadb/static-creds/firefly" {
+      capabilities = ["read"]
+    }
+  |||),
+
+  "policies/postgresql-immich.yaml": policy("postgresql-immich", |||
+    path "databases/postgresql/static-creds/firefly" {
+      capabilities = ["read"]
+    }
+  |||),
+
+  "policies/postgresql-gitea.yaml": policy("postgresql-gitea", |||
+    path "databases/postgresql/static-creds/gitea" {
+      capabilities = ["read"]
+    }
+  |||),
+
+  "policies/postgresql-backups.yaml": policy("postgresql-backups", |||
+    path "databases/postgresql/static-creds/gitea" {
       capabilities = ["read"]
     }
   |||),
