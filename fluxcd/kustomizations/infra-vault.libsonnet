@@ -27,7 +27,7 @@ function(mode='test') [
       },
       path: "./fluxcd/manifests/%s/infrastructure/vault" % mode,
       prune: true,
-      wait: true,
+      wait: false,
     }
   })
 ]
