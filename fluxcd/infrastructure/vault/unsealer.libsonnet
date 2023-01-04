@@ -32,7 +32,7 @@ function(mode='test') {
       },
       ui: {
         enabled: true,
-        externalPort: vars.vault.unsealer.ingress.port,
+        externalPort: 443,
         targetPort: vars.vault.unsealer.ingress.port,
         serviceType: "LoadBalancer",
         loadBalancerIP: if mode == "test" then vars.vault.unsealer.testLoadBalancerIP else vars.vault.unsealer.loadBalancerIP,

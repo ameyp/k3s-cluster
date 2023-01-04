@@ -35,7 +35,7 @@ function(mode='test') {
       },
       ui: {
         enabled: true,
-        externalPort: vars.vault.main.ingress.port,
+        externalPort: 443,
         targetPort: vars.vault.main.ingress.port,
         serviceType: "LoadBalancer",
         loadBalancerIP: if mode == "test" then vars.vault.main.testLoadBalancerIP else vars.vault.main.loadBalancerIP,
