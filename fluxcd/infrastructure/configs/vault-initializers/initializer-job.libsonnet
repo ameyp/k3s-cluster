@@ -11,7 +11,7 @@ local volumeMount = k.core.v1.volumeMount;
 local volumeName = "vault-tls-web";
 local certName = "tls.crt";
 
-function(name, addr, args)
+function(name, addr, args, secretName)
   job.new(name) +
   job.metadata.withNamespace("vault") +
   jobSpec.withServiceAccountName(vars.vault.initializer.service_account) +
@@ -28,5 +28,5 @@ function(name, addr, args)
     ])
   ]) +
   jobSpec.withVolumes([
-    volume.fromSecret(volumeName, vars.cluster.wildcard_cert_secret)
+    volume.fromSecret(volumeName, secretName)
   ])

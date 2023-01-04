@@ -47,6 +47,8 @@ function(mode='test') [{
   spec: {
     dnsNames: [
       "*.vault-internal",
+      "vault.vault.svc",
+      "vault.vault.svc.cluster.local",
     ],
     ipAddresses: [
       "127.0.0.1",

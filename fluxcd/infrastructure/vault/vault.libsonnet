@@ -39,6 +39,10 @@ function(mode='test') {
         targetPort: vars.vault.main.ingress.port,
         serviceType: "LoadBalancer",
         loadBalancerIP: if mode == "test" then vars.vault.main.testLoadBalancerIP else vars.vault.main.loadBalancerIP,
+        # This is necessary because requests to not-ready pods return a redirect to the api_addr of the cluster,
+        # which is https://<active pod internal ip>:8200, which doesn't work with the LetsEncrypt cert.
+        # This causes requests to occasionally fail with cert errors.
+        activeVaultPodOnly: true,
       },
       server: {
         extraArgs: "-config=/vault/secrets/server-config",
