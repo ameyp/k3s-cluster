@@ -38,7 +38,7 @@ function(mode, params) {
       username: "immich",
       rotationPeriod: 86400,
       rotationStatements: [
-        - "ALTER USER \"{{name}}\" WITH PASSWORD '{{password}}';"
+        "ALTER USER \"{{name}}\" WITH PASSWORD '{{password}}';"
       ],
     }
   },
@@ -59,7 +59,7 @@ function(mode, params) {
       username: "gitea",
       rotationPeriod: 86400,
       rotationStatements: [
-        - "ALTER USER \"{{name}}\" WITH PASSWORD '{{password}}';"
+        "ALTER USER \"{{name}}\" WITH PASSWORD '{{password}}';"
       ],
     }
   },
