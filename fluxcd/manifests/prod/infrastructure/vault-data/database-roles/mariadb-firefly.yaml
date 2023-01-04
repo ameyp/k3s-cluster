@@ -10,7 +10,9 @@
          "path": "kubernetes",
          "role": "operator"
       },
+      "credentialType": "password",
       "dBName": "mariadb",
+      "passwordCredentialConfig": { },
       "path": "databases/mariadb",
       "rotationPeriod": 86400,
       "username": "firefly"
