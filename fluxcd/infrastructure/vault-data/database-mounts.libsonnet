@@ -14,7 +14,7 @@ function(mode, params) {
         role: "operator",
       },
       type: "database",
-      path: params.postgresql.path
+      path: params.path
     }
   },
   "database-mounts/mariadb.yaml": {
@@ -30,7 +30,7 @@ function(mode, params) {
         role: "operator",
       },
       type: "database",
-      path: params.mariadb.path
+      path: params.path
     }
   }
 }
