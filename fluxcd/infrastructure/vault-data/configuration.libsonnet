@@ -5,7 +5,7 @@ local secret = k.core.v1.secret;
 function(mode) {
   "configuration/postgresql.yaml":
     // Create the secret containing the initial admin password
-    secret.new("postgresql-initial-creds", {}) +
+    secret.new("postgres-initial-creds", {}) +
     secret.metadata.withNamespace(vars.vault.namespace) +
     secret.withType("kubernetes.io/basic-auth") +
     secret.withStringData({

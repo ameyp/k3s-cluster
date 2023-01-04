@@ -35,4 +35,12 @@ function(mode)
       path: "%s/%s" % [databasesPath, mariadbMountName],
       endpoint: wirywolf.get_endpoint(vars.databases.mariadb.subdomain, mode),
     }
+  }) +
+  database_roles(mode, {
+    postgresql: {
+      path: "%s/%s" % [databasesPath, postgresqlMountName],
+    },
+    mariadb: {
+      path: "%s/%s" % [databasesPath, mariadbMountName],
+    }
   })
