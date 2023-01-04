@@ -40,6 +40,8 @@ function(mode, params) {
       rotationStatements: [
         "ALTER USER \"{{name}}\" WITH PASSWORD '{{password}}';"
       ],
+      credentialType: "password",
+      passwordCredentialConfig: {}
     }
   },
   "database-roles/postgresql-gitea.yaml": {
@@ -61,6 +63,8 @@ function(mode, params) {
       rotationStatements: [
         "ALTER USER \"{{name}}\" WITH PASSWORD '{{password}}';"
       ],
+      credentialType: "password",
+      passwordCredentialConfig: {}
     }
   },
   "database-roles/mariadb-firefly.yaml": {
