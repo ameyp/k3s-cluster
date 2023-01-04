@@ -88,7 +88,7 @@ function(mode) {
     }
   |||),
 
-  "policies/firefly.yaml": policy("firefly", |||
+  "policies/firefly.yaml": policy("mariadb-firefly", |||
     path "databases/mariadb/static-creds/firefly" {
       capabilities = ["read"]
     }
