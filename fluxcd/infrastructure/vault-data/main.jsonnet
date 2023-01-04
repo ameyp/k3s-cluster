@@ -7,6 +7,7 @@ local policies = import "./policies.libsonnet";
 local kubernetes_roles = import "./kubernetes_roles.libsonnet";
 local database_mounts = import "./database-mounts.libsonnet";
 local database_engines = import "./database-engines.libsonnet";
+local database_roles = import "./database-roles.libsonnet";
 
 local databasesPath = "databases";
 local postgresqlMountName = "postgresql";
