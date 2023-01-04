@@ -62,7 +62,7 @@ function(mode, params) {
       verifyConnection: true,
     },
   },
-  "database-engines/immich.yaml": {
+  "database-engines/gitea.yaml": {
     apiVersion: "redhatcop.redhat.io/v1alpha1",
     kind: "DatabaseSecretEngineConfig",
     metadata: {
