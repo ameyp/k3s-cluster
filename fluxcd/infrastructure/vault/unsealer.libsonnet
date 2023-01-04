@@ -30,6 +30,13 @@ function(mode='test') {
       global: {
         tlsDisable: false
       },
+      ui: {
+        enabled: true,
+        externalPort: vars.vault.unsealer.ingress.port,
+        targetPort: vars.vault.unsealer.ingress.port,
+        serviceType: "LoadBalancer",
+        loadBalancerIP: if mode == "test" then vars.vault.unsealer.testLoadBalancerIP else vars.vault.unsealer.loadBalancerIP,
+      },
       server: {
         // logLevel: "trace"
         standalone: {
