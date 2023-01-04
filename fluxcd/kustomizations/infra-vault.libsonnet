@@ -13,8 +13,6 @@ function(mode='test') [
       dependsOn: [{
         name: "infra-configs-certs"
       }, {
-        name: "infra-configs-traefik"
-      }, {
         name: "infra-configs-longhorn"
       }, {
         name: "infra-configs-vault"
