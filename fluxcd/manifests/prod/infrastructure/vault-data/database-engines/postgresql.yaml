@@ -2,7 +2,7 @@
    "apiVersion": "redhatcop.redhat.io/v1alpha1",
    "kind": "DatabaseSecretEngineConfig",
    "metadata": {
-      "name": "postgresql",
+      "name": "postgres",
       "namespace": "vault"
    },
    "spec": {
@@ -19,7 +19,7 @@
       "rootCredentials": {
          "passwordKey": "password",
          "secret": {
-            "name": "postgresql-initial-creds"
+            "name": "postgres-initial-creds"
          },
          "usernameKey": "username"
       },
