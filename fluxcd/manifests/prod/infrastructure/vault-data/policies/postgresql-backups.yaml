@@ -10,6 +10,6 @@
          "path": "kubernetes",
          "role": "operator"
       },
-      "policy": "path \"databases/postgresql/static-creds/gitea\" {\n  capabilities = [\"read\"]\n}\n"
+      "policy": "path \"databases/postgresql/creds/postgresql-backups\" {\n  capabilities = [\"read\"]\n}\n"
    }
 }
