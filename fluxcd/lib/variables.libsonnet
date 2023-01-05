@@ -100,5 +100,11 @@
   },
   firefly: {
     namespace: "firefly",
-  }
+  },
+  gitea: {
+    namespace: "gitea",
+  },
+  immich: {
+    namespace: "immich",
+  },
 }
