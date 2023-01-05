@@ -98,4 +98,7 @@
       },
     }
   },
+  firefly: {
+    namespace: "firefly",
+  }
 }
