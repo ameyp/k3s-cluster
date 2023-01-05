@@ -1,0 +1,35 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "KubernetesAuthEngineRole",
+   "metadata": {
+      "name": "nfs-backups",
+      "namespace": "vault"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "path": "kubernetes",
+      "policies": [
+         "vault-snapshot",
+         "create-backups",
+         "postgresql-backups"
+      ],
+      "targetNamespaces": {
+         "targetNamespaces": [
+            "immich",
+            "vault",
+            "audiobookshelf",
+            "media",
+            "syncthing",
+            "firefly",
+            "postgresql",
+            "gitea"
+         ]
+      },
+      "targetServiceAccounts": [
+         "default"
+      ]
+   }
+}

@@ -1,0 +1,27 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "KubernetesAuthEngineRole",
+   "metadata": {
+      "name": "firefly",
+      "namespace": "vault"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "path": "kubernetes",
+      "policies": [
+         "mariadb-firefly",
+         "allow-tokens"
+      ],
+      "targetNamespaces": {
+         "targetNamespaces": [
+            "firefly"
+         ]
+      },
+      "targetServiceAccounts": [
+         "default"
+      ]
+   }
+}

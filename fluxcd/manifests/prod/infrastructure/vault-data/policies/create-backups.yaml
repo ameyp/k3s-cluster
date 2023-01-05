@@ -1,0 +1,15 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "Policy",
+   "metadata": {
+      "name": "create-backups",
+      "namespace": "vault"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "policy": "path \"tokens/data/restic\" {\n  capabilities = [\"read\"]\n}\npath \"tokens/data/backblaze/*\" {\n  capabilities = [\"read\", \"list\"]\n}\n"
+   }
+}

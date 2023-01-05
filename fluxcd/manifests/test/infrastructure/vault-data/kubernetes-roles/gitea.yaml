@@ -1,0 +1,28 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "KubernetesAuthEngineRole",
+   "metadata": {
+      "name": "gitea",
+      "namespace": "vault"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "path": "kubernetes",
+      "policies": [
+         "postgresql-gitea",
+         "allow-tokens",
+         "allow-logins"
+      ],
+      "targetNamespaces": {
+         "targetNamespaces": [
+            "gitea"
+         ]
+      },
+      "targetServiceAccounts": [
+         "default"
+      ]
+   }
+}

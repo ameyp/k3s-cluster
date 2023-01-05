@@ -1,0 +1,15 @@
+{
+   "apiVersion": "redhatcop.redhat.io/v1alpha1",
+   "kind": "Policy",
+   "metadata": {
+      "name": "vault-snapshot",
+      "namespace": "vault"
+   },
+   "spec": {
+      "authentication": {
+         "path": "kubernetes",
+         "role": "operator"
+      },
+      "policy": "path \"sys/storage/raft/snapshot\" {\n  capabilities = [\"read\"]\n}\n"
+   }
+}
