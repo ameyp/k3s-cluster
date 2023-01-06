@@ -44,6 +44,9 @@ function(mode='test') [{
             tls_key_file = "/vault-tls-web/tls.key"
             address = "[::]:8300"
             cluster_address = "[::]:8301"
+            telemetry {
+              unauthenticated_metrics_access = "true"
+            }
           }
           seal "transit" {
             address = "%(unsealerEndpoint)s"
@@ -71,6 +74,10 @@ function(mode='test') [{
             }
           }
           service_registration "kubernetes" {}
+          telemetry {
+            prometheus_retention_time = "30s",
+            disable_hostname = true
+          }
           EOT
       }
     ||| % {

@@ -120,6 +120,14 @@ function(mode='test') {
             }
           }
         }
+      },
+      serverTelemetry: {
+        serviceMonitor: {
+          enabled: true,
+          selectors: {
+            release: vars.monitoring.prometheus_stack_name,
+          }
+        }
       }
     }, if mode == 'test' then {
       injector: {
