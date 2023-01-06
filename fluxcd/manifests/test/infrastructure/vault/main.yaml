@@ -228,6 +228,14 @@
                }
             ]
          },
+         "serverTelemetry": {
+            "serviceMonitor": {
+               "enabled": true,
+               "selectors": {
+                  "release": "prometheus-stack"
+               }
+            }
+         },
          "ui": {
             "activeVaultPodOnly": true,
             "enabled": true,
