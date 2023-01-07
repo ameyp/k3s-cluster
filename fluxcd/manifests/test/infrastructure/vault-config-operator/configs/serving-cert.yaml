@@ -1,0 +1,19 @@
+{
+   "apiVersion": "cert-manager.io/v1",
+   "kind": "Certificate",
+   "metadata": {
+      "name": "serving-cert",
+      "namespace": "vault"
+   },
+   "spec": {
+      "dnsNames": [
+         "vault-config-operator-webhook-service.vault.svc",
+         "vault-config-operator-webhook-service.vault.svc.cluster.local"
+      ],
+      "issuerRef": {
+         "kind": "ClusterIssuer",
+         "name": "selfsigned"
+      },
+      "secretName": "webhook-server-cert"
+   }
+}
