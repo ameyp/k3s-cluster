@@ -24,17 +24,17 @@ local role = function(name, params) {
 };
 
 function(mode)
-  role("operator", std.mergePatch({
+  std.mergePatch(role("operator", {
     policies: ["operator"],
     serviceAccounts: ["default"],
     namespaces: [vars.vault.namespace]
-  }, {
+  }), {
     spec: {
       # Necessary because of https://github.com/redhat-cop/vault-config-operator/issues/103
       tokenMaxTTL: 120,
       tokenTTL: 120,
     }
-  })) +
+  }) +
   role("media", {
     policies: ["media"],
     serviceAccounts: ["default"],
