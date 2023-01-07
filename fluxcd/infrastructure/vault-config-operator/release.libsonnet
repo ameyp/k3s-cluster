@@ -29,44 +29,40 @@ function(mode) {
       },
     }
   }),
-  "release/kustomization.yaml": wirywolf.kustomization.new({
-    metadata: {
-      name: "vault-config-operator-patches",
-      namespace: vars.vault.namespace,
-    },
-    spec: {
-      resources: ["repo.yaml", "release.yaml"],
-      patches: [{
-        target: {
-          kind: "Deployment",
-          labelSelector: "app.kubernetes.io/name=vault-config-operator"
-        },
-        patch: [{
-          op: "add",
-          path: "/spec/template/spec/volumes",
-          value: {
-            name: "vault-tls-certs",
-            secret: {
-              secretName: vars.cluster.wildcard_cert_secret
-            }
+  "release/kustomization.yaml": {
+    apiVersion: "kustomize.config.k8s.io/v1beta1",
+    kind: "Kustomization",
+    resources: ["repo.yaml", "release.yaml"],
+    patches: [{
+      target: {
+        kind: "Deployment",
+        labelSelector: "app.kubernetes.io/name=vault-config-operator"
+      },
+      patch: [{
+        op: "add",
+        path: "/spec/template/spec/volumes",
+        value: {
+          name: "vault-tls-certs",
+          secret: {
+            secretName: vars.cluster.wildcard_cert_secret
           }
-        }, {
-          op: "add",
-          path: "/spec/template/spec/containers/1/volumeMounts",
-          value: {
-            name: "vault-tls-certs",
-            mountPath: "/vault-tls",
-          }
-        }, {
-          op: "add",
-          path: "/spec/template/spec/containers/1/env",
-          value: {
-            name: "VAULT_CACERT",
-            value: "/vault-tls/tls.crt",
-          }
-        }]
+        }
+      }, {
+        op: "add",
+        path: "/spec/template/spec/containers/1/volumeMounts",
+        value: {
+          name: "vault-tls-certs",
+          mountPath: "/vault-tls",
+        }
+      }, {
+        op: "add",
+        path: "/spec/template/spec/containers/1/env",
+        value: {
+          name: "VAULT_CACERT",
+          value: "/vault-tls/tls.crt",
+        }
       }]
-    }
-  })
+    }]
+  }
 }
 
