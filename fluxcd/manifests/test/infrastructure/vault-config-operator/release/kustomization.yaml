@@ -3,44 +3,21 @@
    "kind": "Kustomization",
    "patches": [
       {
-         "patch": {
-            "op": "add",
-            "path": "/spec/template/spec/volumes",
-            "value": {
-               "name": "vault-tls-certs",
-               "secret": {
-                  "secretName": "wildcard-tls-secret"
-               }
-            }
-         },
+         "patch": "op: \"add\",\npath: \"/spec/template/spec/volumes\",\nvalue: {\n  name: \"vault-tls-certs\",\n  secret: {\n    secretName: vars.cluster.wildcard_cert_secret\n  }\n}\n",
          "target": {
             "kind": "Deployment",
             "labelSelector": "app.kubernetes.io/name=vault-config-operator"
          }
       },
       {
-         "patch": {
-            "op": "add",
-            "path": "/spec/template/spec/containers/1/volumeMounts",
-            "value": {
-               "mountPath": "/vault-tls",
-               "name": "vault-tls-certs"
-            }
-         },
+         "patch": "op: \"add\",\npath: \"/spec/template/spec/containers/1/volumeMounts\",\nvalue: {\n  name: \"vault-tls-certs\",\n  mountPath: \"/vault-tls\",\n}\n",
          "target": {
             "kind": "Deployment",
             "labelSelector": "app.kubernetes.io/name=vault-config-operator"
          }
       },
       {
-         "patch": {
-            "op": "add",
-            "path": "/spec/template/spec/containers/1/env",
-            "value": {
-               "name": "VAULT_CACERT",
-               "value": "/vault-tls/tls.crt"
-            }
-         },
+         "patch": "op: \"add\",\npath: \"/spec/template/spec/containers/1/env\",\nvalue: {\n  name: \"VAULT_CACERT\",\n  value: \"/vault-tls/tls.crt\",\n}\n",
          "target": {
             "kind": "Deployment",
             "labelSelector": "app.kubernetes.io/name=vault-config-operator"
