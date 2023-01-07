@@ -296,7 +296,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./fluxcd/manifests/test/infrastructure/vault-config-operator",
+      "path": "./fluxcd/manifests/test/infrastructure/vault-config-operator/kustomizations",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
