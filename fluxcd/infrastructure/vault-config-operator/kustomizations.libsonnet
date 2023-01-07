@@ -25,6 +25,9 @@ function(mode) {
       namespace: vars.flux.namespace,
     },
     spec: {
+      dependsOn: [{
+        name: "vault-config-operator-configuration"
+      }],
       interval: "10m",
       sourceRef: {
         kind: "GitRepository",

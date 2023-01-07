@@ -3,7 +3,7 @@ local vars = import 'variables.libsonnet';
 local wirywolf = import 'wirywolf.libsonnet';
 
 function(mode) {
-  "configs/serving-cert.yaml": {
+  "configuration/serving-cert.yaml": {
     apiVersion: "cert-manager.io/v1",
     kind: "Certificate",
     metadata: {
@@ -24,7 +24,7 @@ function(mode) {
       secretName: "webhook-server-cert",
     },
   },
-  "configs/metrics-cert.yaml": {
+  "configuration/metrics-cert.yaml": {
     apiVersion: "cert-manager.io/v1",
     kind: "Certificate",
     metadata: {
