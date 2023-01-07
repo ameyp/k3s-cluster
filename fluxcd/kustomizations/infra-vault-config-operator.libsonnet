@@ -18,7 +18,7 @@ function(mode='test') [
         kind: "GitRepository",
         name: "k3s-cluster-deploy",
       },
-      path: "./fluxcd/manifests/%s/infrastructure/vault-config-operator" % mode,
+      path: "./fluxcd/manifests/%s/infrastructure/vault-config-operator/kustomizations" % mode,
       prune: true,
       wait: true,
     }
