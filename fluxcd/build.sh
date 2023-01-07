@@ -36,8 +36,8 @@ for mode in test prod; do
     # Vault
     jsonnet_export $mode infrastructure/vault/main.jsonnet \
                    manifests/${mode}/infrastructure/vault
-    jsonnet_export $mode infrastructure/vault-config-operator/main.jsonnet \
-                   manifests/${mode}/infrastructure/vault-config-operator
+    jsonnet_export_multi $mode infrastructure/vault-config-operator/main.jsonnet \
+                         manifests/${mode}/infrastructure/vault-config-operator
 
     # Traefik
     jsonnet_export $mode infrastructure/traefik/main.jsonnet \
