@@ -38,7 +38,7 @@ function(mode) {
         kind: "Deployment",
         labelSelector: "app.kubernetes.io/name=vault-config-operator"
       },
-      patch: [{
+      patch: {
         op: "add",
         path: "/spec/template/spec/volumes",
         value: {
@@ -47,21 +47,33 @@ function(mode) {
             secretName: vars.cluster.wildcard_cert_secret
           }
         }
-      }, {
+      }
+    }, {
+      target: {
+        kind: "Deployment",
+        labelSelector: "app.kubernetes.io/name=vault-config-operator"
+      },
+      patch: {
         op: "add",
         path: "/spec/template/spec/containers/1/volumeMounts",
         value: {
           name: "vault-tls-certs",
           mountPath: "/vault-tls",
         }
-      }, {
+      }
+    }, {
+      target: {
+        kind: "Deployment",
+        labelSelector: "app.kubernetes.io/name=vault-config-operator"
+      },
+      patch: {
         op: "add",
         path: "/spec/template/spec/containers/1/env",
         value: {
           name: "VAULT_CACERT",
           value: "/vault-tls/tls.crt",
         }
-      }]
+      },
     }]
   }
 }
