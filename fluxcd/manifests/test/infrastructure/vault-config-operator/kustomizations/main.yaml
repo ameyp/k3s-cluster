@@ -6,6 +6,11 @@
       "namespace": "flux-system"
    },
    "spec": {
+      "dependsOn": [
+         {
+            "name": "vault-config-operator-configuration"
+         }
+      ],
       "interval": "10m",
       "path": "./fluxcd/manifests/test/infrastructure/vault-config-operator/main",
       "prune": true,
