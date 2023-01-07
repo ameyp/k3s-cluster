@@ -12,7 +12,7 @@
          }
       ],
       "interval": "10m",
-      "path": "./fluxcd/manifests/test/infrastructure/vault-config-operator/main",
+      "path": "./fluxcd/manifests/test/infrastructure/vault-config-operator/release",
       "prune": true,
       "sourceRef": {
          "kind": "GitRepository",
