@@ -1,10 +1,9 @@
 local vars = import "variables.libsonnet";
 local wirywolf = import "wirywolf.libsonnet";
-local kustomization = wirywolf.kustomization.new;
 
 function(mode) {
-  "main/repo.yaml": wirywolf.helmRepository.new("vault-config-operator", "https://redhat-cop.github.io/vault-config-operator"),
-  "main/release.yaml": wirywolf.helmRelease.new({
+  "release/repo.yaml": wirywolf.helmRepository.new("vault-config-operator", "https://redhat-cop.github.io/vault-config-operator"),
+  "release/release.yaml": wirywolf.helmRelease.new({
     name: "vault-config-operator",
     spec: {
       targetNamespace: vars.vault.namespace,
@@ -28,6 +27,45 @@ function(mode) {
           value: wirywolf.get_vault_address(mode)
         }]
       },
+    }
+  }),
+  "release/kustomization.yaml": wirywolf.kustomization.new({
+    metadata: {
+      name: "vault-config-operator-patches",
+      namespace: vars.vault.namespace,
+    },
+    spec: {
+      resources: ["repo.yaml", "release.yaml"],
+      patches: [{
+        target: {
+          kind: "Deployment",
+          labelSelector: "app.kubernetes.io/name=vault-config-operator"
+        },
+        patch: [{
+          op: "add",
+          path: "/spec/template/spec/volumes",
+          value: {
+            name: "vault-tls-certs",
+            secret: {
+              secretName: vars.cluster.wildcard_cert_secret
+            }
+          }
+        }, {
+          op: "add",
+          path: "/spec/template/spec/containers/1/volumeMounts",
+          value: {
+            name: "vault-tls-certs",
+            mountPath: "/vault-tls",
+          }
+        }, {
+          op: "add",
+          path: "/spec/template/spec/containers/1/env",
+          value: {
+            name: "VAULT_CACERT",
+            value: "/vault-tls/tls.crt",
+          }
+        }]
+      }]
     }
   })
 }

@@ -19,7 +19,7 @@ function(mode) {
       wait: true,
     }
   }),
-  "kustomizations/main.yaml": kustomization({
+  "kustomizations/release.yaml": kustomization({
     metadata: {
       name: "vault-config-operator",
       namespace: vars.flux.namespace,
@@ -33,7 +33,7 @@ function(mode) {
         kind: "GitRepository",
         name: "k3s-cluster-deploy",
       },
-      path: "./fluxcd/manifests/%s/infrastructure/vault-config-operator/main" % mode,
+      path: "./fluxcd/manifests/%s/infrastructure/vault-config-operator/release" % mode,
       prune: true,
       wait: true,
     }
