@@ -28,34 +28,28 @@
                         {
                            "op": "add",
                            "path": "/spec/template/spec/volumes/-",
-                           "value": [
-                              {
-                                 "name": "vault-tls-certs",
-                                 "secret": {
-                                    "secretName": "wildcard-tls-secret"
-                                 }
+                           "value": {
+                              "name": "vault-tls-certs",
+                              "secret": {
+                                 "secretName": "wildcard-tls-secret"
                               }
-                           ]
+                           }
                         },
                         {
                            "op": "add",
                            "path": "/spec/template/spec/containers/1/volumeMounts/-",
-                           "value": [
-                              {
-                                 "mountPath": "/vault-tls",
-                                 "name": "vault-tls-certs"
-                              }
-                           ]
+                           "value": {
+                              "mountPath": "/vault-tls",
+                              "name": "vault-tls-certs"
+                           }
                         },
                         {
                            "op": "add",
                            "path": "/spec/template/spec/containers/1/env/-",
-                           "value": [
-                              {
-                                 "name": "VAULT_CACERT",
-                                 "value": "/vault-tls/tls.crt"
-                              }
-                           ]
+                           "value": {
+                              "name": "VAULT_CACERT",
+                              "value": "/vault-tls/tls.crt"
+                           }
                         }
                      ],
                      "target": {
