@@ -27,6 +27,41 @@ function(mode) {
           value: wirywolf.get_vault_address(mode)
         }]
       },
+      postRenderers: [{
+        kustomize: {
+          patchesJson6902: [{
+            target: {
+              version: "v1",
+              kind: "Deployment",
+              name: "vault-config-operator",
+            },
+            patch: [{
+              op: "add",
+              path: "/spec/template/spec/volumes",
+              value: {
+                name: "vault-tls-certs",
+                secret: {
+                  secretName: vars.cluster.wildcard_cert_secret
+                }
+              }
+            }, {
+              op: "add",
+              path: "/spec/template/spec/containers/1/volumeMounts",
+              value: {
+                name: "vault-tls-certs",
+                mountPath: "/vault-tls"
+              }
+            }, {
+              op: "add",
+              path: "/spec/template/spec/containers/1/env",
+              value: {
+                name: "VAULT_CACERT",
+                value: "/vault-tls/tls.crt"
+              },
+            }]
+          }]
+        }
+      }]
     }
   }),
   "release/kustomization.yaml": {
