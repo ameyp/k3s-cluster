@@ -39,22 +39,22 @@ function(mode) {
         labelSelector: "app.kubernetes.io/name=vault-config-operator"
       },
       patch: |||
-        - op: "add",
-          path: "/spec/template/spec/volumes",
+        - op: "add"
+          path: "/spec/template/spec/volumes"
           value:
-            name: "vault-tls-certs",
+            name: "vault-tls-certs"
             secret:
               secretName: vars.cluster.wildcard_cert_secret
-        - op: "add",
-          path: "/spec/template/spec/containers/1/volumeMounts",
+        - op: "add"
+          path: "/spec/template/spec/containers/1/volumeMounts"
           value:
-            name: "vault-tls-certs",
-            mountPath: "/vault-tls",
-        - op: "add",
-          path: "/spec/template/spec/containers/1/env",
+            name: "vault-tls-certs"
+            mountPath: "/vault-tls"
+        - op: "add"
+          path: "/spec/template/spec/containers/1/env"
           value:
-            name: "VAULT_CACERT",
-            value: "/vault-tls/tls.crt",
+            name: "VAULT_CACERT"
+            value: "/vault-tls/tls.crt"
       |||
     }]
   }
