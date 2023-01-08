@@ -58,6 +58,10 @@ function(mode) {
                 name: "VAULT_CACERT",
                 value: "/vault-tls/tls.crt"
               },
+            }, {
+              op: "add",
+              path: "/spec/template/spec/containers/1/args/-",
+              value: "--zap-time-encoding=iso8601",
             }]
           }]
         }
