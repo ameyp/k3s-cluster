@@ -37,7 +37,7 @@ function(mode) {
             },
             patch: [{
               op: "add",
-              path: "/spec/template/spec/volumes",
+              path: "/spec/template/spec/volumes/-",
               value: [{
                 name: "vault-tls-certs",
                 secret: {
@@ -46,14 +46,14 @@ function(mode) {
               }]
             }, {
               op: "add",
-              path: "/spec/template/spec/containers/1/volumeMounts",
+              path: "/spec/template/spec/containers/1/volumeMounts/-",
               value: [{
                 name: "vault-tls-certs",
                 mountPath: "/vault-tls"
               }]
             }, {
               op: "add",
-              path: "/spec/template/spec/containers/1/env",
+              path: "/spec/template/spec/containers/1/env/-",
               value: [{
                 name: "VAULT_CACERT",
                 value: "/vault-tls/tls.crt"
