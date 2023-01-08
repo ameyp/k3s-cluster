@@ -38,26 +38,26 @@ function(mode) {
             patch: [{
               op: "add",
               path: "/spec/template/spec/volumes",
-              value: {
+              value: [{
                 name: "vault-tls-certs",
                 secret: {
                   secretName: vars.cluster.wildcard_cert_secret
                 }
-              }
+              }]
             }, {
               op: "add",
               path: "/spec/template/spec/containers/1/volumeMounts",
-              value: {
+              value: [{
                 name: "vault-tls-certs",
                 mountPath: "/vault-tls"
-              }
+              }]
             }, {
               op: "add",
               path: "/spec/template/spec/containers/1/env",
-              value: {
+              value: [{
                 name: "VAULT_CACERT",
                 value: "/vault-tls/tls.crt"
-              },
+              }],
             }]
           }]
         }
