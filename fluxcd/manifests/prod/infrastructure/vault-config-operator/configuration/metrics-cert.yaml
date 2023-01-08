@@ -1,0 +1,19 @@
+{
+   "apiVersion": "cert-manager.io/v1",
+   "kind": "Certificate",
+   "metadata": {
+      "name": "vault-config-operator-metrics",
+      "namespace": "vault"
+   },
+   "spec": {
+      "dnsNames": [
+         "vault-config-operator-controller-manager-metrics-service.vault.svc",
+         "vault-config-operator-controller-manager-metrics-service.vault.svc.cluster.local"
+      ],
+      "issuerRef": {
+         "kind": "ClusterIssuer",
+         "name": "selfsigned"
+      },
+      "secretName": "vault-config-operator-certs"
+   }
+}

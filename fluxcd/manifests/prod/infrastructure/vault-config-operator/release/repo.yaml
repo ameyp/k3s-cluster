@@ -1,0 +1,12 @@
+{
+   "apiVersion": "source.toolkit.fluxcd.io/v1beta2",
+   "kind": "HelmRepository",
+   "metadata": {
+      "name": "vault-config-operator",
+      "namespace": "flux-system"
+   },
+   "spec": {
+      "interval": "24h",
+      "url": "https://redhat-cop.github.io/vault-config-operator"
+   }
+}
